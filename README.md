@@ -24,7 +24,7 @@ npx start
 
 with that range of programming and scripting languages anyone can code flawlessly with just one single visual language.
 
-# Do you still need convincing?
-Well then take a look at this kickass demo and see how easy it is to model your class with **"Tea"**.
+# Demo please!
+Take look at this kickass demo and see how easy it is to model your class with **"Tea"**.
 
 ![Example of the Editor](view.gif?raw=true "Example of the Editor")
