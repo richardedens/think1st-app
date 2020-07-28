@@ -1,4 +1,4 @@
-# :tea: Tea - the Visual Programming Language
+# ![Tea](android-icon-48x48.png?raw=true "Tea") Tea - the Visual Programming Language
 Tea is a visual programming language. Designed to be very simple, powerful, and just incrediable awesome.
 What ever you model within the visual language, this is automaticly compiled to **C#**, **Java**, **TypeScript**, **Python** and **PHP**.
 With complementairy Tea runtime libraries for each of these languages.
