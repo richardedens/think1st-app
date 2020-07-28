@@ -29586,6 +29586,9 @@ var widgetsTooltip = $.ui.tooltip;
 (function(jQuery){
 
 	jQuery.fn.extend( {
+		exists: function() {
+			return (this.length > 0);
+		},
 		poor: function(){
 			jQuery(this).addClass("tea-area");
 		},
@@ -29598,17 +29601,27 @@ var widgetsTooltip = $.ui.tooltip;
 		},
 		addStart: function() {
 			let action = jQuery("<div></div>");
-			jQuery(action).addClass("tea-component");
-			jQuery(action).addClass("tea-start");
-			jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
-			jQuery(this).prepend(action);
+			if (!jQuery(".tea-start").exists()) {
+				jQuery(action).addClass("tea-component");
+				jQuery(action).addClass("tea-start");
+				jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
+				jQuery(this).prepend(action);
+				return true;
+			} else {
+				return false;
+			}
 		},
 		addStop: function() {
 			let action = jQuery("<div></div>");
-			jQuery(action).addClass("tea-component");
-			jQuery(action).addClass("tea-stop");
-			jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
-			jQuery(this).prepend(action);
+			if (!jQuery(".tea-stop").exists()) {
+				jQuery(action).addClass("tea-component");
+				jQuery(action).addClass("tea-stop");
+				jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
+				jQuery(this).prepend(action);
+				return true;
+			} else {
+				return false;
+			}
 		},
 		doCallback(resolve, value) {
 			resolve(value);
