@@ -1,8 +1,14 @@
 # ![Teapot/Tea](public/android-icon-48x48.png?raw=true "Tea") Tea a visual programming language
 **"Teapot/Tea"** is a visual programming language. Designed to be very simple yet powerful and just incrediable awesome.
-What ever you model in **"Tea"** within the visual language, this is automaticly compiled to **C#**, **Java**, **TypeScript**, **Python** and **PHP**.
-So within these enviroment, and with the help of the **"Tea"** runtime libraries you are good to go.
-Tea uses the power of the existing programming languages and does not fight against it.
+What ever you model in **"Tea"** within the visual language, is automaticly compiled to **C#**, **Java**, **TypeScript**, **Python** and **PHP**.
+
+# How to run **"Tea"** scripts.
+**"Teapot"** is a runtime within the languages mentioned, that helps run the compiled **"Tea"** scripts.
+We really made the runtime work with the programming languages and as thin as possible.
+So that the performance of the languages is without any setbacks of using a visual programming language.
+
+This gives **"Tea"** the power of the existing programming languages and produces code that is absolutely 100% yours without any vendor locking.
+All the **"Teapot"** runtimes and editor are provided under the MIT license and are free of charge.
 
 # Teapot/Tea editor.
 The **"Tea"** pot editor is the IDE to develop **"Tea"** scripts. And you are looking at its repository.
