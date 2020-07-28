@@ -1,24 +1,24 @@
-# ![Tea](public/android-icon-48x48.png?raw=true "Tea") Tea - the Visual Programming Language
-Tea is a visual programming language. Designed to be very simple yet powerful and just incrediable awesome.
+# ![Teapot/Tea](public/android-icon-48x48.png?raw=true "Tea") Tea a visual programming language
+**"Teapot/Tea"** is a visual programming language. Designed to be very simple yet powerful and just incrediable awesome.
 What ever you model in **"Tea"** within the visual language, this is automaticly compiled to **C#**, **Java**, **TypeScript**, **Python** and **PHP**.
 So within these enviroment, and with the help of the **"Tea"** runtime libraries you are good to go.
 Tea uses the power of the existing programming languages and does not fight against it.
 
-# Tea pot editor.
+# Teapot/Tea editor.
 The **"Tea"** pot editor is the IDE to develop **"Tea"** scripts. And you are looking at its repository.
 
-# **"Tea"** Designed to be easy.
+# **"Tea"** is designed to be easy.
 If Java is another word for coffee we believe that programming in **"Tea"** should just be as relaxing and wellbeing as drinking a cup of tea.
 Yes you heared it right. Get yourself a nice cup of tea and start programming with the following simple commands:
 
-# Installation
+# Installation of the editor
 To be up and running in no time you would need to install NodeJS, just grab a version for your operating system and run the following command from the root of the source:
 
 ```sh
 npx install
 ```
 
-# Running the application
+# Running the editor
 To run the application simple use the following command, and your good to go:
 
 ```sh
