@@ -30,7 +30,7 @@ tea(document).ready(function () {
             code += "}\r\n";
 
             // Output code
-            const html = Prism.highlight(code, Prism.languages.typescript, 'php');
+            const html = Prism.highlight(code, Prism.languages.typescript, 'typescript');
             document.getElementById("tea-output-typescript").innerHTML = html;
         });
 
