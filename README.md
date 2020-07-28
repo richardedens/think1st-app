@@ -5,9 +5,10 @@ Scripting errors that might occur are helped to avoid as much as possible.
 
 # How to run **"Tea"** scripts.
 **"Teapot"** is a runtime within the languages mentioned, that helps run the compiled **"Tea"** scripts.
-We really made the runtime work with the programming languages and as thin as possible.
+We really made the runtime work with the programming languages and be as thin as possible.
 So that the performance of the languages is without any setbacks of using a visual programming language.
 
+Externally imported libraries are carefully selected and can be used with the knowledge that in a form they are available within the mentioned programming languages.
 This gives **"Tea"** the power of the existing programming languages and produces code that is absolutely 100% yours without any vendor locking.
 All the **"Teapot"** runtimes and editor are provided under the MIT license and are free of charge.
 
