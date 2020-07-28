@@ -1,0 +1,15 @@
+{
+  "name": "tea",
+  "version": "1.0.0",
+  "description": "Tea, the visual programming language.",
+  "main": "tea.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node serve.js"
+  },
+  "author": "Gehard Richard Edens",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

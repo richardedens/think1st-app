@@ -29591,23 +29591,48 @@ var widgetsTooltip = $.ui.tooltip;
 		},
 		addAction: function() {
 			let action = jQuery("<div></div>");
+			jQuery(action).addClass("tea-component");
 			jQuery(action).addClass("tea-action");
-			jQuery(action).draggable({ snap: ".tea-action", snapMode: "outer" });
+			jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
 			jQuery(this).prepend(action);
 		},
 		addStart: function() {
 			let action = jQuery("<div></div>");
-			jQuery(action).addClass("tea-action");
+			jQuery(action).addClass("tea-component");
 			jQuery(action).addClass("tea-start");
-			jQuery(action).draggable({ snap: ".tea-action", snapMode: "outer" });
+			jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
 			jQuery(this).prepend(action);
 		},
 		addStop: function() {
 			let action = jQuery("<div></div>");
-			jQuery(action).addClass("tea-action");
+			jQuery(action).addClass("tea-component");
 			jQuery(action).addClass("tea-stop");
-			jQuery(action).draggable({ snap: ".tea-action", snapMode: "outer" });
+			jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
 			jQuery(this).prepend(action);
+		},
+		doCallback(resolve, value) {
+			resolve(value);
+		},
+		getModel() {
+			let json = { code:[] };
+			let self = this;
+			return new Promise(function(resolve, reject){
+				try {
+					jQuery(self).find(".tea-component").map(function(index, item) {
+						if (jQuery(item).hasClass("tea-start")) {
+							json.code.push({"type":"start"});
+						}
+						if (jQuery(item).hasClass("tea-stop")) {
+							json.code.push({"type":"stop"});
+						}
+						if (jQuery(item).hasClass("tea-action")) {
+							json.code.push({"type":"action"});
+						}
+					}).doCallback(resolve, json);
+				} catch(e) {
+					reject();
+				}
+			});
 		}
 	});
 
