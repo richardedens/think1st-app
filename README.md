@@ -22,3 +22,7 @@ npx start
 ```
 
 with that range of programming and scripting languages anyone can code flawlessly with just one single visual language.
+
+# Not convinced?
+Take a look how easy it is to model your class with **"Tea"**.
+![Example of the Editor](view.gif?raw=true "Example of the Editor")

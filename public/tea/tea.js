@@ -29685,6 +29685,32 @@
                 return false;
             }
         },
+        addVariable: function() {
+            let action = jQuery("<div></div>");
+            let svg = `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+			<g transform="matrix(1,0,0,1,-25.8741,15.3846)">
+				<path d="M417.022,326.573C432.213,305.737 440.21,282.102 440.21,258.042C440.21,182.395 362.657,120.979 267.133,120.979C171.609,120.979 94.056,182.395 94.056,258.042C94.056,282.102 102.053,305.737 117.244,326.573L417.022,326.573Z" style="fill:rgb(255,234,203);stroke:rgb(255,181,92);stroke-width:19.52px;"/>
+			</g>
+		</svg>`;
+            jQuery(action).addClass("tea-component");
+            jQuery(action).addClass("tea-variable");
+            jQuery(action).html(svg);
+            jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
+            jQuery(this).prepend(action);
+        },
+        addImport: function() {
+            let action = jQuery("<div></div>");
+            let svg = `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+			<g transform="matrix(1.28226,0,0,1,-97.5271,-23.0769)">
+				<path d="M267.483,90.909C267.483,90.909 137.413,228.217 137.413,287.063C137.413,379.113 195.695,453.846 267.483,453.846C339.27,453.846 397.552,379.113 397.552,287.063C397.552,228.217 267.483,90.909 267.483,90.909Z" style="fill:rgb(255,203,245);stroke:rgb(255,92,213);stroke-width:16.98px;"/>
+			</g>
+		</svg>`;
+            jQuery(action).addClass("tea-component");
+            jQuery(action).addClass("tea-import");
+            jQuery(action).html(svg);
+            jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
+            jQuery(this).prepend(action);
+        },
         doCallback(resolve, value) {
             resolve(value);
         },
@@ -29702,6 +29728,12 @@
                         }
                         if (jQuery(item).hasClass("tea-action")) {
                             json.code.push({ "type": "action" });
+                        }
+                        if (jQuery(item).hasClass("tea-import")) {
+                            json.code.push({ "type": "import" });
+                        }
+                        if (jQuery(item).hasClass("tea-variable")) {
+                            json.code.push({ "type": "variable" });
                         }
                     }).doCallback(resolve, json);
                 } catch (e) {

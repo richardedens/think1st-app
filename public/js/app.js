@@ -40,8 +40,26 @@ tea(document).ready(function() {
 
             // Setup rendered code.
             let code = "/* Load the Tea TypeScript Dependencies. */\r\n";
-            code += "import { action } from \"tea\";\r\n\r\n";
-            code += "class " + className + " {\r\n";
+            code += "import { action } from \"teapot\";\r\n";
+
+            // Setup imports
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'import') {
+                    code += "\import lib;\r\n";
+                }
+            });
+            code += "\r\n";
+            code += "export default class " + className + " {\r\n";
+
+            // Create variables.
+            let row = "";
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'variable') {
+                    code += "\tprivate newvar: String = \"\";\r\n";
+                    row = "\r\n";
+                }
+            });
+            code += row;
 
             // Compile code
             console.log(json);
@@ -74,8 +92,26 @@ tea(document).ready(function() {
 
             // Setup rendered code.
             let code = "/* Load the Tea PHP Dependencies. */\r\n";
-            code += "$teaAction = require_once(\"tea-action.php\");\r\n\r\n";
+            code += "$tea = require_once(\"teapot.php\");\r\n";
+
+            // Setup imports
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'import') {
+                    code += "\$lib = require_once(\"lib\");\r\n";
+                }
+            });
+            code += "\r\n";
             code += "class " + className + " {\r\n";
+
+            // Create variables.
+            let row = "";
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'variable') {
+                    code += "\tprivate $newvar = \"\";\r\n";
+                    row = "\r\n";
+                }
+            });
+            code += row;
 
             // Compile code
             console.log(json);
@@ -87,7 +123,7 @@ tea(document).ready(function() {
                     code += "\t}\r\n";
                 }
                 if (item['type'] === 'action') {
-                    code += "\t\t$teaAction();\r\n";
+                    code += "\t\t$tea.action();\r\n";
                 }
             });
             code += "}\r\n";
@@ -95,6 +131,109 @@ tea(document).ready(function() {
             // Output code
             const html = Prism.highlight(code, Prism.languages.php, 'php');
             document.getElementById("tea-output-php").innerHTML = html;
+        });
+
+    }
+
+
+    function renderCSharp() {
+        // Prerequisites.
+        tea("#tea-editor").getModel().then(function(json) {
+            console.log(json);
+            let className = tea("#file-name").text().replace(".tea", "");
+
+            // Setup rendered code.
+            let code = "/* Load the Tea C# Dependencies. */\r\n";
+            code += "using TeaPot.*;\r\n";
+
+            // Setup imports
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'import') {
+                    code += "using lib;\r\n";
+                }
+            });
+            code += "\r\n";
+            code += "public class " + className + " {\r\n";
+
+            // Create variables.
+            let row = "";
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'variable') {
+                    code += "\tprivate string newvar = \"\";\r\n";
+                    row = "\r\n";
+                }
+            });
+            code += row;
+
+            // Compile code
+            console.log(json);
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'start') {
+                    code += "\tpublic void run() {\r\n";
+                }
+                if (item['type'] === 'stop') {
+                    code += "\t}\r\n";
+                }
+                if (item['type'] === 'action') {
+                    code += "\t\taction();\r\n";
+                }
+            });
+            code += "}\r\n";
+
+            // Output code
+            const html = Prism.highlight(code, Prism.languages.csharp, 'csharp');
+            document.getElementById("tea-output-csharp").innerHTML = html;
+        });
+
+    }
+
+    function renderJava() {
+        // Prerequisites.
+        tea("#tea-editor").getModel().then(function(json) {
+            console.log(json);
+            let className = tea("#file-name").text().replace(".tea", "");
+
+            // Setup rendered code.
+            let code = "/* Load the Tea Java Dependencies. */\r\n";
+            code += "import com.teapot.tea.action;\r\n";
+
+            // Setup imports
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'import') {
+                    code += "import lib;\r\n";
+                }
+            });
+            code += "\r\n";
+            code += "public class " + className + " {\r\n";
+
+            // Create variables.
+            let row = "";
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'variable') {
+                    code += "\tprivate String newvar = \"\";\r\n";
+                    row = "\r\n";
+                }
+            });
+            code += row;
+
+            // Compile code
+            console.log(json);
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'start') {
+                    code += "\tpublic void run() {\r\n";
+                }
+                if (item['type'] === 'stop') {
+                    code += "\t}\r\n";
+                }
+                if (item['type'] === 'action') {
+                    code += "\t\taction();\r\n";
+                }
+            });
+            code += "}\r\n";
+
+            // Output code
+            const html = Prism.highlight(code, Prism.languages.java, 'java');
+            document.getElementById("tea-output-java").innerHTML = html;
         });
 
     }
@@ -107,8 +246,27 @@ tea(document).ready(function() {
 
             // Setup rendered code.
             let code = "# Load the Tea Python Dependencies.\r\n";
-            code += "from tea import action\r\n\r\n";
+            code += "from tea import action\r\n";
+
+            // Setup imports
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'import') {
+                    code += "\import lib\r\n";
+                }
+            });
+            code += "\r\n";
+
             code += "class " + className + "():\r\n";
+
+            // Create variables.
+            let row = "";
+            json.code.reverse().map(function(item, index) {
+                if (item['type'] === 'variable') {
+                    code += "\tnewvar = \"\"\r\n";
+                    row = "\r\n";
+                }
+            });
+            code += row;
 
             // Compile code
             console.log(json);
@@ -140,6 +298,8 @@ tea(document).ready(function() {
         renderTypeScript();
         renderPython();
         renderPHP();
+        renderCSharp();
+        renderJava();
     });
 
     tea("#add-start").on('click', () => {
@@ -151,6 +311,8 @@ tea(document).ready(function() {
         renderTypeScript();
         renderPython();
         renderPHP();
+        renderCSharp();
+        renderJava();
     });
 
     tea("#add-stop").on('click', () => {
@@ -162,6 +324,34 @@ tea(document).ready(function() {
         renderTypeScript();
         renderPython();
         renderPHP();
+        renderCSharp();
+        renderJava();
+    });
+
+    tea("#add-variable").on('click', () => {
+        tea("#tea-editor").addVariable();
+        renderTypeScript();
+        renderPython();
+        renderPHP();
+        renderCSharp();
+        renderJava();
+    });
+
+    tea("#add-import").on('click', () => {
+        tea("#tea-editor").addImport();
+        renderTypeScript();
+        renderPython();
+        renderPHP();
+        renderCSharp();
+        renderJava();
+    });
+
+    tea("#file-name").on('change', function() {
+        renderTypeScript();
+        renderPython();
+        renderPHP();
+        renderCSharp();
+        renderJava();
     });
 
     tea('.scrollbar-map').scrollbar({

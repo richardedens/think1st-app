@@ -116,12 +116,6 @@
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-        <ul class="navbar-nav px-12">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Sign out</a>
-            </li>
-        </ul>
     </nav>
 
     <div class="container-fluid">
@@ -169,6 +163,24 @@
                                 </svg> Stop
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="add-variable">
+                                <svg width="24" height="24" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+                                    <g transform="matrix(1,0,0,1,-25.8741,15.3846)">
+                                        <path d="M417.022,326.573C432.213,305.737 440.21,282.102 440.21,258.042C440.21,182.395 362.657,120.979 267.133,120.979C171.609,120.979 94.056,182.395 94.056,258.042C94.056,282.102 102.053,305.737 117.244,326.573L417.022,326.573Z" style="fill:rgb(255,234,203);stroke:rgb(255,181,92);stroke-width:19.52px;"/>
+                                    </g>
+                                </svg> Variable
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" id="add-import">
+                                <svg width="24" height="24" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+                                    <g transform="matrix(1.28226,0,0,1,-97.5271,-23.0769)">
+                                        <path d="M267.483,90.909C267.483,90.909 137.413,228.217 137.413,287.063C137.413,379.113 195.695,453.846 267.483,453.846C339.27,453.846 397.552,379.113 397.552,287.063C397.552,228.217 267.483,90.909 267.483,90.909Z" style="fill:rgb(255,203,245);stroke:rgb(255,92,213);stroke-width:16.98px;"/>
+                                    </g>
+                                </svg> Import
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -176,23 +188,6 @@
             <main role="main" class="col-md-10 ml-sm-auto col-lg-11 px-md-6">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2" id="file-name" contenteditable="true">home.tea</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group mr-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-calendar">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                <line x1="16" y1="2" x2="16" y2="6"></line>
-                                <line x1="8" y1="2" x2="8" y2="6"></line>
-                                <line x1="3" y1="10" x2="21" y2="10"></line>
-                            </svg>
-                            This week
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Tea Editor Start -->
@@ -221,6 +216,12 @@
                         <li class="nav-item">
                             <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-php" role="tab" aria-controls="pills-contact" aria-selected="false">PHP</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-csharp" role="tab" aria-controls="pills-csharp" aria-selected="true">C#</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-java" role="tab" aria-controls="pills-java" aria-selected="true">Java</a>
+                        </li>
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pills-typescript" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -236,6 +237,16 @@
                         <div class="tab-pane fade" id="pills-php" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <pre>
 <code class="language-php" id="tea-output-php"></code>
+                            </pre>
+                        </div>
+                        <div class="tab-pane fade" id="pills-csharp" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <pre>
+<code class="language-php" id="tea-output-csharp"></code>
+                            </pre>
+                        </div>
+                        <div class="tab-pane fade" id="pills-java" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <pre>
+<code class="language-php" id="tea-output-java"></code>
                             </pre>
                         </div>
                     </div>

@@ -2276,7 +2276,9 @@ a.ui-button:active,
     height: 30px;
 }
 
-.tea-component.tea-stop:after {
+.tea-component.tea-stop:after,
+.tea-component.tea-variable:after,
+.tea-component.tea-import:after {
     content: "";
     position: absolute;
     height: 0;
