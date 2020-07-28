@@ -4,7 +4,10 @@ What ever you model in **"Tea"** within the visual language, this is automaticly
 So within these enviroment, and with the help of the **"Tea"** runtime libraries you are good to go.
 Tea uses the power of the existing programming languages and does not fight against it.
 
-# Designed to be easy.
+# Tea pot editor.
+The **"Tea"** pot editor is the IDE to develop **"Tea"** scripts. And you are looking at its repository.
+
+# **"Tea"** Designed to be easy.
 If Java is another word for coffee we believe that programming in **"Tea"** should just be as relaxing and wellbeing as drinking a cup of tea.
 Yes you heared it right. Get yourself a nice cup of tea and start programming with the following simple commands:
 
