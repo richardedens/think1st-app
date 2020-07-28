@@ -28,6 +28,7 @@ tea(document).ready(function () {
                 }
             });
             code += "}\r\n";
+            console.log(code);
 
             // Output code
             const html = Prism.highlight(code, Prism.languages.typescript, 'typescript');
@@ -104,7 +105,9 @@ tea(document).ready(function () {
 
     tea("#add-action").on('click', () => {
         tea("#tea-editor").addAction();
+        renderTypeScript();
         renderPython();
+        renderPHP();
     });
 
     tea("#add-start").on('click', () => {
@@ -124,6 +127,7 @@ tea(document).ready(function () {
             tea("#tea-information-msg").html("There is already a STOP in your TEA script.");
             tea("#tea-information-modal").modal();
         }
+        renderTypeScript();
         renderPython();
         renderPHP();
     });
