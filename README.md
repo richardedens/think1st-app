@@ -1,5 +1,5 @@
-# ![Teapot/Tea](public/android-icon-48x48.png?raw=true "Tea") Teapot/Tea, a visual programming language
-**"Teapot/Tea"** is a visual programming language. Designed to be very simple yet powerful and just incrediable awesome.
+# ![Tea](public/android-icon-48x48.png?raw=true "Tea") "Tea", a visual programming language
+**"Tea"** is a visual programming language. Designed to be very simple yet powerful and just incrediable awesome.
 What ever you visually script within **"Tea"** is automaticly compiled to **C#**, **Java**, **TypeScript**, **Python** and **PHP**.
 Scripting errors that might occur are helped to avoid as much as possible.
 
@@ -12,21 +12,21 @@ Externally imported libraries are carefully selected and can be used with the kn
 This gives **"Tea"** the power of the existing programming languages and produces code that is absolutely 100% yours without any vendor locking.
 All the **"Teapot"** runtimes and editor are provided under the MIT license and are free of charge.
 
-# Teapot/Tea editor.
+# **"Tea"** IDE.
 The **"Tea"** pot editor is the IDE to develop **"Tea"** scripts. And you are looking at its repository.
 
 # **"Tea"** is designed to be easy.
 If Java is another word for coffee we believe that programming in **"Tea"** should just be as relaxing and wellbeing as drinking a cup of tea.
 Yes you heared it right. Get yourself a nice cup of tea and start programming with the following simple commands:
 
-# Installation of the editor
+# Installation of the IDE
 To be up and running in no time you would need to install NodeJS, just grab a version for your operating system and run the following command from the root of the source:
 
 ```sh
 npx install
 ```
 
-# Running the editor
+# Running the IDE
 To run the application simple use the following command, and your good to go:
 
 ```sh
