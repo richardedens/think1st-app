@@ -1,3 +1,26 @@
+/*
+ *         )  (           
+ *        (   ) )      
+ *         ) ( (           
+ *       _______)_    _______     
+ *    .-'---------|  |__   __|
+ *   ( C|/\/\/\/\/|     | | ___  __ _ 
+ *    '-./\/\/\/\/|     | |/ _ \/ _` |
+ *      '_________'     | |  __/ (_| |
+ *       '-------'      |_|\___|\__,_|
+ *      -----------   ------------------
+ *
+ * Tea Library v1.2.1
+ * https://tea-vpl.com/
+ *
+ * Released under the MIT license
+ * https://tea-vpl.com/license
+ * 
+ * Author:
+ * Gerhard Richard Edens
+ *
+ * Date: 2020-07-27T11:30Z
+ */
 /*!
  * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
@@ -29629,10 +29652,10 @@
 
 /*!
  * Tea Library v3.5.1
- * https://teajs.com/
+ * https://tea-vpl.com/
  *
  * Released under the MIT license
- * https://teajs.com/license
+ * https://tea-vpl.com/license
  *
  * Date: 2020-07-27T11:30Z
  */

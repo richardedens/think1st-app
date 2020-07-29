@@ -1,5 +1,25 @@
-/**
- * Tea - Version 1.0.0.
+/* ------------------------------------------------------------------------
+ *
+ *         )  (           
+ *        (   ) )      
+ *         ) ( (           
+ *       _______)_    _______     
+ *    .-'---------|  |__   __|
+ *   ( C|/\/\/\/\/|     | | ___  __ _ 
+ *    '-./\/\/\/\/|     | |/ _ \/ _` |
+ *      '_________'     | |  __/ (_| |
+ *       '-------'      |_|\___|\__,_|
+ *      -----------   ------------------
+ *                         version 1.0.0
+ * 
+ * Author: 
+ * -------------------------------------
+ * Gerhard Richard Edens
+ * 
+ * Description:
+ * -------------------------------------
+ * The IDE development environment.
+ * 
  */
 tea(document).ready(function() {
 
@@ -39,7 +59,21 @@ tea(document).ready(function() {
             let className = tea("#file-name").text().replace(".tea", "");
 
             // Setup rendered code.
-            let code = "/* Load the Tea TypeScript Dependencies. */\r\n";
+            let code = `/**
+ *         )  (           
+ *        (   ) )      
+ *         ) ( (           
+ *       _______)_    _______     
+ *    .-'---------|  |__   __|
+ *   ( C|/\\/\\/\\/\\/|     | | ___  __ _ 
+ *    '-./\\/\\/\\/\\/|     | |/ _ \\\/ _\\ |
+ *      '_________'     | |  __\/ (_| |
+ *       '-------'      |_|\\___|\\__,_|
+ *      -----------   ------------------
+ */
+
+`;
+
             code += "import { action } from \"teapot\";\r\n";
 
             // Setup imports
@@ -91,7 +125,20 @@ tea(document).ready(function() {
             let className = tea("#file-name").text().replace(".tea", "");
 
             // Setup rendered code.
-            let code = "/* Load the Tea PHP Dependencies. */\r\n";
+            let code = `/**
+ *         )  (           
+ *        (   ) )      
+ *         ) ( (           
+ *       _______)_    _______     
+ *    .-'---------|  |__   __|
+ *   ( C|/\\/\\/\\/\\/|     | | ___  __ _ 
+ *    '-./\\/\\/\\/\\/|     | |/ _ \\\/ _\\ |
+ *      '_________'     | |  __\/ (_| |
+ *       '-------'      |_|\\___|\\__,_|
+ *      -----------   ------------------
+ */
+
+`;
             code += "$tea = require_once(\"teapot.php\");\r\n";
 
             // Setup imports
@@ -143,7 +190,20 @@ tea(document).ready(function() {
             let className = tea("#file-name").text().replace(".tea", "");
 
             // Setup rendered code.
-            let code = "/* Load the Tea C# Dependencies. */\r\n";
+            let code = `/**
+ *         )  (           
+ *        (   ) )      
+ *         ) ( (           
+ *       _______)_    _______     
+ *    .-'---------|  |__   __|
+ *   ( C|/\\/\\/\\/\\/|     | | ___  __ _ 
+ *    '-./\\/\\/\\/\\/|     | |/ _ \\\/ _\\ |
+ *      '_________'     | |  __\/ (_| |
+ *       '-------'      |_|\\___|\\__,_|
+ *      -----------   ------------------
+ */
+
+`;
             code += "using TeaPot.*;\r\n";
 
             // Setup imports
@@ -194,7 +254,21 @@ tea(document).ready(function() {
             let className = tea("#file-name").text().replace(".tea", "");
 
             // Setup rendered code.
-            let code = "/* Load the Tea Java Dependencies. */\r\n";
+
+            let code = `/**
+ *         )  (           
+ *        (   ) )      
+ *         ) ( (           
+ *       _______)_    _______     
+ *    .-'---------|  |__   __|
+ *   ( C|/\\/\\/\\/\\/|     | | ___  __ _ 
+ *    '-./\\/\\/\\/\\/|     | |/ _ \\\/ _\\ |
+ *      '_________'     | |  __\/ (_| |
+ *       '-------'      |_|\\___|\\__,_|
+ *      -----------   ------------------
+ */
+
+`;
             code += "import com.teapot.tea.action;\r\n";
 
             // Setup imports
@@ -245,7 +319,21 @@ tea(document).ready(function() {
             let className = tea("#file-name").text().replace(".tea", "");
 
             // Setup rendered code.
-            let code = "# Load the Tea Python Dependencies.\r\n";
+
+            let code = `#
+#         )  (           
+#        (   ) )      
+#         ) ( (           
+#       _______)_    _______     
+#    .-'---------|  |__   __|
+#   ( C|/\\/\\/\\/\\/|     | | ___  __ _ 
+#    '-./\\/\\/\\/\\/|     | |/ _ \\\/ _\\ |
+#      '_________'     | |  __\/ (_| |
+#       '-------'      |_|\\___|\\__,_|
+#      -----------   ------------------
+#
+
+`;
             code += "from tea import action\r\n";
 
             // Setup imports
