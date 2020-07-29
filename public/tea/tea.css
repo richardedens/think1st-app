@@ -2189,7 +2189,7 @@ a.ui-button:active,
 
 .tea-editor-outer {
     position: fixed;
-    left: 140px;
+    left: 180px;
     top: 125px;
     right: 600px;
     bottom: 0;
@@ -2286,4 +2286,14 @@ a.ui-button:active,
     left: 0;
     top: 0;
     border: transparent;
+}
+
+.tea-selection {
+    border: 1px solid orange;
+    background: rgba(255, 255, 0, 0.13);
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    width: 1px;
+    height: 1px;
 }

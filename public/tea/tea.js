@@ -29651,6 +29651,15 @@
                 jQuery(action).addClass("tea-component");
                 jQuery(action).addClass("tea-action");
                 jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
+                jQuery(action).mousedown(function() {
+                    window.teaInteractionMode = true;
+                });
+                jQuery(action).mouseup(function() {
+                    window.teaInteractionMode = false;
+                });
+                jQuery(action).mouseleave(function() {
+                    window.teaInteractionMode = false;
+                });
                 if (jQuery(".tea-stop").exists()) {
                     jQuery(action).insertAfter(".tea-stop");
                 } else {
@@ -29667,6 +29676,15 @@
                 jQuery(action).addClass("tea-component");
                 jQuery(action).addClass("tea-start");
                 jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
+                jQuery(action).mousedown(function() {
+                    window.teaInteractionMode = true;
+                });
+                jQuery(action).mouseup(function() {
+                    window.teaInteractionMode = false;
+                });
+                jQuery(action).mouseleave(function() {
+                    window.teaInteractionMode = false;
+                });
                 jQuery(this).prepend(action);
                 return true;
             } else {
@@ -29679,6 +29697,15 @@
                 jQuery(action).addClass("tea-component");
                 jQuery(action).addClass("tea-stop");
                 jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
+                jQuery(action).mousedown(function() {
+                    window.teaInteractionMode = true;
+                });
+                jQuery(action).mouseup(function() {
+                    window.teaInteractionMode = false;
+                });
+                jQuery(action).mouseleave(function() {
+                    window.teaInteractionMode = false;
+                });
                 jQuery(this).prepend(action);
                 return true;
             } else {
@@ -29696,6 +29723,15 @@
             jQuery(action).addClass("tea-variable");
             jQuery(action).html(svg);
             jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
+            jQuery(action).mousedown(function() {
+                window.teaInteractionMode = true;
+            });
+            jQuery(action).mouseup(function() {
+                window.teaInteractionMode = false;
+            });
+            jQuery(action).mouseleave(function() {
+                window.teaInteractionMode = false;
+            });
             jQuery(this).prepend(action);
         },
         addImport: function() {
@@ -29709,6 +29745,15 @@
             jQuery(action).addClass("tea-import");
             jQuery(action).html(svg);
             jQuery(action).draggable({ snap: ".tea-component", snapMode: "outer" });
+            jQuery(action).mousedown(function() {
+                window.teaInteractionMode = true;
+            });
+            jQuery(action).mouseup(function() {
+                window.teaInteractionMode = false;
+            });
+            jQuery(action).mouseleave(function() {
+                window.teaInteractionMode = false;
+            });
             jQuery(this).prepend(action);
         },
         doCallback(resolve, value) {

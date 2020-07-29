@@ -368,4 +368,67 @@ tea(document).ready(function() {
         "stepScrolling": false
     });
 
+    let pos = {}
+    let selection = tea("<div></div>");
+    selection.addClass("tea-selection");
+    let selectmode = false;
+    window.teaInteractionMode = false;
+
+    function deselect() {
+        tea('.tea-selection').css("left", "-4px");
+        tea('.tea-selection').css("top", "-4px");
+        tea('.tea-selection').css("width", "1px");
+        tea('.tea-selection').css("height", "1px");
+    }
+    tea('#tea-editor').append(selection);
+    tea('.tea-editor-outer').click(function() {
+        let range = {};
+        range.l = pos.x;
+        range.r = pos.x + parseInt(tea('.tea-selection').css("width").replace("px", ""), 10);
+        range.t = pos.y;
+        range.b = pos.y + parseInt(tea('.tea-selection').css("height").replace("px", ""), 10);
+        console.log(range);
+        deselect();
+    });
+    tea('.tea-editor-outer').mousedown(function(evt) {
+        if (window.teaInteractionMode) {
+            deselect();
+        } else {
+            let epos = tea('.tea-editor-outer').position();
+            pos.x = evt.clientX - epos.left;
+            pos.y = evt.clientY - epos.top;
+            tea('.tea-selection').css("left", pos.x + "px");
+            tea('.tea-selection').css("top", pos.y + "px");
+            selectmode = true;
+        }
+    });
+
+    tea('.tea-editor-outer').mousemove(function(evt) {
+        if (window.teaInteractionMode) {
+            deselect();
+        } else {
+            if (selectmode) {
+                let epos = tea('.tea-editor-outer').position();
+                let w = (evt.clientX - epos.left) - pos.x;
+                let h = (evt.clientY - epos.top) - pos.y;
+                tea('.tea-selection').css("width", w + "px");
+                tea('.tea-selection').css("height", h + "px");
+            }
+        }
+    });
+
+    tea('.tea-editor-outer').mouseup(function(evt) {
+        if (window.teaInteractionMode) {
+            let range = {}
+            range.l = pos.x;
+            range.r = pos.x + tea('.tea-selection').css("width").replace("px", "");
+            range.t = pos.y;
+            range.b = pos.y + tea('.tea-selection').css("height").replace("px", "");
+            console.log(range);
+            deselect();
+        } else {
+            selectmode = false;
+        }
+    });
+
 });
