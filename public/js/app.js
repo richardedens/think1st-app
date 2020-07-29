@@ -456,9 +456,24 @@ tea(document).ready(function() {
         "stepScrolling": false
     });
 
-    let pos = {}
+    /**
+     * Selection system.
+     */
+
+    let pos = {};
+    let range = {}; // Reserve range
+
+    // Selection
     let selection = tea("<div></div>");
     selection.addClass("tea-selection");
+    tea('#tea-editor').append(selection);
+
+    // Selection Area
+    let selectionArea = tea("<div></div>");
+    selectionArea.addClass("tea-selection-area");
+    tea('#tea-editor').append(selectionArea);
+
+    // Select mode and interaction mode
     let selectmode = false;
     window.teaInteractionMode = false;
 
@@ -468,13 +483,57 @@ tea(document).ready(function() {
         tea('.tea-selection').css("width", "1px");
         tea('.tea-selection').css("height", "1px");
     }
-    tea('#tea-editor').append(selection);
+
+    tea('.tea-selection-area').draggable({
+        start: function() {
+            window.teaInteractionMode = true;
+            selectmode = false;
+        },
+        drag: function() {
+            window.teaInteractionMode = true;
+            selectmode = false;
+        },
+        stop: function() {
+            window.teaInteractionMode = false;
+            selectmode = false;
+            let pos = tea('.tea-selection-area').position();
+            tea(this).find(".tea-component").map(function(index, item) {
+                let elpos = tea(item).position();
+                tea(item).css("left", (elpos.left + pos.left) + "px");
+                tea(item).css("top", (elpos.top + pos.top) + "px");
+                tea('#tea-editor').append(item);
+            });
+            range = {};
+            tea('.tea-selection-area').css("left", "-4px");
+            tea('.tea-selection-area').css("top", "-4px");
+            tea('.tea-selection-area').css("width", "1px");
+            tea('.tea-selection-area').css("height", "1px");
+        }
+    });
+
     tea('.tea-editor-outer').click(function() {
-        let range = {};
         range.l = pos.x;
         range.r = pos.x + parseInt(tea('.tea-selection').css("width").replace("px", ""), 10);
         range.t = pos.y;
         range.b = pos.y + parseInt(tea('.tea-selection').css("height").replace("px", ""), 10);
+
+        // Create selected area.
+        tea('.tea-selection-area').css("left", pos.x + "px");
+        tea('.tea-selection-area').css("top", pos.y + "px");
+        tea('.tea-selection-area').css("width", tea('.tea-selection').css("width"));
+        tea('.tea-selection-area').css("height", tea('.tea-selection').css("height"));
+
+        tea('.tea-component').map(function(index, item) {
+            let pos = tea(item).position();
+            if (pos.left >= range.l && pos.left <= range.r) {
+                if (pos.top >= range.t && pos.top <= range.b) {
+                    tea(item).css("left", (pos.left - range.l) + "px");
+                    tea(item).css("top", (pos.top - range.t) + "px");
+                    tea('.tea-selection-area').append(item);
+                }
+            }
+        });
+
         console.log(range);
         deselect();
     });

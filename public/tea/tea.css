@@ -2297,3 +2297,13 @@ a.ui-button:active,
     width: 1px;
     height: 1px;
 }
+
+.tea-selection-area {
+    border: 1px dashed orange;
+    background: rgba(255, 255, 0, 0.13);
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    width: 1px;
+    height: 1px;
+}
