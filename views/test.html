@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /*!
+         * Tea CSS
+         */
+        .tea-editor {
+            position: absolute;
+            left: 180px;
+            top: 125px;
+            right: 600px;
+            bottom: 0;
+            border: 1px solid rgb(228, 228, 228);
+            overflow: scroll;
+        }
+
+        .tea-editor-inner {
+            width: 4000px;
+            height: 4000px;
+            background: white;
+            border-right: 1px solid silver;
+            border-bottom: 1px solid silver;
+            padding: 15px;
+            position: relative;
+        }
+
+        .tea-output {
+            width: 600px;
+            right: 0px;
+            top: 125px;
+            bottom: 0px;
+            background: rgb(39, 40, 34);
+            padding: 15px;
+            position: fixed;
+            overflow: hidden;
+        }
+
+        .tea-component {
+            position: absolute !important;
+            left: 0;
+            top: 0;
+        }
+
+        .tea-component.tea-start {
+            position: absolute;
+            border-radius: 50%;
+            margin: 15px;
+            border: 2px solid rgb(63, 156, 0);
+            background-color: rgb(213, 255, 203);
+            width: 30px;
+            height: 30px;
+        }
+
+        .tea-component.tea-start:after {
+            content: "";
+            position: absolute;
+            height: 0;
+            width: 0;
+            left: 100%;
+            top: 3px;
+            border: 10px solid transparent;
+            border-left: 10px solid rgb(63, 156, 0);
+        }
+
+        .tea-component.tea-action {
+            position: absolute;
+            border-radius: 8px;
+            border: 2px solid rgb(93, 196, 255);
+            border-top: 4px solid rgb(93, 196, 255);
+            background-color: rgb(210, 238, 255);
+            width: 150px;
+            height: 80px;
+        }
+
+        .tea-component:after {
+            content: "";
+            position: absolute;
+            height: 0;
+            width: 0;
+            left: 100%;
+            top: 30px;
+            border: 10px solid transparent;
+            border-left: 10px solid rgb(93, 196, 255);
+        }
+
+        .tea-component.tea-stop {
+            position: absolute;
+            border-radius: 50%;
+            margin: 15px;
+            border: 2px solid rgb(255, 95, 95);
+            background-color: rgb(255, 203, 203);
+            width: 30px;
+            height: 30px;
+        }
+
+        .tea-component.tea-stop:after,
+        .tea-component.tea-variable:after,
+        .tea-component.tea-import:after {
+            content: "";
+            position: absolute;
+            height: 0;
+            width: 0;
+            left: 0;
+            top: 0;
+            border: transparent;
+        }
+
+        .tea-selection {
+            border: 1px solid orange;
+            background: rgba(255, 255, 0, 0.13);
+            position: absolute;
+            left: -4px;
+            top: -4px;
+            width: 1px;
+            height: 1px;
+        }
+
+        .tea-selection-area {
+            border: 1px dashed orange;
+            background: rgba(255, 255, 0, 0.13);
+            position: absolute;
+            left: -4px;
+            top: -4px;
+            width: 1px;
+            height: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tea-menu">
+        <ul>
+            <li>
+                <button id="tea-variable">variable</button>
+                <button id="tea-import">import</button>
+                <button id="tea-start">start</button>
+                <button id="tea-action">action</button>
+                <button id="tea-stop">stop</button>
+            </li>
+        </ul>
+    </div>
+    <div class="tea-editor">
+        <div class="tea-editor-inner">
+            <div class="tea-component tea-start" draggable="true"></div>
+        </div>
+    </div>
+    <script>
+        window.Tea = tea = (function() {
+
+            let teaArea = {};
+            let teaEditor = {};
+            let dragScrEl = {};
+
+            // Setup dragging elements.
+            function handleDragStart(e)  {
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', e.innerHTML);
+
+                dragSrcEl = this;
+
+                console.log(e);
+            }
+
+            function handleDragEnd(e)  {
+                console.log(e);
+                e.target.style.left = (e.x - teaEditor.offsetLeft - 34) + "px";
+                e.target.style.top = (e.y - teaEditor.offsetTop - 34) + "px";
+                console.log(e.target);
+            };
+            function handleDragOver(e)  {
+                if (e.preventDefault) {
+                    e.preventDefault();
+                }
+
+                return false;
+            };
+            function handleDragEnter(e)  {
+            }
+            function handleDragLeave(e) {
+            }
+
+            // Create new items.
+            function connect(action, el) {
+                let self = this;
+                switch(action) {
+                    case "start":
+                        el.addEventListener('click', function (el)  {
+                            createStart();
+                        });
+                        break;
+                    case "action":
+                        el.addEventListener('click', function (el)  {
+                            createAction();
+                        });
+                        break;
+                    case "stop":
+                        el.addEventListener('click', function (el)  {
+                            createStop();
+                        });
+                        break;
+                    case "variable":
+                        el.addEventListener('click', function(el) {
+                            console.log(this);
+                            console.log(self);
+                            createVariable();
+                        });
+                        break;
+                    case "import":
+                        el.addEventListener('click', function (el)  {
+                            createImport();
+                        });
+                        break;
+                }
+            }
+            function attachAllDragEvents(el)  {
+                el.addEventListener('dragstart', handleDragStart, false);
+                el.addEventListener('dragover', handleDragOver, false);
+                el.addEventListener('dragenter', handleDragEnter, false);
+                el.addEventListener('dragleave', handleDragLeave, false);
+                el.addEventListener('dragend', handleDragEnd, false);
+            }
+            function createStart() {
+                let el = document.createElement("div");
+                el.className = "tea-component tea-start";
+                el.style.left = "1px";
+                el.style.top = "1px";
+                el.setAttribute("draggable", "true");
+                attachAllDragEvents(el);
+                teaArea.appendChild(el);
+            }
+            function createAction() {
+                let el = document.createElement("div");
+                el.className = "tea-component tea-action";
+                el.style.left = "1px";
+                el.style.top = "1px";
+                el.setAttribute("draggable", "true");
+                attachAllDragEvents(el);
+                teaArea.appendChild(el);
+            }
+            function createStop() {
+                let el = document.createElement("div");
+                el.className = "tea-component tea-stop";
+                el.style.left = "1px";
+                el.style.top = "1px";
+                el.setAttribute("draggable", "true");
+                attachAllDragEvents(el);
+                teaArea.appendChild(el);
+            }
+            function createVariable() {
+                let el = document.createElement("div");
+                el.className = "tea-component tea-variable";
+                el.style.left = "1px";
+                el.style.top = "1px";
+                el.innerHTML = `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+			<g transform="matrix(1,0,0,1,-25.8741,15.3846)">
+				<path d="M417.022,326.573C432.213,305.737 440.21,282.102 440.21,258.042C440.21,182.395 362.657,120.979 267.133,120.979C171.609,120.979 94.056,182.395 94.056,258.042C94.056,282.102 102.053,305.737 117.244,326.573L417.022,326.573Z" style="fill:rgb(255,234,203);stroke:rgb(255,181,92);stroke-width:19.52px;"/>
+			</g>
+		</svg>`;
+                el.setAttribute("draggable", "true");
+                attachAllDragEvents(el);
+                teaArea.appendChild(el);
+            }
+            function createImport() {
+                let el = document.createElement("div");
+                el.className = "tea-component tea-import";
+                el.style.left = "1px";
+                el.style.top = "1px";
+                el.innerHTML = `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+			<g transform="matrix(1.28226,0,0,1,-97.5271,-23.0769)">
+				<path d="M267.483,90.909C267.483,90.909 137.413,228.217 137.413,287.063C137.413,379.113 195.695,453.846 267.483,453.846C339.27,453.846 397.552,379.113 397.552,287.063C397.552,228.217 267.483,90.909 267.483,90.909Z" style="fill:rgb(255,203,245);stroke:rgb(255,92,213);stroke-width:16.98px;"/>
+			</g>
+		</svg>`;
+                el.setAttribute("draggable", "true");
+                attachAllDragEvents(el);
+                teaArea.appendChild(el);
+            }
+            function init(cssSelector) {
+                // Grab the div that will be the tea editor
+                teaArea = document.querySelectorAll(cssSelector + " .tea-editor-inner")[0];
+                teaEditor = document.querySelectorAll(cssSelector)[0];
+                let els = document.querySelectorAll(cssSelector + ' .tea-component');
+                els.forEach(function (el) {
+                    el.addEventListener('dragstart', handleDragStart, false);
+                    el.addEventListener('dragover', handleDragOver, false);
+                    el.addEventListener('dragenter', handleDragEnter, false);
+                    el.addEventListener('dragleave', handleDragLeave, false);
+                    el.addEventListener('dragend', handleDragEnd, false);
+                });
+            }
+
+            return {
+                init: init,
+                connect: connect
+            }
+        }());
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            Tea.init(".tea-editor");
+            Tea.connect('start', document.getElementById('tea-start'));
+            Tea.connect('stop', document.getElementById('tea-stop'));
+            Tea.connect('action', document.getElementById('tea-action'));
+            Tea.connect('variable', document.getElementById('tea-variable'));
+            Tea.connect('import', document.getElementById('tea-import'));
+        });
+    </script>
+</body>
+
+</html>
