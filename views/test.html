@@ -228,7 +228,7 @@
                 el.style.top = "1px";
                 el.setAttribute("draggable", "true");
                 attachAllDragEvents(el);
-                teaArea.appendChild(el);
+                teaArea.insertBefore(el,teaArea.childNodes[0]);
             }
             function createAction() {
                 let el = document.createElement("div");
@@ -237,7 +237,7 @@
                 el.style.top = "1px";
                 el.setAttribute("draggable", "true");
                 attachAllDragEvents(el);
-                teaArea.appendChild(el);
+                teaArea.insertBefore(el, teaArea.childNodes[0]);
             }
             function createStop() {
                 let el = document.createElement("div");
@@ -246,7 +246,7 @@
                 el.style.top = "1px";
                 el.setAttribute("draggable", "true");
                 attachAllDragEvents(el);
-                teaArea.appendChild(el);
+                teaArea.insertBefore(el,teaArea.childNodes[0]);
             }
             function createVariable() {
                 let el = document.createElement("div");
@@ -260,7 +260,7 @@
 		</svg>`;
                 el.setAttribute("draggable", "true");
                 attachAllDragEvents(el);
-                teaArea.appendChild(el);
+                teaArea.insertBefore(el,teaArea.childNodes[0]);
             }
             function createImport() {
                 let el = document.createElement("div");
@@ -274,7 +274,7 @@
 		</svg>`;
                 el.setAttribute("draggable", "true");
                 attachAllDragEvents(el);
-                teaArea.appendChild(el);
+                teaArea.insertBefore(el,teaArea.childNodes[0]);
             }
             function init(cssSelector) {
                 // Grab the div that will be the tea editor
