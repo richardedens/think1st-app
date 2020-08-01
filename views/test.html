@@ -42,6 +42,7 @@
             position: absolute !important;
             left: 0;
             top: 0;
+            cursor: pointer;
         }
         
         .tea-component.tea-start {
@@ -156,11 +157,10 @@
 
             // Setup dragging elements.
             function handleDragStart(e) {
-                e.dataTransfer.effectAllowed = 'none';
                 img = new Image();
+                e.dataTransfer.effectAllowed = 'all';
                 e.dataTransfer.setDragImage(img, -1000, -1000);
                 e.dataTransfer.setData('text/html', e.innerHTML);
-                this.classList.add("dragging");
 
                 dragSrcEl = this;
 
@@ -186,7 +186,6 @@
                 e.target.style.left = (e.x - teaEditor.offsetLeft - 34) + teaEditor.scrollLeft + "px";
                 e.target.style.top = (e.y - teaEditor.offsetTop - 34) + teaEditor.scrollTop + "px";
                 console.log(e.target);
-                this.classList.replace(/\dragging\b/g, "");
             };
 
             function handleDragOver(e) {
