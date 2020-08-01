@@ -30,6 +30,7 @@ const open = require('open')
 app.use(express.static('public'))
 
 app.get('/', (req, res) => res.sendFile(__dirname + '/views/dashboard.html'))
+app.get('/test', (req, res) => res.sendFile(__dirname + '/views/test.html'))
 
 console.log(chalk.yellow(`
 
