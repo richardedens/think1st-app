@@ -1,18 +1,32 @@
-# ![Tea](public/android-icon-48x48.png?raw=true "Tea") "Tea", a visual programming language
-**"Tea"** is a visual programming language. Designed to be very simple yet powerful and just incrediable awesome.
-What ever you visually script within **"Tea"** is automaticly compiled to **C#**, **Java**, **TypeScript**, **Python** and **PHP**.
+# ![Tea](public/android-icon-48x48.png?raw=true "Tea") "Tea" a Visual Programming Language
+**"Tea"** is a visual programming language. Designed to be very simple, and yet incrediable powerful and just completely awesome.
+**"Tea"** melts down barriers inbetween proper Enterprise Architecture with the TOGAF 9.2 and ArchiMate 3.1 standard in combination with hardcore programming.
+
+# For who is Tea?
+Have you every truly wondered if what you build in your software is really helping the business?
+And do they really reach for a goal that has any business value?
+With **"Tea"** it becomes visually cristal clear if this is the case.
+By combining a visual programming language with the ArchiMate 3.1 standard for defining Enterprise Architecture.
+You can now easily define what your script solves within the architecture.
+And so, **"Tea"** is for hardcore programmers and enterprise / solution architects.
+
+**"Tea"** lets the business, enterprise architects, and software development teams work very closely together.
+What ever you visually program within **"Tea"** will be automaticly compiled to **C#**, **Java**, **TypeScript**, **Python** and **PHP**.
 Scripting errors that might occur are helped to avoid as much as possible.
 
-# How to run **"Tea"** scripts.
-**"Teapot"** is a runtime within the languages mentioned, that helps run the compiled **"Tea"** scripts.
+# Is **"Tea"** / **"Teapot Runtime"** / **"Tea Enterprise Architect"** free of charge?
+YES! I believe that a visual language can only be succesful if its simply put, completely free.
+That is why everything is provided with the MIT license. To help the community use the language in the way they want to.
+
+# How to run **"Tea"** scripts?
+**"Teapot"** is a runtime within the languages mentioned, that helps to compile **"Tea"** scripts to your preferred language.
 We really made the runtime work with the programming languages and be as thin as possible.
 So that the performance of the languages is without any setbacks of using a visual programming language.
 
 Externally imported libraries are carefully selected and can be used with the knowledge that in a form they are available within the mentioned programming languages.
 This gives **"Tea"** the power of the existing programming languages and produces code that is absolutely 100% yours without any vendor locking.
-All the **"Teapot"** runtimes and editor are provided under the MIT license and are free of charge.
 
-# **"Tea"** is pure HTML5 and vanilla JavaScript technology.
+# **"Tea"** graphical user interface components are pure HTML5 and vanilla JavaScript technology.
 We made sure that **"Tea"** itself is created purely out of HTML5 and vanilla JavaScript.
 
 # Within **"Tea"** you have ArchiMate 3.1 and the TOGAF 9.2 industry standard integrated.
