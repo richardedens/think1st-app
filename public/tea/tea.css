@@ -4,7 +4,7 @@
 
 .tea-editor {
     position: fixed;
-    left: 180px;
+    left: 260px;
     top: 125px;
     right: 600px;
     bottom: 0;
@@ -90,7 +90,8 @@
 
 .tea-component.tea-stop:after,
 .tea-component.tea-variable:after,
-.tea-component.tea-import:after {
+.tea-component.tea-import:after,
+.tea-component.tea-archimate:after {
     content: "";
     position: absolute;
     height: 0;
@@ -118,4 +119,18 @@
     top: -4px;
     width: 1px;
     height: 1px;
+}
+
+.tea-archimate-innertext {
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+    top: 30%;
+    text-align: center;
+    width: 100px;
+    height: 20px;
+    color: black;
+    font-size: 11px;
+    border: none;
+    background: transparent;
 }
