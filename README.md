@@ -12,6 +12,12 @@ Externally imported libraries are carefully selected and can be used with the kn
 This gives **"Tea"** the power of the existing programming languages and produces code that is absolutely 100% yours without any vendor locking.
 All the **"Teapot"** runtimes and editor are provided under the MIT license and are free of charge.
 
+# **"Tea"** is pure HTML5 and vanilla JavaScript technology.
+We made sure that **"Tea"** itself is created purely out of HTML5 and vanilla JavaScript.
+
+# Within **"Tea"** you have ArchiMate 3.1 and the TOGAF 9.2 industry standard integrated.
+This allows you to program industry standard ArchiMate 3.1 within **"Tea"** connecting architecture artifacts to your actual code. Making it completely logic why you are programming what you are programming. And how this connects to the Enterprise Architecture defined within your company.
+
 # **"Tea"** IDE.
 The **"Tea"** pot editor is the IDE to develop **"Tea"** scripts. And you are looking at its repository.
 

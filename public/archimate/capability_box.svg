@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
+    <g transform="matrix(1,0,0,1,-200.538,-9.5617)">
+        <path d="M320,20C320,14.481 315.519,10 310,10L211,10C205.481,10 201,14.481 201,20L201,54C201,59.519 205.481,64 211,64L310,64C315.519,64 320,59.519 320,54L320,20Z" style="fill:rgb(245,222,170);"/>
+    </g>
+    <g transform="matrix(1,0,0,1,-200.538,-9.5617)">
+        <clipPath id="_clip1">
+            <rect x="200" y="9" width="122" height="57"/>
+        </clipPath>
+        <g clip-path="url(#_clip1)">
+            <path d="M320,20C320,14.481 315.519,10 310,10L211,10C205.481,10 201,14.481 201,20L201,54C201,59.519 205.481,64 211,64L310,64C315.519,64 320,59.519 320,54L320,20Z" style="fill:none;stroke:rgb(15,10,0);stroke-width:1px;"/>
+        </g>
+    </g>
+    <g>
+        <g transform="matrix(1,0,0,1,-200.538,-9.5617)">
+            <rect x="312" y="15" width="4" height="4" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-200.538,-9.5617)">
+            <rect x="308" y="19" width="4" height="4" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-200.538,-9.5617)">
+            <rect x="312" y="19" width="4" height="4" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-200.538,-9.5617)">
+            <rect x="304" y="23" width="4" height="4" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-200.538,-9.5617)">
+            <rect x="308" y="23" width="4" height="4" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-200.538,-9.5617)">
+            <rect x="312" y="23" width="4" height="4" style="fill:none;stroke:black;stroke-width:1px;"/>
+        </g>
+    </g>
+</svg>

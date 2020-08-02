@@ -169,38 +169,32 @@
             }
 
             function handleDrag(e) {
-                console.log(e);
                 if (isFirefox) {
                     e.target.style.left = (fireFoxEvt.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px";
                     e.target.style.top = (fireFoxEvt.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px";
                 } else {
                     e.target.style.left = (e.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px";
                     e.target.style.top = (e.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px";
-                    console.log(teaEditor.scrollTop + " - " + e.target.style.height.replace("px", "") + " - " + (e.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px" + " x " + (e.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px");
                 }
             };
 
             function handleDrop(e) {
-                //console.log(e);
                 if (isFirefox) {
                     e.target.style.left = (fireFoxEvt.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px";
                     e.target.style.top = (fireFoxEvt.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px";
                 } else {
                     e.target.style.left = (e.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px";
                     e.target.style.top = (e.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px";
-                    console.log((e.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px" + " x " + (e.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px");
                 }
             };
 
             function handleDragEnd(e) {
-                //console.log(e);
                 if (isFirefox) {
                     e.target.style.left = (fireFoxEvt.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px";
                     e.target.style.top = (fireFoxEvt.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px";
                 } else {
                     e.target.style.left = (e.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px";
                     e.target.style.top = (e.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px";
-                    console.log((e.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px" + " x " + (e.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px");
                 }
             };
 
@@ -354,17 +348,6 @@
                         fireFoxEvt = e
                     }, false);
                 }
-
-                /*let els = document.querySelectorAll(cssSelector + ' .tea-component');
-                els.forEach(function(el) {
-                    el.addEventListener('dragstart', handleDragStart, false);
-                    el.addEventListener('drag', handleDrag, false);
-                    el.addEventListener('drop', handleDrop, false);
-                    el.addEventListener('dragend', handleDragEnd, false);
-                    el.addEventListener('dragover', handleDragOver, false);
-                    el.addEventListener('dragenter', handleDragEnter, false);
-                    el.addEventListener('dragleave', handleDragLeave, false);
-                });*/
             }
 
             return {

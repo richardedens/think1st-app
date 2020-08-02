@@ -134,7 +134,7 @@
                     </h6>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" id="add-start" href="#">
+                            <a class="nav-link active" id="tea-start" href="#">
                                 <svg width="24" height="24" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
                                     <g transform="matrix(1.22895,0,0,1.22895,-60.3882,-60.722)">
                                         <g transform="matrix(0.829089,0,0,0.829089,-28.7765,40.924)">
@@ -148,14 +148,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="add-action" href="#">
+                            <a class="nav-link" id="tea-action" href="#">
                                 <svg width="24" height="24" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
                                     <path d="M462.587,184.965C462.587,147.72 432.35,117.483 395.105,117.483L97.203,117.483C59.958,117.483 29.72,147.72 29.72,184.965L29.72,319.93C29.72,357.175 59.958,387.413 97.203,387.413L395.105,387.413C432.35,387.413 462.587,357.175 462.587,319.93L462.587,184.965Z" style="fill:rgb(203,227,255);stroke:rgb(92,168,255);stroke-width:19.52px;"/>
                                 </svg> Action
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="add-stop">
+                            <a class="nav-link" href="#" id="tea-stop">
                                 <svg width="24" height="24" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
                                     <g transform="matrix(1.01891,0,0,1.01891,-41.4231,-10.4283)">
                                         <circle cx="286.014" cy="255.594" r="159.79" style="fill:rgb(255,203,203);stroke:rgb(255,92,92);stroke-width:19.16px;"/>
@@ -164,7 +164,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="add-variable">
+                            <a class="nav-link" href="#" id="tea-variable">
                                 <svg width="24" height="24" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
                                     <g transform="matrix(1,0,0,1,-25.8741,15.3846)">
                                         <path d="M417.022,326.573C432.213,305.737 440.21,282.102 440.21,258.042C440.21,182.395 362.657,120.979 267.133,120.979C171.609,120.979 94.056,182.395 94.056,258.042C94.056,282.102 102.053,305.737 117.244,326.573L417.022,326.573Z" style="fill:rgb(255,234,203);stroke:rgb(255,181,92);stroke-width:19.52px;"/>
@@ -173,7 +173,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" id="add-import">
+                            <a class="nav-link" href="#" id="tea-import">
                                 <svg width="24" height="24" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
                                     <g transform="matrix(1.28226,0,0,1,-97.5271,-23.0769)">
                                         <path d="M267.483,90.909C267.483,90.909 137.413,228.217 137.413,287.063C137.413,379.113 195.695,453.846 267.483,453.846C339.27,453.846 397.552,379.113 397.552,287.063C397.552,228.217 267.483,90.909 267.483,90.909Z" style="fill:rgb(255,203,245);stroke:rgb(255,92,213);stroke-width:16.98px;"/>
@@ -191,8 +191,9 @@
                 </div>
 
                 <!-- Tea Editor Start -->
-                <div class="tea-editor-outer">
-                    <div id="tea-editor"></div>
+                <div class="tea-editor">
+                    <div class="tea-editor-inner">
+                    </div>
                 </div>
                 <!-- Tea Editor End -->
 
@@ -273,14 +274,13 @@
     <script type="text/javascript" src="/js/prism.js"></script>
 
     <!-- Tea is an extension on top of jQuery and jQuery UI -->
-    <script type="text/javascript" src="/tea/tea.js"></script>
-    <script type="text/javascript" src="/js/jquery.scrollbar.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
 
     <!-- Bootstrap 4 - JS -->
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-    <!-- Tea Editor App -->
-    <script type="text/javascript" src="/js/app.js"></script>
+    <!-- Tea is an extension on top of jQuery and jQuery UI -->
+    <script type="text/javascript" src="/tea/tea.js"></script>
 </body>
 
 </html>
