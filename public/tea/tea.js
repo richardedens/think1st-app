@@ -34,8 +34,8 @@ window.Tea = tea = (function() {
                 if (item.classList.contains("tea-import")) {
                     json.code.push({ "type": "import" });
                 }
-                if (item.classList.contains("tea-variable")) {
-                    json.code.push({ "type": "variable" });
+                if (item.classList.contains("tea-letiable")) {
+                    json.code.push({ "type": "letiable" });
                 }
             });
             resolve(json);
@@ -76,11 +76,11 @@ window.Tea = tea = (function() {
             code += "\r\n";
             code += "export default class " + className + " {\r\n";
 
-            // Create variables.
+            // Create letiables.
             let row = "";
             json.code.reverse().map(function(item, index) {
-                if (item['type'] === 'variable') {
-                    code += "\tprivate newvar: String = \"\";\r\n";
+                if (item['type'] === 'letiable') {
+                    code += "\tprivate newlet: String = \"\";\r\n";
                     row = "\r\n";
                 }
             });
@@ -141,11 +141,11 @@ window.Tea = tea = (function() {
             code += "\r\n";
             code += "class " + className + " {\r\n";
 
-            // Create variables.
+            // Create letiables.
             let row = "";
             json.code.reverse().map(function(item, index) {
-                if (item['type'] === 'variable') {
-                    code += "\tprivate $newvar = \"\";\r\n";
+                if (item['type'] === 'letiable') {
+                    code += "\tprivate $newlet = \"\";\r\n";
                     row = "\r\n";
                 }
             });
@@ -206,11 +206,11 @@ window.Tea = tea = (function() {
             code += "\r\n";
             code += "public class " + className + " {\r\n";
 
-            // Create variables.
+            // Create letiables.
             let row = "";
             json.code.reverse().map(function(item, index) {
-                if (item['type'] === 'variable') {
-                    code += "\tprivate string newvar = \"\";\r\n";
+                if (item['type'] === 'letiable') {
+                    code += "\tprivate string newlet = \"\";\r\n";
                     row = "\r\n";
                 }
             });
@@ -271,11 +271,11 @@ window.Tea = tea = (function() {
             code += "\r\n";
             code += "public class " + className + " {\r\n";
 
-            // Create variables.
+            // Create letiables.
             let row = "";
             json.code.reverse().map(function(item, index) {
-                if (item['type'] === 'variable') {
-                    code += "\tprivate String newvar = \"\";\r\n";
+                if (item['type'] === 'letiable') {
+                    code += "\tprivate String newlet = \"\";\r\n";
                     row = "\r\n";
                 }
             });
@@ -337,11 +337,11 @@ window.Tea = tea = (function() {
 
             code += "class " + className + "():\r\n";
 
-            // Create variables.
+            // Create letiables.
             let row = "";
             json.code.reverse().map(function(item, index) {
-                if (item['type'] === 'variable') {
-                    code += "\tnewvar = \"\"\r\n";
+                if (item['type'] === 'letiable') {
+                    code += "\tnewlet = \"\"\r\n";
                     row = "\r\n";
                 }
             });
@@ -367,13 +367,16 @@ window.Tea = tea = (function() {
     }
 
     function moveElement(e) {
-        if (!e.target.classList.contains("tea-archimate-innertext")) {
-            if (isFirefox) {
-                e.target.style.left = (fireFoxEvt.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px";
-                e.target.style.top = (fireFoxEvt.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px";
-            } else {
-                e.target.style.left = (e.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px";
-                e.target.style.top = (e.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px";
+        console.log(e);
+        if (!e.target.classList.contains("anchor")) {
+            if (!e.target.classList.contains("tea-archimate-innertext")) {
+                if (isFirefox) {
+                    e.target.style.left = (fireFoxEvt.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px";
+                    e.target.style.top = (fireFoxEvt.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px";
+                } else {
+                    e.target.style.left = (e.pageX - teaEditor.offsetLeft - Math.ceil(e.target.style.width.replace("px", "") / 2)) + teaEditor.scrollLeft + "px";
+                    e.target.style.top = (e.pageY - teaEditor.offsetTop - Math.ceil(e.target.style.height.replace("px", "") / 2)) + teaEditor.scrollTop + "px";
+                }
             }
         }
     }
@@ -423,9 +426,9 @@ window.Tea = tea = (function() {
                     renderLanguages();
                 });
                 break;
-            case "variable":
+            case "letiable":
                 el.addEventListener('click', function(el) {
-                    createVariable();
+                    createletiable();
                     renderLanguages();
                 });
                 break;
@@ -480,18 +483,69 @@ window.Tea = tea = (function() {
         el.addEventListener('dragend', handleDragEnd, false);
     }
 
-    function createElement(classNames, width, height, html, left = (1 + teaEditor.scrollLeft) + "px", top = (1 + teaEditor.scrollTop) + "px", draggable = true) {
+    let startElement = false;
+    let endElement = false;
+
+    function handleMouseDown(e) {
+        console.log(e);
+        startElement = e.target;
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        return false;
+    }
+
+    function handleMouseOver(e) {
+        console.log(e);
+        endElement = e.target;
+        if (startElement !== false && endElement !== false) {
+            createConnection(startElement, endElement);
+            startElement = false;
+            endElement = false;
+        }
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        return false;
+    }
+
+    function createElement(classNames, width, height, html, anchortype = "both", left = (1 + teaEditor.scrollLeft) + "px", top = (1 + teaEditor.scrollTop) + "px", draggable = true) {
         let el = document.createElement("div");
-        el.className = classNames;
         el.style.left = left;
         el.style.top = top;
         el.style.width = width;
         el.style.height = height;
+        el.className = classNames;
+        el.setAttribute("draggable", "true");
+
+        // Create anchors.
+        if (anchortype === "left") {
+            let leftAnchor = document.createElement("div");
+            leftAnchor.className = "anchor anchor-left";
+            leftAnchor.addEventListener('mouseover', handleMouseOver, false);
+            el.append(leftAnchor);
+        }
+        if (anchortype === "right") {
+            let rightAnchor = document.createElement("div");
+            rightAnchor.className = "anchor anchor-right";
+            rightAnchor.addEventListener('mousedown', handleMouseDown, false);
+            el.append(rightAnchor);
+        }
+        if (anchortype === "both") {
+            let leftAnchor = document.createElement("div");
+            leftAnchor.className = "anchor anchor-left";
+            leftAnchor.addEventListener('mouseover', handleMouseOver, false);
+            el.append(leftAnchor);
+            let rightAnchor = document.createElement("div");
+            rightAnchor.className = "anchor anchor-right";
+            rightAnchor.addEventListener('mousedown', handleMouseDown, false);
+            el.append(rightAnchor);
+        }
+
         if (html != null) {
             el.innerHTML = html;
         }
         if (draggable) {
-            el.setAttribute("draggable", "true");
             attachAllDragEvents(el);
         }
         return el;
@@ -499,31 +553,43 @@ window.Tea = tea = (function() {
 
     // Tea
     function createStart() {
-        var el = createElement("tea-component tea-start", "32px", "32px");
+        let el = createElement("tea-component tea-start", "32px", "32px", null, "right");
         teaArea.append(el);
     }
 
     function createAction() {
-        var el = createElement("tea-component tea-action", "150px", "80px");
+        let el = createElement("tea-component tea-action", "150px", "80px");
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
     function createStop() {
-        var el = createElement("tea-component tea-stop", "32px", "32px");
+        let el = createElement("tea-component tea-stop", "32px", "32px", null, "left");
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
-    function createConnection() {
-        var el = createElement("tea-connection", "300px", "300px", `<svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
-<g transform="matrix(2.05158,0,0,2.0487,-4.67167,-520.09)">
-<path d="M2.448,498.601C119.645,498.601 122.267,253.863 245.14,253.863" style="fill:none;stroke:black;stroke-width:0.85px;"/>
-</g>
-</svg>`);
+    function createConnection(startElement, endElement) {
+        let el = document.createElement("div");
+        el.className = "tea-connection";
+
+        let left = teaEditor.scrollLeft + startElement.parentNode.offsetLeft + startElement.parentNode.clientWidth;
+        let top = teaEditor.scrollTop + startElement.parentNode.offsetTop + (startElement.parentNode.clientHeight / 2);
+        let outerleft = teaEditor.scrollLeft + endElement.parentNode.offsetLeft;
+        let outertop = teaEditor.scrollTop + endElement.parentNode.offsetTop + (endElement.parentNode.clientHeight / 2);
+
+        el.style.position = "absolute";
+        el.style.left = left + "px";
+        el.style.top = top + "px";
+        el.style.width = (outerleft - left) + "px";
+        el.style.height = (outertop - top) + "px";
+
+        svg = document.getElementById("tea-editor-arrows");
+        svg.innerHTML = '<line x1="' + left + '" y1="' + top + '" x2="' + outerleft + '" y2="' + outertop + '" stroke="black"/>'
+
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
-    function createVariable() {
-        var el = createElement("tea-component tea-variable", "32px", "32px", `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    function createletiable() {
+        let el = createElement("tea-component tea-letiable", "32px", "32px", `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
     <g transform="matrix(1,0,0,1,-25.8741,15.3846)">
         <path d="M417.022,326.573C432.213,305.737 440.21,282.102 440.21,258.042C440.21,182.395 362.657,120.979 267.133,120.979C171.609,120.979 94.056,182.395 94.056,258.042C94.056,282.102 102.053,305.737 117.244,326.573L417.022,326.573Z" style="fill:rgb(255,234,203);stroke:rgb(255,181,92);stroke-width:19.52px;"/>
     </g>
@@ -532,7 +598,7 @@ window.Tea = tea = (function() {
     }
 
     function createImport() {
-        var el = createElement("tea-component tea-import", "32px", "32px", `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+        let el = createElement("tea-component tea-import", "32px", "32px", `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
     <g transform="matrix(1.28226,0,0,1,-97.5271,-23.0769)">
         <path d="M267.483,90.909C267.483,90.909 137.413,228.217 137.413,287.063C137.413,379.113 195.695,453.846 267.483,453.846C339.27,453.846 397.552,379.113 397.552,287.063C397.552,228.217 267.483,90.909 267.483,90.909Z" style="fill:rgb(255,203,245);stroke:rgb(255,92,213);stroke-width:16.98px;"/>
     </g>
@@ -542,7 +608,7 @@ window.Tea = tea = (function() {
 
     // ArchiMate 3.1
     function createArchiMateResource() {
-        var el = createElement("tea-component tea-archimate tea-archimate-resource", "119px", "54px", `<svg width="119" height="54" viewBox="0 0 119 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
+        let el = createElement("tea-component tea-archimate tea-archimate-resource", "119px", "54px", `<svg width="119" height="54" viewBox="0 0 119 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
         <g transform="matrix(1,0,0,1,-1.69362,-1.60709)">
             <g transform="matrix(1,0,0,1,-8.30638,-8.39291)">
                 <rect x="10" y="10" width="119" height="54" style="fill:rgb(245,222,170);"/>
@@ -575,7 +641,7 @@ window.Tea = tea = (function() {
     }
 
     function createArchiMateCapability() {
-        var el = createElement("tea-component tea-archimate tea-archimate-capability", "120px", "55px", `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
+        let el = createElement("tea-component tea-archimate tea-archimate-capability", "120px", "55px", `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
         <g transform="matrix(1,0,0,1,-200.538,-9.5617)">
             <path d="M320,20C320,14.481 315.519,10 310,10L211,10C205.481,10 201,14.481 201,20L201,54C201,59.519 205.481,64 211,64L310,64C315.519,64 320,59.519 320,54L320,20Z" style="fill:rgb(245,222,170);"/>
         </g>
@@ -609,7 +675,7 @@ window.Tea = tea = (function() {
     }
 
     function createArchiMateValueStream() {
-        var el = createElement("tea-component tea-archimate tea-archimate-value-stream", "120px", "55px", `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+        let el = createElement("tea-component tea-archimate tea-archimate-value-stream", "120px", "55px", `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
         <g transform="matrix(1,0,0,1,0.5,0.5)">
             <g transform="matrix(1,0,0,1,-393,-10)">
                 <path d="M512,20C512,14.481 507.519,10 502,10L403,10C397.481,10 393,14.481 393,20L393,54C393,59.519 397.481,64 403,64L502,64C507.519,64 512,59.519 512,54L512,20Z" style="fill:rgb(245,222,170);stroke:black;stroke-width:1px;"/>
@@ -623,7 +689,7 @@ window.Tea = tea = (function() {
     }
 
     function createArchiMateCourseOfAction() {
-        var el = createElement("tea-component tea-archimate tea-archimate-course-of-action", "120px", "55px", `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+        let el = createElement("tea-component tea-archimate tea-archimate-course-of-action", "120px", "55px", `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
         <g transform="matrix(1,0,0,1,-9.5,-93.6827)">
             <path d="M129,104C129,98.481 124.519,94 119,94L20,94C14.481,94 10,98.481 10,104L10,138C10,143.519 14.481,148 20,148L119,148C124.519,148 129,143.519 129,138L129,104Z" style="fill:rgb(245,222,170);stroke:black;stroke-width:1px;"/>
         </g>
@@ -669,7 +735,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     Tea.connect('start', document.getElementById('tea-start'));
     Tea.connect('stop', document.getElementById('tea-stop'));
     Tea.connect('action', document.getElementById('tea-action'));
-    Tea.connect('variable', document.getElementById('tea-variable'));
+    Tea.connect('letiable', document.getElementById('tea-letiable'));
     Tea.connect('import', document.getElementById('tea-import'));
 
     // ArchiMate 3.1
