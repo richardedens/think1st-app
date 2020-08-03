@@ -480,102 +480,69 @@ window.Tea = tea = (function() {
         el.addEventListener('dragend', handleDragEnd, false);
     }
 
+    function createElement(classNames, width, height, html, left = (1 + teaEditor.scrollLeft) + "px", top = (1 + teaEditor.scrollTop) + "px", draggable = true) {
+        let el = document.createElement("div");
+        el.className = classNames;
+        el.style.left = left;
+        el.style.top = top;
+        el.style.width = width;
+        el.style.height = height;
+        if (html != null) {
+            el.innerHTML = html;
+        }
+        if (draggable) {
+            el.setAttribute("draggable", "true");
+            attachAllDragEvents(el);
+        }
+        return el;
+    }
+
     // Tea
     function createStart() {
-        let el = document.createElement("div");
-        el.className = "tea-component tea-start";
-        el.style.left = (1 + teaEditor.scrollLeft) + "px";
-        el.style.top = (1 + teaEditor.scrollTop) + "px";
-        el.style.width = "32px";
-        el.style.height = "32px";
-        el.setAttribute("draggable", "true");
-        attachAllDragEvents(el);
+        var el = createElement("tea-component tea-start", "32px", "32px");
         teaArea.append(el);
     }
 
     function createAction() {
-        let el = document.createElement("div");
-        el.className = "tea-component tea-action";
-        el.style.left = (1 + teaEditor.scrollLeft) + "px";
-        el.style.top = (1 + teaEditor.scrollTop) + "px";
-        el.style.width = "150px";
-        el.style.height = "80px";
-        el.setAttribute("draggable", "true");
-        attachAllDragEvents(el);
+        var el = createElement("tea-component tea-action", "150px", "80px");
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
     function createStop() {
-        let el = document.createElement("div");
-        el.className = "tea-component tea-stop";
-        el.style.left = (1 + teaEditor.scrollLeft) + "px";
-        el.style.top = (1 + teaEditor.scrollTop) + "px";
-        el.style.width = "32px";
-        el.style.height = "32px";
-        el.setAttribute("draggable", "true");
-        attachAllDragEvents(el);
+        var el = createElement("tea-component tea-stop", "32px", "32px");
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
     function createConnection() {
-        let el = document.createElement("div");
-        el.className = "tea-connection";
-        el.style.left = (1 + teaEditor.scrollLeft) + "px";
-        el.style.top = (1 + teaEditor.scrollTop) + "px";
-        el.style.width = "300px";
-        el.style.height = "300px";
-        el.innerHTML = `<svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+        var el = createElement("tea-connection", "300px", "300px", `<svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
 <g transform="matrix(2.05158,0,0,2.0487,-4.67167,-520.09)">
 <path d="M2.448,498.601C119.645,498.601 122.267,253.863 245.14,253.863" style="fill:none;stroke:black;stroke-width:0.85px;"/>
 </g>
-</svg>`;
-        el.setAttribute("draggable", "true");
+</svg>`);
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
     function createVariable() {
-        let el = document.createElement("div");
-        el.className = "tea-component tea-variable";
-        el.style.left = (1 + teaEditor.scrollLeft) + "px";
-        el.style.top = (1 + teaEditor.scrollTop) + "px";
-        el.style.width = "32px";
-        el.style.height = "32px";
-        el.innerHTML = `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+        var el = createElement("tea-component tea-variable", "32px", "32px", `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
     <g transform="matrix(1,0,0,1,-25.8741,15.3846)">
         <path d="M417.022,326.573C432.213,305.737 440.21,282.102 440.21,258.042C440.21,182.395 362.657,120.979 267.133,120.979C171.609,120.979 94.056,182.395 94.056,258.042C94.056,282.102 102.053,305.737 117.244,326.573L417.022,326.573Z" style="fill:rgb(255,234,203);stroke:rgb(255,181,92);stroke-width:19.52px;"/>
     </g>
-</svg>`;
-        el.setAttribute("draggable", "true");
-        attachAllDragEvents(el);
+</svg>`);
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
     function createImport() {
-        let el = document.createElement("div");
-        el.className = "tea-component tea-import";
-        el.style.left = (1 + teaEditor.scrollLeft) + "px";
-        el.style.top = (1 + teaEditor.scrollTop) + "px";
-        el.style.width = "32px";
-        el.style.height = "32px";
-        el.innerHTML = `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+        var el = createElement("tea-component tea-import", "32px", "32px", `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
     <g transform="matrix(1.28226,0,0,1,-97.5271,-23.0769)">
         <path d="M267.483,90.909C267.483,90.909 137.413,228.217 137.413,287.063C137.413,379.113 195.695,453.846 267.483,453.846C339.27,453.846 397.552,379.113 397.552,287.063C397.552,228.217 267.483,90.909 267.483,90.909Z" style="fill:rgb(255,203,245);stroke:rgb(255,92,213);stroke-width:16.98px;"/>
     </g>
-</svg>`;
-        el.setAttribute("draggable", "true");
-        attachAllDragEvents(el);
+</svg>`);
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
     // ArchiMate 3.1
     function createArchiMateResource() {
-        let el = document.createElement("div");
-        el.className = "tea-component tea-archimate tea-archimate-resource";
-        el.style.left = (1 + teaEditor.scrollLeft) + "px";
-        el.style.top = (1 + teaEditor.scrollTop) + "px";
-        el.style.width = "119px";
-        el.style.height = "54px";
-        el.innerHTML = `<svg width="119" height="54" viewBox="0 0 119 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
+        var el = createElement("tea-component tea-archimate tea-archimate-resource", "119px", "54px", `<svg width="119" height="54" viewBox="0 0 119 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
         <g transform="matrix(1,0,0,1,-1.69362,-1.60709)">
             <g transform="matrix(1,0,0,1,-8.30638,-8.39291)">
                 <rect x="10" y="10" width="119" height="54" style="fill:rgb(245,222,170);"/>
@@ -603,20 +570,12 @@ window.Tea = tea = (function() {
                 <path d="M113,19L113,25M116,19L116,25M119,19L119,25" style="fill:none;stroke:black;stroke-width:1px;"/>
             </g>
         </g>
-    </svg><input class="tea-archimate-innertext" contenteditable="true" value="resource">`;
-        el.setAttribute("draggable", "true");
-        attachAllDragEvents(el);
+    </svg><input class="tea-archimate-innertext" contenteditable="true" value="resource">`);
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
     function createArchiMateCapability() {
-        let el = document.createElement("div");
-        el.className = "tea-component tea-archimate tea-archimate-capability";
-        el.style.left = (1 + teaEditor.scrollLeft) + "px";
-        el.style.top = (1 + teaEditor.scrollTop) + "px";
-        el.style.width = "120px";
-        el.style.height = "55px";
-        el.innerHTML = `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
+        var el = createElement("tea-component tea-archimate tea-archimate-capability", "120px", "55px", `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
         <g transform="matrix(1,0,0,1,-200.538,-9.5617)">
             <path d="M320,20C320,14.481 315.519,10 310,10L211,10C205.481,10 201,14.481 201,20L201,54C201,59.519 205.481,64 211,64L310,64C315.519,64 320,59.519 320,54L320,20Z" style="fill:rgb(245,222,170);"/>
         </g>
@@ -645,20 +604,12 @@ window.Tea = tea = (function() {
                 <rect x="312" y="23" width="4" height="4" style="fill:none;stroke:black;stroke-width:1px;"/>
             </g>
         </g>
-    </svg><input class="tea-archimate-innertext" contenteditable="true" value="capability">`;
-        el.setAttribute("draggable", "true");
-        attachAllDragEvents(el);
+    </svg><input class="tea-archimate-innertext" contenteditable="true" value="capability">`);
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
     function createArchiMateValueStream() {
-        let el = document.createElement("div");
-        el.className = "tea-component tea-archimate tea-archimate-value-stream";
-        el.style.left = (1 + teaEditor.scrollLeft) + "px";
-        el.style.top = (1 + teaEditor.scrollTop) + "px";
-        el.style.width = "120px";
-        el.style.height = "55px";
-        el.innerHTML = `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+        var el = createElement("tea-component tea-archimate tea-archimate-value-stream", "120px", "55px", `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
         <g transform="matrix(1,0,0,1,0.5,0.5)">
             <g transform="matrix(1,0,0,1,-393,-10)">
                 <path d="M512,20C512,14.481 507.519,10 502,10L403,10C397.481,10 393,14.481 393,20L393,54C393,59.519 397.481,64 403,64L502,64C507.519,64 512,59.519 512,54L512,20Z" style="fill:rgb(245,222,170);stroke:black;stroke-width:1px;"/>
@@ -667,20 +618,12 @@ window.Tea = tea = (function() {
                 <path d="M494,17L504,17L509,22L504,27L494,27L499,22L494,17Z" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;stroke-linejoin:miter;stroke-miterlimit:10;"/>
             </g>
         </g>
-    </svg><input class="tea-archimate-innertext" contenteditable="true" value="value stream">`;
-        el.setAttribute("draggable", "true");
-        attachAllDragEvents(el);
+    </svg><input class="tea-archimate-innertext" contenteditable="true" value="value stream">`);
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
     function createArchiMateCourseOfAction() {
-        let el = document.createElement("div");
-        el.className = "tea-component tea-archimate tea-archimate-course-of-action";
-        el.style.left = (1 + teaEditor.scrollLeft) + "px";
-        el.style.top = (1 + teaEditor.scrollTop) + "px";
-        el.style.width = "120px";
-        el.style.height = "55px";
-        el.innerHTML = `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+        var el = createElement("tea-component tea-archimate tea-archimate-course-of-action", "120px", "55px", `<svg width="120" height="55" viewBox="0 0 120 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
         <g transform="matrix(1,0,0,1,-9.5,-93.6827)">
             <path d="M129,104C129,98.481 124.519,94 119,94L20,94C14.481,94 10,98.481 10,104L10,138C10,143.519 14.481,148 20,148L119,148C124.519,148 129,143.519 129,138L129,104Z" style="fill:rgb(245,222,170);stroke:black;stroke-width:1px;"/>
         </g>
@@ -693,9 +636,7 @@ window.Tea = tea = (function() {
         <g transform="matrix(1,0,0,1,-9.5,-93.6827)">
             <path d="M126,103.5C126,99.91 123.09,97 119.5,97C115.91,97 113,99.91 113,103.5C113,107.09 115.91,110 119.5,110C123.09,110 126,107.09 126,103.5ZM123.5,103.5C123.5,101.291 121.709,99.5 119.5,99.5C117.291,99.5 115.5,101.291 115.5,103.5C115.5,105.709 117.291,107.5 119.5,107.5C121.709,107.5 123.5,105.709 123.5,103.5ZM121,103.5C121,102.672 120.328,102 119.5,102C118.672,102 118,102.672 118,103.5C118,104.328 118.672,105 119.5,105C120.328,105 121,104.328 121,103.5ZM120,103.5C120,103.224 119.776,103 119.5,103C119.224,103 119,103.224 119,103.5C119,103.776 119.224,104 119.5,104C119.776,104 120,103.776 120,103.5Z" style="fill:none;stroke:black;stroke-width:1.2px;stroke-linejoin:miter;stroke-miterlimit:10;"/>
         </g>
-    </svg><input class="tea-archimate-innertext" contenteditable="true" value="course of action">`;
-        el.setAttribute("draggable", "true");
-        attachAllDragEvents(el);
+    </svg><input class="tea-archimate-innertext" contenteditable="true" value="course of action">`);
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
     // Init
