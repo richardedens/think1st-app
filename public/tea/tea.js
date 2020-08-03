@@ -568,10 +568,10 @@ window.Tea = tea = (function() {
     }
 
     function createConnection(startElement, endElement) {
-        let left = teaEditor.scrollLeft + startElement.parentNode.offsetLeft + startElement.parentNode.clientWidth;
-        let top = teaEditor.scrollTop + startElement.parentNode.offsetTop + (startElement.parentNode.clientHeight / 2);
-        let outerleft = teaEditor.scrollLeft + endElement.parentNode.offsetLeft;
-        let outertop = teaEditor.scrollTop + endElement.parentNode.offsetTop + (endElement.parentNode.clientHeight / 2);
+        let left = startElement.parentNode.offsetLeft + startElement.parentNode.clientWidth;
+        let top = startElement.parentNode.offsetTop + (startElement.parentNode.clientHeight / 2);
+        let outerleft = endElement.parentNode.offsetLeft;
+        let outertop = endElement.parentNode.offsetTop + (endElement.parentNode.clientHeight / 2);
 
         svg = document.getElementById("tea-editor-arrows");
         svg.innerHTML = '<line x1="' + left + '" y1="' + top + '" x2="' + outerleft + '" y2="' + outertop + '" stroke="black"/>'
