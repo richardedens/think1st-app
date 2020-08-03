@@ -426,7 +426,7 @@ window.Tea = tea = (function() {
                     renderLanguages();
                 });
                 break;
-            case "letiable":
+            case "variable":
                 el.addEventListener('click', function(el) {
                     createletiable();
                     renderLanguages();
@@ -568,19 +568,10 @@ window.Tea = tea = (function() {
     }
 
     function createConnection(startElement, endElement) {
-        let el = document.createElement("div");
-        el.className = "tea-connection";
-
         let left = teaEditor.scrollLeft + startElement.parentNode.offsetLeft + startElement.parentNode.clientWidth;
         let top = teaEditor.scrollTop + startElement.parentNode.offsetTop + (startElement.parentNode.clientHeight / 2);
         let outerleft = teaEditor.scrollLeft + endElement.parentNode.offsetLeft;
         let outertop = teaEditor.scrollTop + endElement.parentNode.offsetTop + (endElement.parentNode.clientHeight / 2);
-
-        el.style.position = "absolute";
-        el.style.left = left + "px";
-        el.style.top = top + "px";
-        el.style.width = (outerleft - left) + "px";
-        el.style.height = (outertop - top) + "px";
 
         svg = document.getElementById("tea-editor-arrows");
         svg.innerHTML = '<line x1="' + left + '" y1="' + top + '" x2="' + outerleft + '" y2="' + outertop + '" stroke="black"/>'
@@ -589,7 +580,7 @@ window.Tea = tea = (function() {
     }
 
     function createletiable() {
-        let el = createElement("tea-component tea-letiable", "32px", "32px", `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+        let el = createElement("tea-component tea-variable", "32px", "32px", `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
     <g transform="matrix(1,0,0,1,-25.8741,15.3846)">
         <path d="M417.022,326.573C432.213,305.737 440.21,282.102 440.21,258.042C440.21,182.395 362.657,120.979 267.133,120.979C171.609,120.979 94.056,182.395 94.056,258.042C94.056,282.102 102.053,305.737 117.244,326.573L417.022,326.573Z" style="fill:rgb(255,234,203);stroke:rgb(255,181,92);stroke-width:19.52px;"/>
     </g>
