@@ -34,8 +34,8 @@ window.Tea = tea = (function() {
                 if (item.classList.contains("tea-import")) {
                     json.code.push({ "type": "import" });
                 }
-                if (item.classList.contains("tea-letiable")) {
-                    json.code.push({ "type": "letiable" });
+                if (item.classList.contains("tea-variable")) {
+                    json.code.push({ "type": "variable" });
                 }
             });
             resolve(json);
@@ -79,7 +79,7 @@ window.Tea = tea = (function() {
             // Create letiables.
             let row = "";
             json.code.reverse().map(function(item, index) {
-                if (item['type'] === 'letiable') {
+                if (item['type'] === 'variable') {
                     code += "\tprivate newlet: String = \"\";\r\n";
                     row = "\r\n";
                 }
@@ -144,7 +144,7 @@ window.Tea = tea = (function() {
             // Create letiables.
             let row = "";
             json.code.reverse().map(function(item, index) {
-                if (item['type'] === 'letiable') {
+                if (item['type'] === 'variable') {
                     code += "\tprivate $newlet = \"\";\r\n";
                     row = "\r\n";
                 }
@@ -209,7 +209,7 @@ window.Tea = tea = (function() {
             // Create letiables.
             let row = "";
             json.code.reverse().map(function(item, index) {
-                if (item['type'] === 'letiable') {
+                if (item['type'] === 'variable') {
                     code += "\tprivate string newlet = \"\";\r\n";
                     row = "\r\n";
                 }
@@ -274,7 +274,7 @@ window.Tea = tea = (function() {
             // Create letiables.
             let row = "";
             json.code.reverse().map(function(item, index) {
-                if (item['type'] === 'letiable') {
+                if (item['type'] === 'variable') {
                     code += "\tprivate String newlet = \"\";\r\n";
                     row = "\r\n";
                 }
@@ -340,7 +340,7 @@ window.Tea = tea = (function() {
             // Create letiables.
             let row = "";
             json.code.reverse().map(function(item, index) {
-                if (item['type'] === 'letiable') {
+                if (item['type'] === 'variable') {
                     code += "\tnewlet = \"\"\r\n";
                     row = "\r\n";
                 }
@@ -379,6 +379,8 @@ window.Tea = tea = (function() {
                 }
             }
         }
+        // Render the connection!
+        renderConnections();
     }
 
     // Setup dragging elements.
@@ -428,7 +430,7 @@ window.Tea = tea = (function() {
                 break;
             case "variable":
                 el.addEventListener('click', function(el) {
-                    createletiable();
+                    createVariable();
                     renderLanguages();
                 });
                 break;
@@ -485,10 +487,17 @@ window.Tea = tea = (function() {
 
     let startElement = false;
     let endElement = false;
+    let connectionType = false;
 
     function handleMouseDown(e) {
         console.log(e);
         startElement = e.target;
+        if (e.target.classList.contains("anchor-top")) {
+            connectionType = "anchor-top";
+        }
+        if (e.target.classList.contains("anchor-right")) {
+            connectionType = "anchor-right";
+        }
         if (e.preventDefault) {
             e.preventDefault();
         }
@@ -499,9 +508,7 @@ window.Tea = tea = (function() {
         console.log(e);
         endElement = e.target;
         if (startElement !== false && endElement !== false) {
-            createConnection(startElement, endElement);
-            startElement = false;
-            endElement = false;
+            createConnection(startElement, endElement, connectionType);
         }
         if (e.preventDefault) {
             e.preventDefault();
@@ -518,7 +525,22 @@ window.Tea = tea = (function() {
         el.className = classNames;
         el.setAttribute("draggable", "true");
 
+        // Set inner html
+        if (html != null) {
+            el.innerHTML = html;
+        }
+
         // Create anchors.
+        if (anchortype === "topbottom") {
+            let topAnchor = document.createElement("div");
+            topAnchor.className = "anchor anchor-top";
+            topAnchor.addEventListener('mousedown', handleMouseDown, false);
+            el.append(topAnchor);
+            let bottomAnchor = document.createElement("div");
+            bottomAnchor.className = "anchor anchor-bottom";
+            bottomAnchor.addEventListener('mouseover', handleMouseOver, false);
+            el.append(bottomAnchor);
+        }
         if (anchortype === "left") {
             let leftAnchor = document.createElement("div");
             leftAnchor.className = "anchor anchor-left";
@@ -541,10 +563,54 @@ window.Tea = tea = (function() {
             rightAnchor.addEventListener('mousedown', handleMouseDown, false);
             el.append(rightAnchor);
         }
-
-        if (html != null) {
-            el.innerHTML = html;
+        if (anchortype === "triple") {
+            let topAnchor = document.createElement("div");
+            topAnchor.className = "anchor anchor-top";
+            topAnchor.addEventListener('mousedown', handleMouseDown, false);
+            el.append(topAnchor);
+            let leftAnchor = document.createElement("div");
+            leftAnchor.className = "anchor anchor-left";
+            leftAnchor.addEventListener('mouseover', handleMouseOver, false);
+            el.append(leftAnchor);
+            let rightAnchor = document.createElement("div");
+            rightAnchor.className = "anchor anchor-right";
+            rightAnchor.addEventListener('mousedown', handleMouseDown, false);
+            el.append(rightAnchor);
         }
+        if (anchortype === "triplebottom") {
+            let bottomAnchor = document.createElement("div");
+            bottomAnchor.className = "anchor anchor-bottom";
+            bottomAnchor.addEventListener('mouseover', handleMouseOver, false);
+            el.append(bottomAnchor);
+            let leftAnchor = document.createElement("div");
+            leftAnchor.className = "anchor anchor-left";
+            leftAnchor.addEventListener('mouseover', handleMouseOver, false);
+            el.append(leftAnchor);
+            let rightAnchor = document.createElement("div");
+            rightAnchor.className = "anchor anchor-right";
+            rightAnchor.addEventListener('mousedown', handleMouseDown, false);
+            el.append(rightAnchor);
+        }
+        if (anchortype === "all") {
+            let topAnchor = document.createElement("div");
+            topAnchor.className = "anchor anchor-top";
+            topAnchor.addEventListener('mousedown', handleMouseDown, false);
+            el.append(topAnchor);
+            let bottomAnchor = document.createElement("div");
+            bottomAnchor.className = "anchor anchor-bottom";
+            bottomAnchor.addEventListener('mouseover', handleMouseOver, false);
+            el.append(bottomAnchor);
+            let leftAnchor = document.createElement("div");
+            leftAnchor.className = "anchor anchor-left";
+            leftAnchor.addEventListener('mouseover', handleMouseOver, false);
+            el.append(leftAnchor);
+            let rightAnchor = document.createElement("div");
+            rightAnchor.className = "anchor anchor-right";
+            rightAnchor.addEventListener('mousedown', handleMouseDown, false);
+            el.append(rightAnchor);
+        }
+
+
         if (draggable) {
             attachAllDragEvents(el);
         }
@@ -558,7 +624,7 @@ window.Tea = tea = (function() {
     }
 
     function createAction() {
-        let el = createElement("tea-component tea-action", "150px", "80px");
+        let el = createElement("tea-component tea-action", "150px", "80px", null, "triple");
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
@@ -567,24 +633,68 @@ window.Tea = tea = (function() {
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
-    function createConnection(startElement, endElement) {
-        let left = startElement.parentNode.offsetLeft + startElement.parentNode.clientWidth;
-        let top = startElement.parentNode.offsetTop + (startElement.parentNode.clientHeight / 2);
-        let outerleft = endElement.parentNode.offsetLeft;
-        let outertop = endElement.parentNode.offsetTop + (endElement.parentNode.clientHeight / 2);
+    let connections = [];
+    function renderConnections() {
+        // Grab the SVG
+        let svg = document.getElementById("tea-editor-arrows");
+        svg.innerHTML = ''
+        
+        // Setup lines.
+        let html = '';
+        connections.forEach(function (connection, index) {
+            let addLeft = 0;
+            let addTop = 0;
+            let addEndLeft = 0;
+            let addEndTop = 0;
+            if (connection.connectionType === "anchor-top") {
+                addLeft = (connection.startElement.parentNode.clientWidth / 2);
+                addTop = 0;
+                addEndLeft = (connection.endElement.parentNode.clientWidth / 2);
+                addEndTop = connection.endElement.parentNode.clientHeight;
+            } 
+            if (connection.connectionType === "anchor-right") {
+                addLeft = connection.startElement.parentNode.clientWidth;
+                addTop = (connection.startElement.parentNode.clientHeight / 2);
+                addEndLeft = 0;
+                addEndTop = (connection.endElement.parentNode.clientHeight / 2);
+            }
+            let left = connection.startElement.parentNode.offsetLeft + addLeft;
+            let top = connection.startElement.parentNode.offsetTop + addTop;
+            let outerleft = connection.endElement.parentNode.offsetLeft + addEndLeft;
+            let outertop = connection.endElement.parentNode.offsetTop + addEndTop;
+            let style = ""
+            if (connection.endElement.parentNode.classList.contains("tea-archimate")) {
+                style = "style=\"stroke-dasharray:5,5\"";
+            }
+            html += '<line ' + style + ' x1="' + left + '" y1="' + top + '" x2="' + outerleft + '" y2="' + outertop + '" stroke="black"/>'
+        });
+        svg.innerHTML = html;
+    }
+    function createConnection(start, end, conntype) {
 
-        svg = document.getElementById("tea-editor-arrows");
-        svg.innerHTML = '<line x1="' + left + '" y1="' + top + '" x2="' + outerleft + '" y2="' + outertop + '" stroke="black"/>'
+        // Push new connection
+        connections.push({
+            startElement: start,
+            endElement: end,
+            connectionType: conntype
+        });
+        
+        // Reset connection elements
+        startElement = false;
+        endElement = false;
+        connectionType = false;
+        
+        // Grab the SVG
+        renderConnections();
 
-        teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
-    function createletiable() {
+    function createVariable() {
         let el = createElement("tea-component tea-variable", "32px", "32px", `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
     <g transform="matrix(1,0,0,1,-25.8741,15.3846)">
         <path d="M417.022,326.573C432.213,305.737 440.21,282.102 440.21,258.042C440.21,182.395 362.657,120.979 267.133,120.979C171.609,120.979 94.056,182.395 94.056,258.042C94.056,282.102 102.053,305.737 117.244,326.573L417.022,326.573Z" style="fill:rgb(255,234,203);stroke:rgb(255,181,92);stroke-width:19.52px;"/>
     </g>
-</svg>`);
+</svg>`, 'none');
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
@@ -593,7 +703,7 @@ window.Tea = tea = (function() {
     <g transform="matrix(1.28226,0,0,1,-97.5271,-23.0769)">
         <path d="M267.483,90.909C267.483,90.909 137.413,228.217 137.413,287.063C137.413,379.113 195.695,453.846 267.483,453.846C339.27,453.846 397.552,379.113 397.552,287.063C397.552,228.217 267.483,90.909 267.483,90.909Z" style="fill:rgb(255,203,245);stroke:rgb(255,92,213);stroke-width:16.98px;"/>
     </g>
-</svg>`);
+</svg>`, 'none');
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
@@ -627,7 +737,7 @@ window.Tea = tea = (function() {
                 <path d="M113,19L113,25M116,19L116,25M119,19L119,25" style="fill:none;stroke:black;stroke-width:1px;"/>
             </g>
         </g>
-    </svg><input class="tea-archimate-innertext" contenteditable="true" value="resource">`);
+    </svg><input class="tea-archimate-innertext" contenteditable="true" value="resource">`, "topbottom");
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
@@ -661,7 +771,7 @@ window.Tea = tea = (function() {
                 <rect x="312" y="23" width="4" height="4" style="fill:none;stroke:black;stroke-width:1px;"/>
             </g>
         </g>
-    </svg><input class="tea-archimate-innertext" contenteditable="true" value="capability">`);
+    </svg><input class="tea-archimate-innertext" contenteditable="true" value="capability">`, "topbottom");
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
@@ -675,7 +785,7 @@ window.Tea = tea = (function() {
                 <path d="M494,17L504,17L509,22L504,27L494,27L499,22L494,17Z" style="fill:none;fill-rule:nonzero;stroke:black;stroke-width:1px;stroke-linejoin:miter;stroke-miterlimit:10;"/>
             </g>
         </g>
-    </svg><input class="tea-archimate-innertext" contenteditable="true" value="value stream">`);
+    </svg><input class="tea-archimate-innertext" contenteditable="true" value="value stream">`, "topbottom");
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
@@ -693,7 +803,7 @@ window.Tea = tea = (function() {
         <g transform="matrix(1,0,0,1,-9.5,-93.6827)">
             <path d="M126,103.5C126,99.91 123.09,97 119.5,97C115.91,97 113,99.91 113,103.5C113,107.09 115.91,110 119.5,110C123.09,110 126,107.09 126,103.5ZM123.5,103.5C123.5,101.291 121.709,99.5 119.5,99.5C117.291,99.5 115.5,101.291 115.5,103.5C115.5,105.709 117.291,107.5 119.5,107.5C121.709,107.5 123.5,105.709 123.5,103.5ZM121,103.5C121,102.672 120.328,102 119.5,102C118.672,102 118,102.672 118,103.5C118,104.328 118.672,105 119.5,105C120.328,105 121,104.328 121,103.5ZM120,103.5C120,103.224 119.776,103 119.5,103C119.224,103 119,103.224 119,103.5C119,103.776 119.224,104 119.5,104C119.776,104 120,103.776 120,103.5Z" style="fill:none;stroke:black;stroke-width:1.2px;stroke-linejoin:miter;stroke-miterlimit:10;"/>
         </g>
-    </svg><input class="tea-archimate-innertext" contenteditable="true" value="course of action">`);
+    </svg><input class="tea-archimate-innertext" contenteditable="true" value="course of action">`, "topbottom");
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
     // Init
@@ -726,7 +836,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     Tea.connect('start', document.getElementById('tea-start'));
     Tea.connect('stop', document.getElementById('tea-stop'));
     Tea.connect('action', document.getElementById('tea-action'));
-    Tea.connect('letiable', document.getElementById('tea-letiable'));
+    Tea.connect('variable', document.getElementById('tea-variable'));
     Tea.connect('import', document.getElementById('tea-import'));
 
     // ArchiMate 3.1

@@ -102,6 +102,7 @@
     background: transparent;
 }
 
+/* Anchor Left and Right */
 .anchor-left {
     position: absolute;
     left: -7px;
@@ -165,6 +166,77 @@
     position: absolute;
     right: -6px;
     top: calc(50% - 10px);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(2, 162, 255, 0.5);
+    background-color: rgba(93, 196, 255, 0.5);
+}
+
+/* Anchor top bottom */
+.anchor-top {
+    position: absolute;
+    left: calc(50% - 4px);
+    top: -7px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgb(2, 162, 255);
+    background-color: rgb(93, 196, 255);
+}
+
+.anchor-bottom {
+    position: absolute;
+    bottom: -7px;
+    left: calc(50% - 4px);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgb(2, 162, 255);
+    background-color: rgb(93, 196, 255);
+}
+
+.anchor-top:after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 4px);
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(93, 196, 255, 0.5);
+    transition: all 0.5s;
+}
+
+.anchor-bottom:after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 4px);
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(93, 196, 255, 0.5);
+    transition: all 0.5s;
+}
+
+.anchor-top:hover:after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 10px);
+    top: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(2, 162, 255, 0.5);
+    background-color: rgba(93, 196, 255, 0.5);
+}
+
+.anchor-bottom:hover:after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 10px);
+    bottom: -5px;
     width: 20px;
     height: 20px;
     border-radius: 50%;
