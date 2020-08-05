@@ -1,0 +1,21 @@
+{
+    "type": "sqlite",
+    "database": "dbthink1st",
+    "synchronize": true,
+    "logging": false,
+    "options": { "encrypt": true },
+    "entities": [
+        "dist/src/runtime/src/entity/**/*.js"
+    ],
+    "migrations": [
+        "dist/src/runtime/src/migration/**/*.js"
+    ],
+    "subscribers": [
+        "dist/src/runtime/src/subscriber/**/*.js"
+    ],
+    "cli": {
+        "entitiesDir": "src/runtime/src/entity",
+        "migrationsDir": "src/runtime/src/migration",
+        "subscribersDir": "src/runtime/src/subscriber"
+    }
+}

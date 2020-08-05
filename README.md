@@ -58,4 +58,14 @@ with that range of programming and scripting languages anyone can code flawlessl
 # Demo please!
 Take look at this kickass demo and see how easy it is to model your class with **"Tea"**.
 
+## Login mechanism
+![Example of the Editor](login.gif?raw=true "Example of the login")
+
+## Creating a mindmap
+![Example of the Editor](mindmap.gif?raw=true "Example of the mindmap editor")
+
+## Organize your work with a kanban board.
+![Example of the Editor](kanbanboard.gif?raw=true "Example of the Editor")
+
+## The Tea language editor embedded.
 ![Example of the Editor](view.gif?raw=true "Example of the Editor")

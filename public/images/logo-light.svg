@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 404 83" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g transform="matrix(1.20034,0,0,1,3.84875,-0.801587)">
+        <g transform="matrix(0.943123,-0.544513,0.456743,0.791102,-19.1783,19.9633)">
+            <ellipse cx="35.537" cy="29.743" rx="23.246" ry="17.234" style="fill:white;"/>
+        </g>
+        <g transform="matrix(0.488228,-0.281879,0.206449,0.357581,21.0798,42.7595)">
+            <ellipse cx="35.537" cy="29.743" rx="23.246" ry="17.234" style="fill:white;"/>
+        </g>
+        <g transform="matrix(0.320107,-0.184814,0.157821,0.273354,25.7666,58.2798)">
+            <ellipse cx="35.537" cy="29.743" rx="23.246" ry="17.234" style="fill:white;"/>
+        </g>
+        <g transform="matrix(0.179838,-0.103829,0.103829,0.179838,22.8127,70.7623)">
+            <ellipse cx="35.537" cy="29.743" rx="23.246" ry="17.234" style="fill:white;"/>
+        </g>
+        <g transform="matrix(0.12029,-0.0694497,0.0545175,0.0944272,18.1125,78.8944)">
+            <ellipse cx="35.537" cy="29.743" rx="23.246" ry="17.234" style="fill:white;"/>
+        </g>
+    </g>
+    <g transform="matrix(1.14507,0,0,1.14507,-7.32737,-3.38772)">
+        <text x="93.251px" y="63.276px" style="font-family:'TrebuchetMS-Bold', 'Trebuchet MS', sans-serif;font-weight:700;font-size:61.175px;fill:white;">thinc1st</text>
+    </g>
+</svg>

@@ -1,0 +1,263 @@
+/*!
+* Tea CSS
+*/
+
+.tea-editor {
+    position: fixed;
+    left: 22%;
+    top: 125px;
+    right: 600px;
+    bottom: 0;
+    border: 1px solid rgb(228, 228, 228);
+    overflow: scroll;
+}
+
+.tea-editor-arrows-inner,
+.tea-editor-inner {
+    width: 4000px;
+    height: 4000px;
+    border-right: 1px solid silver;
+    border-bottom: 1px solid silver;
+    padding: 0;
+    left: 0;
+    top: 0;
+    position: absolute;
+}
+
+.tea-output {
+    width: 600px;
+    right: 0px;
+    top: 125px;
+    bottom: 0px;
+    background: rgb(39, 40, 34);
+    padding: 15px;
+    position: fixed;
+    overflow: hidden;
+}
+
+.tea-component {
+    position: absolute !important;
+    cursor: pointer;
+}
+
+.tea-component.tea-start {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgb(63, 156, 0);
+    background-color: rgb(213, 255, 203);
+    width: 30px;
+    height: 30px;
+}
+
+.tea-component.tea-action {
+    position: absolute;
+    border-radius: 8px;
+    border: 2px solid rgb(93, 196, 255);
+    border-top: 4px solid rgb(93, 196, 255);
+    background-color: rgb(210, 238, 255);
+    width: 150px;
+    height: 80px;
+}
+
+.tea-component.tea-stop {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgb(255, 95, 95);
+    background-color: rgb(255, 203, 203);
+    width: 30px;
+    height: 30px;
+}
+
+.tea-selection {
+    border: 1px solid orange;
+    background: rgba(255, 255, 0, 0.13);
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    width: 1px;
+    height: 1px;
+}
+
+.tea-selection-area {
+    border: 1px dashed orange;
+    background: rgba(255, 255, 0, 0.13);
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    width: 1px;
+    height: 1px;
+}
+
+.tea-archimate-innertext {
+    position: absolute;
+    left: 50%;
+    margin-left: -50px;
+    top: 30%;
+    text-align: center;
+    width: 100px;
+    height: 20px;
+    color: black;
+    font-size: 11px;
+    border: none;
+    background: transparent;
+}
+
+.tea-component .anchor {
+    opacity: 0;
+}
+
+.tea-component:hover .anchor,
+.tea-component:hover .anchor:hover {
+    opacity: 1;
+}
+
+
+/* Anchor Left and Right */
+
+.anchor-left {
+    position: absolute;
+    left: -7px;
+    top: calc(50% - 4px);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgb(2, 162, 255);
+    background-color: rgb(255, 255, 255);
+}
+
+.anchor-right {
+    position: absolute;
+    right: -7px;
+    top: calc(50% - 4px);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgb(2, 162, 255);
+    background-color: rgb(255, 255, 255);
+}
+
+.anchor-left:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition: all 0.5s;
+}
+
+.anchor-right:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition: all 0.5s;
+}
+
+.anchor-left:hover:after {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: calc(50% - 10px);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(2, 162, 255, 0.5);
+    background-color: rgba(93, 196, 255, 0.5);
+}
+
+.anchor-right:hover:after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: calc(50% - 10px);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(2, 162, 255, 0.5);
+    background-color: rgba(93, 196, 255, 0.5);
+}
+
+
+/* Anchor top bottom */
+
+.anchor-top {
+    position: absolute;
+    left: calc(50% - 4px);
+    top: -7px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgb(2, 162, 255);
+    background-color: rgb(255, 255, 255);
+}
+
+.anchor-bottom {
+    position: absolute;
+    bottom: -7px;
+    left: calc(50% - 4px);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgb(2, 162, 255);
+    background-color: rgb(255, 255, 255);
+}
+
+.anchor-top:after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 4px);
+    top: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition: all 0.5s;
+}
+
+.anchor-bottom:after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 4px);
+    bottom: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transition: all 0.5s;
+}
+
+.anchor-top:hover:after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 10px);
+    top: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(2, 162, 255, 0.5);
+    background-color: rgba(93, 196, 255, 0.5);
+}
+
+.anchor-bottom:hover:after {
+    content: '';
+    position: absolute;
+    left: calc(50% - 10px);
+    bottom: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(2, 162, 255, 0.5);
+    background-color: rgba(93, 196, 255, 0.5);
+}
+
+.tea-component.selected {
+    border: 2px solid orange !important;
+}
+
+.tea-component.tea-action.selected {
+    border: 2px solid orange !important;
+    border-top: 4px solid orange !important;
+}

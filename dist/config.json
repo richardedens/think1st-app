@@ -1,0 +1,8 @@
+{
+    "theme": "default",
+    "eventBriteKey": "5JOX6VH6GR5M774QPMNR",
+    "eventBriteEndPoint": "https://www.eventbriteapi.com/v3/users/me/?token=5JOX6VH6GR5M774QPMNR",
+    "eventBriteEndPointEvents": "https://www.eventbriteapi.com/v3/users/me/events/?token=5JOX6VH6GR5M774QPMNR",
+    "eventBriteAuthorizationBearer": "Bearer 5JOX6VH6GR5M774QPMNR",
+    "environment": "development"
+}

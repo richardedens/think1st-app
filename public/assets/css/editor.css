@@ -1,0 +1,97 @@
+.editor-content-container {
+    padding: 0;
+}
+
+.editor-content {
+    position: absolute;
+    overflow: scroll;
+    left: 0;
+    top: 0px;
+    bottom: 0px;
+    right: 0;
+    -webkit-box-shadow: inset 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: inset 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
+}
+
+.editor-content-zoomable {
+    background-image: url(/assets/images/editor/bg.png);
+    position: absolute;
+    overflow: hidden;
+    left: 0;
+    top: 0;
+    width: 14000px;
+    height: 14000px;
+    -webkit-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
+}
+
+.editor-note {
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    width: 200px;
+    height: 200px;
+    background-color: #fad076;
+    padding: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.editor-note:hover {
+    -webkit-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 3px 15px 0px rgba(0, 0, 0, 0.75);
+}
+
+.editor-note-avatar {
+    position: absolute;
+    left: -30px;
+    top: -30px;
+}
+
+.ui-resizable-helper {
+    border: 2px dashed rgb(117, 117, 117);
+}
+
+.avatar-border-white {
+    border: 2px solid white;
+    -webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
+}
+
+.editor-topbar {
+    position: fixed;
+    left: 50%;
+    top: 20px;
+    width: 700px;
+    height: 70px;
+    background-color: white;
+    -webkit-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 1px 3px 0px rgba(0, 0, 0, 0.75);
+    margin-left: -350px;
+}
+
+.editor-topbar .logo {
+    width: 70px;
+    height: 70px;
+    background: #2892fd;
+    padding-left: 15px;
+    padding-top: 15px;
+    display: inline-block;
+}
+
+.editor-topbar .navbar-custom {
+    background-color: #949494;
+    box-shadow: 0 0 35px 0 rgba(154, 161, 171, .15);
+    padding: 0 10px 0 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 70px;
+    width: 700px;
+}

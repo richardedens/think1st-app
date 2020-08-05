@@ -4,10 +4,10 @@
 
 .tea-editor {
     position: fixed;
-    left: 17%;
-    top: 125px;
-    right: 600px;
-    bottom: 0;
+    left: 305px;
+    top: 163px;
+    right: 420px;
+    bottom: 60px;
     border: 1px solid rgb(228, 228, 228);
     overflow: scroll;
 }
@@ -25,10 +25,10 @@
 }
 
 .tea-output {
-    width: 600px;
+    width: 420px;
     right: 0px;
-    top: 125px;
-    bottom: 0px;
+    top: 163px;
+    bottom: 61px;
     background: rgb(39, 40, 34);
     padding: 15px;
     position: fixed;
@@ -111,7 +111,9 @@
     opacity: 1;
 }
 
+
 /* Anchor Left and Right */
+
 .anchor-left {
     position: absolute;
     left: -7px;
@@ -180,7 +182,9 @@
     background-color: rgba(93, 196, 255, 0.5);
 }
 
+
 /* Anchor top bottom */
+
 .anchor-top {
     position: absolute;
     left: calc(50% - 4px);
@@ -252,6 +256,7 @@
 .tea-component.selected {
     border: 2px solid orange !important;
 }
+
 .tea-component.tea-action.selected {
     border: 2px solid orange !important;
     border-top: 4px solid orange !important;
