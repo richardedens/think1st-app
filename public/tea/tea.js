@@ -3,6 +3,10 @@ window.Tea = tea = (function() {
     let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
     let fireFoxEvt = {};
 
+    // Set selected iteam
+    let selectedEl = false;
+
+    // Tea area's
     let teaArea = {};
     let teaEditor = {};
 
@@ -393,6 +397,9 @@ window.Tea = tea = (function() {
         e.dataTransfer.setData('text/html', e.innerHTML);
     }
 
+    /**
+     * Drag Events
+     */
     function handleDrag(e) {
         moveElement(e);
     };
@@ -405,64 +412,18 @@ window.Tea = tea = (function() {
         moveElement(e);
     };
 
-    // Create new items.
-    function connect(action, el) {
-        let self = this;
-        switch (action) {
-            // Tea
-            case "start":
-                el.addEventListener('click', function(el) {
-                    createStart();
-                    renderLanguages();
-                });
-                break;
-            case "action":
-                el.addEventListener('click', function(el) {
-                    createAction();
-                    renderLanguages();
-                });
-                break;
-            case "stop":
-                el.addEventListener('click', function(el) {
-                    createStop();
-                    renderLanguages();
-                });
-                break;
-            case "variable":
-                el.addEventListener('click', function(el) {
-                    createVariable();
-                    renderLanguages();
-                });
-                break;
-            case "import":
-                el.addEventListener('click', function(el) {
-                    createImport();
-                    renderLanguages();
-                });
-                break;
-                // ArchiMate
-            case "archimate-resource":
-                el.addEventListener('click', function(el) {
-                    createArchiMateResource();
-                });
-                break;
-            case "archimate-capability":
-                el.addEventListener('click', function(el) {
-                    createArchiMateCapability();
-                });
-                break;
-            case "archimate-value-stream":
-                el.addEventListener('click', function(el) {
-                    createArchiMateValueStream();
-                });
-                break;
-            case "archimate-course-of-action":
-                el.addEventListener('click', function(el) {
-                    createArchiMateCourseOfAction();
-                });
-                break;
+    function handleComponentClick(e) {
+        selectedEl = e.target;
+        selectedEl.classList.add("selected");
+        if (e.preventDefault) {
+            e.preventDefault();
         }
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        }
+        return false;
     }
+
 
     function handleDragEnter(e) {}
 
@@ -471,6 +432,9 @@ window.Tea = tea = (function() {
     function handleDragOver(e) {
         if (e.preventDefault) {
             e.preventDefault();
+        }
+        if (e.stopPropagation) {
+            e.stopPropagation();
         }
         return false;
     }
@@ -483,8 +447,23 @@ window.Tea = tea = (function() {
         el.addEventListener('dragenter', handleDragEnter, false);
         el.addEventListener('dragleave', handleDragLeave, false);
         el.addEventListener('dragend', handleDragEnd, false);
+        el.addEventListener('click', handleComponentClick, false);
     }
 
+    function detachAllDragEvents(el) {
+        el.removeEventListener('dragstart', handleDragStart, false);
+        el.removeEventListener('drag', handleDrag, false);
+        el.removeEventListener('drop', handleDrop, false);
+        el.removeEventListener('dragover', handleDragOver, false);
+        el.removeEventListener('dragenter', handleDragEnter, false);
+        el.removeEventListener('dragleave', handleDragLeave, false);
+        el.removeEventListener('dragend', handleDragEnd, false);
+        el.removeEventListener('click', handleComponentClick, false);
+    }
+
+    /**
+     * Anchor Handling
+     */
     let startElement = false;
     let endElement = false;
     let connectionType = false;
@@ -516,6 +495,9 @@ window.Tea = tea = (function() {
         return false;
     }
 
+    /**
+     * Creating Component Element
+     */
     function createElement(classNames, width, height, html, anchortype = "both", left = (1 + teaEditor.scrollLeft) + "px", top = (1 + teaEditor.scrollTop) + "px", draggable = true) {
         let el = document.createElement("div");
         el.style.left = left;
@@ -617,7 +599,6 @@ window.Tea = tea = (function() {
         return el;
     }
 
-    // Tea
     function createStart() {
         let el = createElement("tea-component tea-start", "32px", "32px", null, "right");
         teaArea.append(el);
@@ -633,62 +614,7 @@ window.Tea = tea = (function() {
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
-    let connections = [];
-    function renderConnections() {
-        // Grab the SVG
-        let svg = document.getElementById("tea-editor-arrows");
-        svg.innerHTML = ''
-        
-        // Setup lines.
-        let html = '';
-        connections.forEach(function (connection, index) {
-            let addLeft = 0;
-            let addTop = 0;
-            let addEndLeft = 0;
-            let addEndTop = 0;
-            if (connection.connectionType === "anchor-top") {
-                addLeft = (connection.startElement.parentNode.clientWidth / 2);
-                addTop = 0;
-                addEndLeft = (connection.endElement.parentNode.clientWidth / 2);
-                addEndTop = connection.endElement.parentNode.clientHeight;
-            } 
-            if (connection.connectionType === "anchor-right") {
-                addLeft = connection.startElement.parentNode.clientWidth;
-                addTop = (connection.startElement.parentNode.clientHeight / 2);
-                addEndLeft = 0;
-                addEndTop = (connection.endElement.parentNode.clientHeight / 2);
-            }
-            let left = connection.startElement.parentNode.offsetLeft + addLeft;
-            let top = connection.startElement.parentNode.offsetTop + addTop;
-            let outerleft = connection.endElement.parentNode.offsetLeft + addEndLeft;
-            let outertop = connection.endElement.parentNode.offsetTop + addEndTop;
-            let style = ""
-            if (connection.endElement.parentNode.classList.contains("tea-archimate")) {
-                style = "style=\"stroke-dasharray:5,5\"";
-            }
-            html += '<line ' + style + ' x1="' + left + '" y1="' + top + '" x2="' + outerleft + '" y2="' + outertop + '" stroke="black"/>'
-        });
-        svg.innerHTML = html;
-    }
-    function createConnection(start, end, conntype) {
-
-        // Push new connection
-        connections.push({
-            startElement: start,
-            endElement: end,
-            connectionType: conntype
-        });
-        
-        // Reset connection elements
-        startElement = false;
-        endElement = false;
-        connectionType = false;
-        
-        // Grab the SVG
-        renderConnections();
-
-    }
-
+    
     function createVariable() {
         let el = createElement("tea-component tea-variable", "32px", "32px", `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
     <g transform="matrix(1,0,0,1,-25.8741,15.3846)">
@@ -806,6 +732,127 @@ window.Tea = tea = (function() {
     </svg><input class="tea-archimate-innertext" contenteditable="true" value="course of action">`, "topbottom");
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
+    
+    // Create new items.
+    function connect(action, el) {
+        let self = this;
+        switch (action) {
+            // Tea
+            case "start":
+                el.addEventListener('click', function(el) {
+                    createStart();
+                    renderLanguages();
+                });
+                break;
+            case "action":
+                el.addEventListener('click', function(el) {
+                    createAction();
+                    renderLanguages();
+                });
+                break;
+            case "stop":
+                el.addEventListener('click', function(el) {
+                    createStop();
+                    renderLanguages();
+                });
+                break;
+            case "variable":
+                el.addEventListener('click', function(el) {
+                    createVariable();
+                    renderLanguages();
+                });
+                break;
+            case "import":
+                el.addEventListener('click', function(el) {
+                    createImport();
+                    renderLanguages();
+                });
+                break;
+                // ArchiMate
+            case "archimate-resource":
+                el.addEventListener('click', function(el) {
+                    createArchiMateResource();
+                });
+                break;
+            case "archimate-capability":
+                el.addEventListener('click', function(el) {
+                    createArchiMateCapability();
+                });
+                break;
+            case "archimate-value-stream":
+                el.addEventListener('click', function(el) {
+                    createArchiMateValueStream();
+                });
+                break;
+            case "archimate-course-of-action":
+                el.addEventListener('click', function(el) {
+                    createArchiMateCourseOfAction();
+                });
+                break;
+        }
+    }
+
+    /**
+     * Connections!
+     */
+    let connections = [];
+    function renderConnections() {
+        // Grab the SVG
+        let svg = document.getElementById("tea-editor-arrows");
+        svg.innerHTML = ''
+        
+        // Setup lines.
+        let html = '';
+        console.log(connections);
+        connections.forEach(function (connection, index) {
+            let addLeft = 0;
+            let addTop = 0;
+            let addEndLeft = 0;
+            let addEndTop = 0;
+            if (connection.connectionType === "anchor-top") {
+                addLeft = (connection.startElement.parentNode.clientWidth / 2);
+                addTop = 0;
+                addEndLeft = (connection.endElement.parentNode.clientWidth / 2);
+                addEndTop = connection.endElement.parentNode.clientHeight;
+            } 
+            if (connection.connectionType === "anchor-right") {
+                addLeft = connection.startElement.parentNode.clientWidth;
+                addTop = (connection.startElement.parentNode.clientHeight / 2);
+                addEndLeft = 0;
+                addEndTop = (connection.endElement.parentNode.clientHeight / 2);
+            }
+            let left = connection.startElement.parentNode.offsetLeft + addLeft;
+            let top = connection.startElement.parentNode.offsetTop + addTop;
+            let outerleft = connection.endElement.parentNode.offsetLeft + addEndLeft;
+            let outertop = connection.endElement.parentNode.offsetTop + addEndTop;
+            let style = ""
+            if (connection.endElement.parentNode.classList.contains("tea-archimate")) {
+                style = "style=\"stroke-dasharray:5,5\"";
+            }
+            html += '<line ' + style + ' x1="' + left + '" y1="' + top + '" x2="' + outerleft + '" y2="' + outertop + '" stroke="black"/>'
+        });
+        svg.innerHTML = html;
+    }
+
+    function createConnection(start, end, conntype) {
+
+        // Push new connection
+        connections.push({
+            startElement: start,
+            endElement: end,
+            connectionType: conntype
+        });
+        
+        // Reset connection elements
+        startElement = false;
+        endElement = false;
+        connectionType = false;
+        
+        // Grab the SVG
+        renderConnections();
+
+    }
+
     // Init
     function init(cssSelector) {
         // Set css selector.
@@ -821,7 +868,52 @@ window.Tea = tea = (function() {
                 fireFoxEvt = e
             }, false);
         }
+
+        // Deselect element.
+        teaArea.addEventListener('click', function(e) {
+            let selectedElements = document.querySelectorAll('.tea-component.selected');
+            selectedElements.forEach(function(el, index){
+                selectedEl.classList.remove("selected");
+            });
+        }, false);
+
+        // Delete selected element
+        let self = this;
+        document.addEventListener('keydown', function(event) { 
+            const key = event.key; 
+            if (key === "Backspace" || key === "Delete") { 
+                let selectedElements = document.querySelectorAll('.tea-component.selected');
+                
+                // Reset connections!
+                let newConnections = [];
+                connections.forEach(function(conn, index) {
+                    let found = false;
+                    selectedElements.forEach(function(el, index){
+                        if (conn.startElement.parentNode == el || conn.endElement.parentNode == el) {
+                            found = true;
+                        }
+                    });
+                    if (found === false) {
+                        newConnections.push({
+                            startElement: conn.startElement,
+                            endElement: conn.endElement,
+                            connectionType: conn.connectionType
+                        });
+                    }
+                })
+                connections = newConnections;
+
+                // Actually removing elements.
+                selectedElements.forEach(function(el, index){
+                    detachAllDragEvents(el);
+                    el.remove();
+                });
+
+                renderConnections();
+            } 
+        }); 
     }
+
 
     return {
         init: init,

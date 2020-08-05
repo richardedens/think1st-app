@@ -248,3 +248,11 @@
     border: 1px solid rgba(2, 162, 255, 0.5);
     background-color: rgba(93, 196, 255, 0.5);
 }
+
+.tea-component.selected {
+    border: 2px solid orange !important;
+}
+.tea-component.tea-action.selected {
+    border: 2px solid orange !important;
+    border-top: 4px solid orange !important;
+}
