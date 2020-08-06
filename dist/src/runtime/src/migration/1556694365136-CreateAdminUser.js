@@ -42,18 +42,26 @@ var CreateAdminUser1556694365136 = /** @class */ (function () {
     }
     CreateAdminUser1556694365136.prototype.up = function (queryRunner) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, userRepository;
+            var userRepository, technicalAdministrator, normalUser;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        user = new User_1.User();
-                        user.username = "admin";
-                        user.password = "asdfd-jjgkl-uiop-sdfew-1RFio";
-                        user.hashPassword();
-                        user.role = "ADMIN";
                         userRepository = typeorm_1.getRepository(User_1.User);
-                        return [4 /*yield*/, userRepository.save(user)];
+                        technicalAdministrator = new User_1.User();
+                        technicalAdministrator.username = "admin";
+                        technicalAdministrator.password = "admin";
+                        technicalAdministrator.hashPassword();
+                        technicalAdministrator.role = "TECHNICALADMINISTRATOR";
+                        return [4 /*yield*/, userRepository.save(technicalAdministrator)];
                     case 1:
+                        _a.sent();
+                        normalUser = new User_1.User();
+                        normalUser.username = "demo_user";
+                        normalUser.password = "demo_user";
+                        normalUser.hashPassword();
+                        normalUser.role = "NORMALUSER";
+                        return [4 /*yield*/, userRepository.save(normalUser)];
+                    case 2:
                         _a.sent();
                         return [2 /*return*/];
                 }

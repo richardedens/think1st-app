@@ -1,6 +1,6 @@
 {
     "type": "sqlite",
-    "database": "dbthink1st",
+    "database": "tea.db",
     "synchronize": true,
     "logging": false,
     "options": { "encrypt": true },

@@ -16,6 +16,7 @@
         "prod:db": "npm-run-all run:dbsync run:migration",
         "prod:server": "npm-run-all run:tsc-build run:dbsync run:migration run:start",
         "ng": "ng",
+        "run:start": "node ./dist/src/runtime/src/server",
         "run:dependencies": "npm install -g typescript",
         "run:tsc-test": "mocha -r ts-node/register src/runtime/test/**/*.spec.ts",
         "run:tsc-build": "tsc",
