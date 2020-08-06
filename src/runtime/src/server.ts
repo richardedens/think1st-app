@@ -14,6 +14,7 @@ import helmet from "helmet";
 import cors from "cors";
 import csrf from "csurf";
 import routes from "./routes";
+import open from "open";
 
 // Setup passport.
 import passport from "passport";
@@ -114,7 +115,7 @@ createConnection().then(async connection => {
 
     // CSRF Protection
     const csrfProtection = csrf({ cookie: true });
-    app.use(cookieParser("terraformer-tiger-secret", {}));
+    app.use(cookieParser("think1st-app", {}));
 
     // Sass middleware
     app.use(sassMiddleware({
@@ -127,7 +128,7 @@ createConnection().then(async connection => {
     app.use(
         session(
             {
-                secret: "terraformer-tiger-secret",
+                secret: "think1st-app",
                 cookie: { maxAge: 60000 },
                 resave: false,
                 saveUninitialized: false
@@ -185,6 +186,9 @@ createConnection().then(async connection => {
     http.createServer(app).listen(port, () => {
         intro.show("think1st", () => {
             console.log("Server Running on http://localhost:" + port);
+
+            // Open default webbrowser.
+            open("http://localhost:" + port);
         });
     });
 

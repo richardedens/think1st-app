@@ -55,6 +55,7 @@ var helmet_1 = __importDefault(require("helmet"));
 var cors_1 = __importDefault(require("cors"));
 var csurf_1 = __importDefault(require("csurf"));
 var routes_1 = __importDefault(require("./routes"));
+var open_1 = __importDefault(require("open"));
 // Setup passport.
 var passport_1 = __importDefault(require("passport"));
 var passport_local_1 = __importDefault(require("passport-local"));
@@ -168,7 +169,7 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                 app.use(express_1.default.json());
                 app.use(express_1.default.urlencoded({ extended: false }));
                 csrfProtection = csurf_1.default({ cookie: true });
-                app.use(cookie_parser_1.default("terraformer-tiger-secret", {}));
+                app.use(cookie_parser_1.default("think1st-app", {}));
                 // Sass middleware
                 app.use(node_sass_middleware_1.default({
                     src: path_1.default.join(__dirname, "../../../public"),
@@ -177,7 +178,7 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                 }));
                 // Create a session and then add passport to it.
                 app.use(express_session_1.default({
-                    secret: "terraformer-tiger-secret",
+                    secret: "think1st-app",
                     cookie: { maxAge: 60000 },
                     resave: false,
                     saveUninitialized: false
@@ -221,6 +222,8 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                 http_1.default.createServer(app).listen(port, function () {
                     intro.show("think1st", function () {
                         console.log("Server Running on http://localhost:" + port);
+                        // Open default webbrowser.
+                        open_1.default("http://localhost:" + port);
                     });
                 });
                 return [2 /*return*/];
