@@ -50,7 +50,6 @@ window.Tea = tea = (function() {
     function renderTypeScript() {
         // Prerequisites.
         getModel().then(function(json) {
-            console.log(json);
             let className = document.getElementById("file-name").textContent.replace(".tea", "");
 
             // Setup rendered code.
@@ -91,7 +90,6 @@ window.Tea = tea = (function() {
             code += row;
 
             // Compile code
-            console.log(json);
             json.code.reverse().map(function(item, index) {
                 if (item['type'] === 'start') {
                     code += "\trun() {\r\n";
@@ -104,7 +102,6 @@ window.Tea = tea = (function() {
                 }
             });
             code += "}\r\n";
-            console.log(code);
 
             // Output code
             const html = Prism.highlight(code, Prism.languages.typescript, 'typescript');
@@ -116,7 +113,6 @@ window.Tea = tea = (function() {
     function renderPHP() {
         // Prerequisites.
         getModel().then(function(json) {
-            console.log(json);
             let className = document.getElementById("file-name").textContent.replace(".tea", "");
 
             // Setup rendered code.
@@ -156,7 +152,6 @@ window.Tea = tea = (function() {
             code += row;
 
             // Compile code
-            console.log(json);
             json.code.reverse().map(function(item, index) {
                 if (item['type'] === 'start') {
                     code += "\tfunction run() {\r\n";
@@ -181,7 +176,6 @@ window.Tea = tea = (function() {
     function renderCSharp() {
         // Prerequisites.
         getModel().then(function(json) {
-            console.log(json);
             let className = document.getElementById("file-name").textContent.replace(".tea", "");
 
             // Setup rendered code.
@@ -221,7 +215,6 @@ window.Tea = tea = (function() {
             code += row;
 
             // Compile code
-            console.log(json);
             json.code.reverse().map(function(item, index) {
                 if (item['type'] === 'start') {
                     code += "\tpublic void run() {\r\n";
@@ -245,7 +238,6 @@ window.Tea = tea = (function() {
     function renderJava() {
         // Prerequisites.
         getModel().then(function(json) {
-            console.log(json);
             let className = document.getElementById("file-name").textContent.replace(".tea", "");
 
             // Setup rendered code.
@@ -286,7 +278,6 @@ window.Tea = tea = (function() {
             code += row;
 
             // Compile code
-            console.log(json);
             json.code.reverse().map(function(item, index) {
                 if (item['type'] === 'start') {
                     code += "\tpublic void run() {\r\n";
@@ -310,7 +301,6 @@ window.Tea = tea = (function() {
     function renderPython() {
         // Prerequisites.
         getModel().then(function(json) {
-            console.log(json);
             let className = document.getElementById("file-name").textContent.replace(".tea", "");
 
             // Setup rendered code.
@@ -352,7 +342,6 @@ window.Tea = tea = (function() {
             code += row;
 
             // Compile code
-            console.log(json);
             json.code.reverse().map(function(item, index) {
                 if (item['type'] === 'start') {
                     code += "\tdef run():\r\n";
@@ -371,7 +360,6 @@ window.Tea = tea = (function() {
     }
 
     function moveElement(e) {
-        console.log(e);
         if (!e.target.classList.contains("anchor")) {
             if (!e.target.classList.contains("tea-archimate-innertext")) {
                 if (isFirefox) {
@@ -469,7 +457,6 @@ window.Tea = tea = (function() {
     let connectionType = false;
 
     function handleMouseDown(e) {
-        console.log(e);
         startElement = e.target;
         if (e.target.classList.contains("anchor-top")) {
             connectionType = "anchor-top";
@@ -484,7 +471,6 @@ window.Tea = tea = (function() {
     }
 
     function handleMouseOver(e) {
-        console.log(e);
         endElement = e.target;
         if (startElement !== false && endElement !== false) {
             createConnection(startElement, endElement, connectionType);
@@ -796,14 +782,27 @@ window.Tea = tea = (function() {
      * Connections!
      */
     let connections = [];
+    function handleLineMouseOver(e) {
+        console.log(this);
+    }
+
     function renderConnections() {
-        // Grab the SVG
-        let svg = document.getElementById("tea-editor-arrows");
-        svg.innerHTML = ''
+        // Create SVG in memory.
+        let svg = document.getElementById('tea-editor-arrows');
+        svg.addEventListener('mouseover', handleLineMouseOver, false);
         
         // Setup lines.
         let html = '';
-        console.log(connections);
+        
+        // Remove eventhandlers.
+        connections.forEach(function (connection, index) {
+            let el = document.getElementById("conn-" + index);
+            if (el) {
+                el.removeEventListener('mouseover', handleLineMouseOver, false);
+            }
+        });
+        
+        // Create connections
         connections.forEach(function (connection, index) {
             let addLeft = 0;
             let addTop = 0;
@@ -825,13 +824,23 @@ window.Tea = tea = (function() {
             let top = connection.startElement.parentNode.offsetTop + addTop;
             let outerleft = connection.endElement.parentNode.offsetLeft + addEndLeft;
             let outertop = connection.endElement.parentNode.offsetTop + addEndTop;
-            let style = ""
+
+            let line = document.createElement('line');
+            let style = "";
             if (connection.endElement.parentNode.classList.contains("tea-archimate")) {
                 style = "style=\"stroke-dasharray:5,5\"";
             }
-            html += '<line ' + style + ' x1="' + left + '" y1="' + top + '" x2="' + outerleft + '" y2="' + outertop + '" stroke="black"/>'
+            html += '<line id="conn-' + index + '" ' + style + ' x1="' + left + '" y1="' + top + '" x2="' + outerleft + '" y2="' + outertop + '" stroke="black"/>';
         });
         svg.innerHTML = html;
+
+        
+        connections.forEach(function (connection, index) {
+            let el = document.getElementById("conn-" + index);
+            if (el) {
+                el.addEventListener('mouseover', handleLineMouseOver, false);
+            }
+        });
     }
 
     function createConnection(start, end, conntype) {
@@ -853,6 +862,11 @@ window.Tea = tea = (function() {
 
     }
 
+    // Destroy
+    function destroy(){
+        // TODO.
+    }
+
     // Init
     function init(cssSelector) {
         // Set css selector.
@@ -861,6 +875,9 @@ window.Tea = tea = (function() {
         // Grab the div that will be the tea editor
         teaArea = document.querySelectorAll(cssSelector + " .tea-editor-inner")[0];
         teaEditor = document.querySelectorAll(cssSelector)[0];
+
+        // Handle the selection of lines
+        teaArea.addEventListener('mouseover', handleLineMouseOver, false);
 
         // Damn , the browser war is still out there. firefox needs help with the drag coordinates.
         if (isFirefox) {

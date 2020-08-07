@@ -3,7 +3,6 @@
     "database": "tea.db",
     "synchronize": true,
     "logging": false,
-    "options": { "encrypt": true },
     "entities": [
         "dist/src/runtime/src/entity/**/*.js"
     ],

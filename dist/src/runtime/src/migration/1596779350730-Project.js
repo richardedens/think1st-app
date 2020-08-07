@@ -35,49 +35,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var User_1 = require("../entity/User");
-var CreateAdminUser1556694365136 = /** @class */ (function () {
-    function CreateAdminUser1556694365136() {
+var Project1596779350730 = /** @class */ (function () {
+    function Project1596779350730() {
     }
-    CreateAdminUser1556694365136.prototype.up = function (queryRunner) {
-        return __awaiter(this, void 0, void 0, function () {
-            var userRepository, technicalAdministrator, normalUser;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        userRepository = typeorm_1.getRepository(User_1.User);
-                        technicalAdministrator = new User_1.User();
-                        technicalAdministrator.username = "admin";
-                        technicalAdministrator.password = "Welkom123!";
-                        technicalAdministrator.hashPassword();
-                        technicalAdministrator.role = "TECHNICALADMINISTRATOR";
-                        technicalAdministrator.team = "Think1st";
-                        return [4 /*yield*/, userRepository.save(technicalAdministrator)];
-                    case 1:
-                        _a.sent();
-                        normalUser = new User_1.User();
-                        normalUser.username = "demo_user";
-                        normalUser.password = "demo_user";
-                        normalUser.hashPassword();
-                        normalUser.role = "NORMALUSER";
-                        normalUser.team = "Think1st";
-                        return [4 /*yield*/, userRepository.save(normalUser)];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    CreateAdminUser1556694365136.prototype.down = function (queryRunner) {
+    Project1596779350730.prototype.up = function (queryRunner) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 return [2 /*return*/];
             });
         });
     };
-    return CreateAdminUser1556694365136;
+    Project1596779350730.prototype.down = function (queryRunner) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/];
+            });
+        });
+    };
+    return Project1596779350730;
 }());
-exports.CreateAdminUser1556694365136 = CreateAdminUser1556694365136;
-//# sourceMappingURL=1556694365136-CreateAdminUser.js.map
+exports.Project1596779350730 = Project1596779350730;
+//# sourceMappingURL=1596779350730-Project.js.map

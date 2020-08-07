@@ -16,11 +16,14 @@ var signup_1 = __importDefault(require("./signup"));
 var logout_1 = __importDefault(require("./logout"));
 var lang_1 = __importDefault(require("./lang"));
 var label_1 = __importDefault(require("./label"));
-// API
+// Mendix API
 var mendix_1 = __importDefault(require("./api/v1/mendix"));
+// Tea API
+var tea_1 = __importDefault(require("./api/v1/tea"));
 var routes = express_1.Router();
 // API
 routes.use("/api/v1/mendix", mendix_1.default);
+routes.use("/api/v1/tea", tea_1.default);
 // Page
 routes.use("/", homepage_1.default);
 routes.use("/dashboard", dashboard_1.default);

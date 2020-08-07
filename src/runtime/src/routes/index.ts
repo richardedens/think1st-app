@@ -12,13 +12,17 @@ import logout from "./logout";
 import lang from "./lang";
 import label from "./label";
 
-// API
+// Mendix API
 import apiV1Mendix from "./api/v1/mendix";
+
+// Tea API
+import apiV1Tea from "./api/v1/tea";
 
 const routes = Router();
 
 // API
 routes.use("/api/v1/mendix", apiV1Mendix);
+routes.use("/api/v1/tea", apiV1Tea);
 
 // Page
 routes.use("/", homepage);

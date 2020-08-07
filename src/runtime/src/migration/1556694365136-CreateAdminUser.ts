@@ -9,9 +9,10 @@ export class CreateAdminUser1556694365136 implements MigrationInterface {
 
         let technicalAdministrator = new User();
         technicalAdministrator.username = "admin";
-        technicalAdministrator.password = "admin";
+        technicalAdministrator.password = "Welkom123!";
         technicalAdministrator.hashPassword();
         technicalAdministrator.role = "TECHNICALADMINISTRATOR";
+        technicalAdministrator.team = "Think1st";
         await userRepository.save(technicalAdministrator);
 
         let normalUser = new User();
@@ -19,6 +20,7 @@ export class CreateAdminUser1556694365136 implements MigrationInterface {
         normalUser.password = "demo_user";
         normalUser.hashPassword();
         normalUser.role = "NORMALUSER";
+        normalUser.team = "Think1st";
         await userRepository.save(normalUser);
 
     }
