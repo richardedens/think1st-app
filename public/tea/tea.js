@@ -1,4 +1,4 @@
-window.Tea = tea = (function() {
+window.Tea = tea = (function () {
 
     let isFirefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
     let fireFoxEvt = {};
@@ -21,11 +21,11 @@ window.Tea = tea = (function() {
     }
 
     function getModel() {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
 
             let json = { code: [] };
             let self = this;
-            document.querySelectorAll(cssSelector + " .tea-editor-inner .tea-component").forEach(function(item, index) {
+            document.querySelectorAll(cssSelector + " .tea-editor-inner .tea-component").forEach(function (item, index) {
                 if (item.classList.contains("tea-start")) {
                     json.code.push({ "type": "start" });
                 }
@@ -49,8 +49,8 @@ window.Tea = tea = (function() {
 
     function renderTypeScript() {
         // Prerequisites.
-        getModel().then(function(json) {
-            let className = document.getElementById("file-name").textContent.replace(".tea", "");
+        getModel().then(function (json) {
+            let className = document.getElementById("file-name").textContent.replace(".tea", "").replace(".archi", "");
 
             // Setup rendered code.
             let code = `/**
@@ -71,7 +71,7 @@ window.Tea = tea = (function() {
             code += "import { action } from \"teapot\";\r\n";
 
             // Setup imports
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'import') {
                     code += "\import lib;\r\n";
                 }
@@ -81,7 +81,7 @@ window.Tea = tea = (function() {
 
             // Create letiables.
             let row = "";
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'variable') {
                     code += "\tprivate newlet: String = \"\";\r\n";
                     row = "\r\n";
@@ -90,7 +90,7 @@ window.Tea = tea = (function() {
             code += row;
 
             // Compile code
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'start') {
                     code += "\trun() {\r\n";
                 }
@@ -112,7 +112,7 @@ window.Tea = tea = (function() {
 
     function renderPHP() {
         // Prerequisites.
-        getModel().then(function(json) {
+        getModel().then(function (json) {
             let className = document.getElementById("file-name").textContent.replace(".tea", "");
 
             // Setup rendered code.
@@ -133,7 +133,7 @@ window.Tea = tea = (function() {
             code += "$tea = require_once(\"teapot.php\");\r\n";
 
             // Setup imports
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'import') {
                     code += "\$lib = require_once(\"lib\");\r\n";
                 }
@@ -143,7 +143,7 @@ window.Tea = tea = (function() {
 
             // Create letiables.
             let row = "";
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'variable') {
                     code += "\tprivate $newlet = \"\";\r\n";
                     row = "\r\n";
@@ -152,7 +152,7 @@ window.Tea = tea = (function() {
             code += row;
 
             // Compile code
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'start') {
                     code += "\tfunction run() {\r\n";
                 }
@@ -175,7 +175,7 @@ window.Tea = tea = (function() {
 
     function renderCSharp() {
         // Prerequisites.
-        getModel().then(function(json) {
+        getModel().then(function (json) {
             let className = document.getElementById("file-name").textContent.replace(".tea", "");
 
             // Setup rendered code.
@@ -196,7 +196,7 @@ window.Tea = tea = (function() {
             code += "using TeaPot.*;\r\n";
 
             // Setup imports
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'import') {
                     code += "using lib;\r\n";
                 }
@@ -206,7 +206,7 @@ window.Tea = tea = (function() {
 
             // Create letiables.
             let row = "";
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'variable') {
                     code += "\tprivate string newlet = \"\";\r\n";
                     row = "\r\n";
@@ -215,7 +215,7 @@ window.Tea = tea = (function() {
             code += row;
 
             // Compile code
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'start') {
                     code += "\tpublic void run() {\r\n";
                 }
@@ -237,7 +237,7 @@ window.Tea = tea = (function() {
 
     function renderJava() {
         // Prerequisites.
-        getModel().then(function(json) {
+        getModel().then(function (json) {
             let className = document.getElementById("file-name").textContent.replace(".tea", "");
 
             // Setup rendered code.
@@ -259,7 +259,7 @@ window.Tea = tea = (function() {
             code += "import com.teapot.tea.action;\r\n";
 
             // Setup imports
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'import') {
                     code += "import lib;\r\n";
                 }
@@ -269,7 +269,7 @@ window.Tea = tea = (function() {
 
             // Create letiables.
             let row = "";
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'variable') {
                     code += "\tprivate String newlet = \"\";\r\n";
                     row = "\r\n";
@@ -278,7 +278,7 @@ window.Tea = tea = (function() {
             code += row;
 
             // Compile code
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'start') {
                     code += "\tpublic void run() {\r\n";
                 }
@@ -300,7 +300,7 @@ window.Tea = tea = (function() {
 
     function renderPython() {
         // Prerequisites.
-        getModel().then(function(json) {
+        getModel().then(function (json) {
             let className = document.getElementById("file-name").textContent.replace(".tea", "");
 
             // Setup rendered code.
@@ -322,7 +322,7 @@ window.Tea = tea = (function() {
             code += "from tea import action\r\n";
 
             // Setup imports
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'import') {
                     code += "\import lib\r\n";
                 }
@@ -333,7 +333,7 @@ window.Tea = tea = (function() {
 
             // Create letiables.
             let row = "";
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'variable') {
                     code += "\tnewlet = \"\"\r\n";
                     row = "\r\n";
@@ -342,11 +342,11 @@ window.Tea = tea = (function() {
             code += row;
 
             // Compile code
-            json.code.reverse().map(function(item, index) {
+            json.code.reverse().map(function (item, index) {
                 if (item['type'] === 'start') {
                     code += "\tdef run():\r\n";
                 }
-                if (item['type'] === 'stop') {}
+                if (item['type'] === 'stop') { }
                 if (item['type'] === 'action') {
                     code += "\t\taction()\r\n";
                 }
@@ -413,9 +413,9 @@ window.Tea = tea = (function() {
     }
 
 
-    function handleDragEnter(e) {}
+    function handleDragEnter(e) { }
 
-    function handleDragLeave(e) {}
+    function handleDragLeave(e) { }
 
     function handleDragOver(e) {
         if (e.preventDefault) {
@@ -600,7 +600,7 @@ window.Tea = tea = (function() {
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
 
-    
+
     function createVariable() {
         let el = createElement("tea-component tea-variable", "32px", "32px", `<svg width="32" height="32" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
     <g transform="matrix(1,0,0,1,-25.8741,15.3846)">
@@ -718,63 +718,65 @@ window.Tea = tea = (function() {
     </svg><input class="tea-archimate-innertext" contenteditable="true" value="course of action">`, "topbottom");
         teaArea.insertBefore(el, teaArea.childNodes[0]);
     }
-    
+
     // Create new items.
     function connect(action, el) {
         let self = this;
-        switch (action) {
-            // Tea
-            case "start":
-                el.addEventListener('click', function(el) {
-                    createStart();
-                    renderLanguages();
-                });
-                break;
-            case "action":
-                el.addEventListener('click', function(el) {
-                    createAction();
-                    renderLanguages();
-                });
-                break;
-            case "stop":
-                el.addEventListener('click', function(el) {
-                    createStop();
-                    renderLanguages();
-                });
-                break;
-            case "variable":
-                el.addEventListener('click', function(el) {
-                    createVariable();
-                    renderLanguages();
-                });
-                break;
-            case "import":
-                el.addEventListener('click', function(el) {
-                    createImport();
-                    renderLanguages();
-                });
-                break;
+        if (el !== null) {
+            switch (action) {
+                // Tea
+                case "start":
+                    el.addEventListener('click', function (el) {
+                        createStart();
+                        renderLanguages();
+                    });
+                    break;
+                case "action":
+                    el.addEventListener('click', function (el) {
+                        createAction();
+                        renderLanguages();
+                    });
+                    break;
+                case "stop":
+                    el.addEventListener('click', function (el) {
+                        createStop();
+                        renderLanguages();
+                    });
+                    break;
+                case "variable":
+                    el.addEventListener('click', function (el) {
+                        createVariable();
+                        renderLanguages();
+                    });
+                    break;
+                case "import":
+                    el.addEventListener('click', function (el) {
+                        createImport();
+                        renderLanguages();
+                    });
+                    break;
                 // ArchiMate
-            case "archimate-resource":
-                el.addEventListener('click', function(el) {
-                    createArchiMateResource();
-                });
-                break;
-            case "archimate-capability":
-                el.addEventListener('click', function(el) {
-                    createArchiMateCapability();
-                });
-                break;
-            case "archimate-value-stream":
-                el.addEventListener('click', function(el) {
-                    createArchiMateValueStream();
-                });
-                break;
-            case "archimate-course-of-action":
-                el.addEventListener('click', function(el) {
-                    createArchiMateCourseOfAction();
-                });
-                break;
+                case "archimate-resource":
+                    el.addEventListener('click', function (el) {
+                        createArchiMateResource();
+                    });
+                    break;
+                case "archimate-capability":
+                    el.addEventListener('click', function (el) {
+                        createArchiMateCapability();
+                    });
+                    break;
+                case "archimate-value-stream":
+                    el.addEventListener('click', function (el) {
+                        createArchiMateValueStream();
+                    });
+                    break;
+                case "archimate-course-of-action":
+                    el.addEventListener('click', function (el) {
+                        createArchiMateCourseOfAction();
+                    });
+                    break;
+            }
         }
     }
 
@@ -790,10 +792,10 @@ window.Tea = tea = (function() {
         // Create SVG in memory.
         let svg = document.getElementById('tea-editor-arrows');
         svg.addEventListener('mouseover', handleLineMouseOver, false);
-        
+
         // Setup lines.
         let html = '';
-        
+
         // Remove eventhandlers.
         connections.forEach(function (connection, index) {
             let el = document.getElementById("conn-" + index);
@@ -801,7 +803,7 @@ window.Tea = tea = (function() {
                 el.removeEventListener('mouseover', handleLineMouseOver, false);
             }
         });
-        
+
         // Create connections
         connections.forEach(function (connection, index) {
             let addLeft = 0;
@@ -813,7 +815,7 @@ window.Tea = tea = (function() {
                 addTop = 0;
                 addEndLeft = (connection.endElement.parentNode.clientWidth / 2);
                 addEndTop = connection.endElement.parentNode.clientHeight;
-            } 
+            }
             if (connection.connectionType === "anchor-right") {
                 addLeft = connection.startElement.parentNode.clientWidth;
                 addTop = (connection.startElement.parentNode.clientHeight / 2);
@@ -834,7 +836,7 @@ window.Tea = tea = (function() {
         });
         svg.innerHTML = html;
 
-        
+
         connections.forEach(function (connection, index) {
             let el = document.getElementById("conn-" + index);
             if (el) {
@@ -851,19 +853,19 @@ window.Tea = tea = (function() {
             endElement: end,
             connectionType: conntype
         });
-        
+
         // Reset connection elements
         startElement = false;
         endElement = false;
         connectionType = false;
-        
+
         // Grab the SVG
         renderConnections();
 
     }
 
     // Destroy
-    function destroy(){
+    function destroy() {
         // TODO.
     }
 
@@ -881,31 +883,31 @@ window.Tea = tea = (function() {
 
         // Damn , the browser war is still out there. firefox needs help with the drag coordinates.
         if (isFirefox) {
-            teaArea.addEventListener('dragover', function(e) {
+            teaArea.addEventListener('dragover', function (e) {
                 fireFoxEvt = e
             }, false);
         }
 
         // Deselect element.
-        teaArea.addEventListener('click', function(e) {
+        teaArea.addEventListener('click', function (e) {
             let selectedElements = document.querySelectorAll('.tea-component.selected');
-            selectedElements.forEach(function(el, index){
+            selectedElements.forEach(function (el, index) {
                 selectedEl.classList.remove("selected");
             });
         }, false);
 
         // Delete selected element
         let self = this;
-        document.addEventListener('keydown', function(event) { 
-            const key = event.key; 
-            if (key === "Backspace" || key === "Delete") { 
+        document.addEventListener('keydown', function (event) {
+            const key = event.key;
+            if (key === "Backspace" || key === "Delete") {
                 let selectedElements = document.querySelectorAll('.tea-component.selected');
-                
+
                 // Reset connections!
                 let newConnections = [];
-                connections.forEach(function(conn, index) {
+                connections.forEach(function (conn, index) {
                     let found = false;
-                    selectedElements.forEach(function(el, index){
+                    selectedElements.forEach(function (el, index) {
                         if (conn.startElement.parentNode == el || conn.endElement.parentNode == el) {
                             found = true;
                         }
@@ -921,14 +923,14 @@ window.Tea = tea = (function() {
                 connections = newConnections;
 
                 // Actually removing elements.
-                selectedElements.forEach(function(el, index){
+                selectedElements.forEach(function (el, index) {
                     detachAllDragEvents(el);
                     el.remove();
                 });
 
                 renderConnections();
-            } 
-        }); 
+            }
+        });
     }
 
 

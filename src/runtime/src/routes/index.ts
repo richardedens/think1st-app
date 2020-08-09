@@ -6,6 +6,7 @@ import projectEdit from "./projectEdit";
 import mindmap from "./mindmap";
 import dashboard from "./dashboard";
 import kanbanboard from "./kanbanboard";
+import architect from "./architect";
 import signin from "./signin";
 import signup from "./signup";
 import logout from "./logout";
@@ -27,6 +28,7 @@ routes.use("/api/v1/tea", apiV1Tea);
 // Page
 routes.use("/", homepage);
 routes.use("/dashboard", dashboard);
+routes.use("/architect", architect);
 routes.use("/mindmap", mindmap);
 routes.use("/kanbanboard", kanbanboard);
 routes.use("/project-create", projectCreate);

@@ -11,6 +11,7 @@ var projectEdit_1 = __importDefault(require("./projectEdit"));
 var mindmap_1 = __importDefault(require("./mindmap"));
 var dashboard_1 = __importDefault(require("./dashboard"));
 var kanbanboard_1 = __importDefault(require("./kanbanboard"));
+var architect_1 = __importDefault(require("./architect"));
 var signin_1 = __importDefault(require("./signin"));
 var signup_1 = __importDefault(require("./signup"));
 var logout_1 = __importDefault(require("./logout"));
@@ -27,6 +28,7 @@ routes.use("/api/v1/tea", tea_1.default);
 // Page
 routes.use("/", homepage_1.default);
 routes.use("/dashboard", dashboard_1.default);
+routes.use("/architect", architect_1.default);
 routes.use("/mindmap", mindmap_1.default);
 routes.use("/kanbanboard", kanbanboard_1.default);
 routes.use("/project-create", projectCreate_1.default);

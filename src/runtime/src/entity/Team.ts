@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateCol
 import { Length, IsNotEmpty } from "class-validator";
 
 @Entity()
-export class Label {
+export class Team {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -12,40 +12,8 @@ export class Label {
     name: string;
 
     @Column()
-    @Length(4, 2000)
-    nl: string;
-
-    @Column()
-    @Length(4, 2000)
-    en: string;
-
-    @Column()
-    @Length(4, 2000)
-    fr: string;
-
-    @Column()
-    @Length(4, 2000)
-    de: string;
-
-    @Column({ nullable: true })
-    @Length(4, 2000)
-    da: string;
-
-    @Column()
-    @Length(4, 2000)
-    ar: string;
-
-    @Column()
-    @Length(4, 2000)
-    fa: string;
-
-    @Column()
-    @Length(4, 2000)
-    po: string;
-
-    @Column()
-    @Length(4, 2000)
-    es: string;
+    @Length(4, 200)
+    members: string;
 
     @Column()
     @CreateDateColumn()
@@ -57,4 +25,4 @@ export class Label {
 
 }
 
-export default Label;
+export default Team;

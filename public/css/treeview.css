@@ -18,7 +18,7 @@ ul,
 /* Style the caret/arrow */
 
 .caret {
-    background-image: url(/icons/feather_black/folder.svg);
+    background-image: url(/icons/feather_black/package.svg);
     background-size: 16px 16px;
     cursor: pointer;
     background-repeat: no-repeat;
