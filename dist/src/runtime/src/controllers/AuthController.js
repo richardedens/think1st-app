@@ -54,6 +54,13 @@ var config_1 = __importDefault(require("../config/config"));
 var AuthController = /** @class */ (function () {
     function AuthController() {
     }
+    AuthController.logout = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            req.logout();
+            res.redirect('/');
+            return [2 /*return*/];
+        });
+    }); };
     AuthController.login = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
         var _a, username, password, userRepository, user, error_1, token;
         return __generator(this, function (_b) {

@@ -11,78 +11,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
 var class_validator_1 = require("class-validator");
-var Label = /** @class */ (function () {
-    function Label() {
+var Team = /** @class */ (function () {
+    function Team() {
     }
     __decorate([
         typeorm_1.PrimaryGeneratedColumn(),
         __metadata("design:type", Number)
-    ], Label.prototype, "id", void 0);
+    ], Team.prototype, "id", void 0);
     __decorate([
         typeorm_1.Column(),
         class_validator_1.Length(4, 200),
         __metadata("design:type", String)
-    ], Label.prototype, "name", void 0);
+    ], Team.prototype, "name", void 0);
     __decorate([
         typeorm_1.Column(),
-        class_validator_1.Length(4, 2000),
+        class_validator_1.Length(4, 200),
         __metadata("design:type", String)
-    ], Label.prototype, "nl", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        class_validator_1.Length(4, 2000),
-        __metadata("design:type", String)
-    ], Label.prototype, "en", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        class_validator_1.Length(4, 2000),
-        __metadata("design:type", String)
-    ], Label.prototype, "fr", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        class_validator_1.Length(4, 2000),
-        __metadata("design:type", String)
-    ], Label.prototype, "de", void 0);
-    __decorate([
-        typeorm_1.Column({ nullable: true }),
-        class_validator_1.Length(4, 2000),
-        __metadata("design:type", String)
-    ], Label.prototype, "da", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        class_validator_1.Length(4, 2000),
-        __metadata("design:type", String)
-    ], Label.prototype, "ar", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        class_validator_1.Length(4, 2000),
-        __metadata("design:type", String)
-    ], Label.prototype, "fa", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        class_validator_1.Length(4, 2000),
-        __metadata("design:type", String)
-    ], Label.prototype, "po", void 0);
-    __decorate([
-        typeorm_1.Column(),
-        class_validator_1.Length(4, 2000),
-        __metadata("design:type", String)
-    ], Label.prototype, "es", void 0);
+    ], Team.prototype, "members", void 0);
     __decorate([
         typeorm_1.Column(),
         typeorm_1.CreateDateColumn(),
         __metadata("design:type", Date)
-    ], Label.prototype, "createdAt", void 0);
+    ], Team.prototype, "createdAt", void 0);
     __decorate([
         typeorm_1.Column(),
         typeorm_1.UpdateDateColumn(),
         __metadata("design:type", Date)
-    ], Label.prototype, "updatedAt", void 0);
-    Label = __decorate([
+    ], Team.prototype, "updatedAt", void 0);
+    Team = __decorate([
         typeorm_1.Entity()
-    ], Label);
-    return Label;
+    ], Team);
+    return Team;
 }());
-exports.Label = Label;
-exports.default = Label;
+exports.Team = Team;
+exports.default = Team;
 //# sourceMappingURL=Team.js.map

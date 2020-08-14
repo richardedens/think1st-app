@@ -7,6 +7,13 @@ import User from "../entity/User";
 import config from "../config/config";
 
 class AuthController {
+
+    static logout = async (req: Request, res: Response) => {
+
+        req.logout();
+        res.redirect('/');
+
+    }
     
     static login = async (req: Request, res: Response) => {
         // Check if username and password are set

@@ -45,7 +45,6 @@ var typeorm_1 = require("typeorm");
 var express_1 = __importDefault(require("express"));
 var express_session_1 = __importDefault(require("express-session"));
 var http_1 = __importDefault(require("http"));
-var cookie_parser_1 = __importDefault(require("cookie-parser"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var http_errors_1 = __importDefault(require("http-errors"));
 var path_1 = __importDefault(require("path"));
@@ -169,7 +168,7 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                 app.use(express_1.default.json());
                 app.use(express_1.default.urlencoded({ extended: false }));
                 csrfProtection = csurf_1.default({ cookie: true });
-                app.use(cookie_parser_1.default("think1st-app", {}));
+                //app.use(cookieParser("think1stapp", {}));
                 // Sass middleware
                 app.use(node_sass_middleware_1.default({
                     src: path_1.default.join(__dirname, "../../../public"),
@@ -178,10 +177,10 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                 }));
                 // Create a session and then add passport to it.
                 app.use(express_session_1.default({
-                    secret: "think1st-app",
-                    cookie: { maxAge: 60000 },
+                    secret: "think1stapp",
+                    cookie: { domain: 'localhost', path: '/', secure: false },
                     resave: false,
-                    saveUninitialized: false
+                    saveUninitialized: true
                 }));
                 app.use(passport_1.default.initialize());
                 app.use(passport_1.default.session());
@@ -206,7 +205,7 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                     // Render error page.
                     var twingEngine = new TwingEngine_1.default();
                     twingEngine.render("error.twig", {
-                        title: "Forgiveness Online Webinar - Error",
+                        title: "Think1st - Error",
                         cachebust: ("v=" + +new Date)
                     }).then(function (output) {
                         res.send(output);

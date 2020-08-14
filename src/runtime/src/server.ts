@@ -115,7 +115,7 @@ createConnection().then(async connection => {
 
     // CSRF Protection
     const csrfProtection = csrf({ cookie: true });
-    app.use(cookieParser("think1st-app", {}));
+    //app.use(cookieParser("think1stapp", {}));
 
     // Sass middleware
     app.use(sassMiddleware({
@@ -128,10 +128,10 @@ createConnection().then(async connection => {
     app.use(
         session(
             {
-                secret: "think1st-app",
-                cookie: { maxAge: 60000 },
+                secret: "think1stapp",
+                cookie: { domain:'localhost', path: '/', secure: false },
                 resave: false,
-                saveUninitialized: false
+                saveUninitialized: true
             }
         )
     );
@@ -167,7 +167,7 @@ createConnection().then(async connection => {
         // Render error page.
         const twingEngine = new TwingEngine();
         twingEngine.render("error.twig", {
-            title: "Forgiveness Online Webinar - Error",
+            title: "Think1st - Error",
             cachebust: ("v=" + +new Date)
         }).then((output) => {
             res.send(output);
