@@ -10,8 +10,22 @@ import { Project } from "../projectentity/Project";
 import { Team } from "../projectentity/Team";
 import { TeaModule } from "../projectentity/TeaModule";
 import { TeaScript } from "../projectentity/TeaScript";
+import fs from "fs";
+import path from "path";
 
 class ProjectController {
+
+    static delete = async (req: Request, res: Response) => {
+        
+        // Get the projects from the folder.
+        if (fs.existsSync(path.join(__dirname,"/../../../../../projects/", req.params.projectname + ".db"))) {
+            fs.unlinkSync(path.join(__dirname,"/../../../../../projects/", req.params.projectname + ".db"));
+            res.redirect('/dashboard');
+        } else {
+            res.redirect('/dashboard');
+        }
+
+    }
 
     static create = async (req: Request, res: Response) => {
 
@@ -27,7 +41,7 @@ class ProjectController {
         req.session.save((err) => {
 
             // @ts-ignore
-            createConnection({
+            let conn = createConnection({
                 "name": projectFile,
                 "type": "sqlite",
                 "database": "projects/" + projectFile + ".db",
@@ -43,6 +57,10 @@ class ProjectController {
             }).then(connection => {
                 // here you can start to work with your entities
                 console.log('[DBSYSTEM] - Created project database: projects/' + projectFile + ".db - for project " + req.params.projectname);
+                
+                // Close connection
+                connection.close();
+
                 res.redirect("/dashboard");
             }).catch((error) => {
                 console.log(error);

@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import homepage from "./homepage";
+import projectDelete from "./projectDelete";
 import projectCreate from "./projectCreate";
 import projectDetail from "./projectDetail";
 import projectEdit from "./projectEdit";
@@ -34,6 +35,7 @@ routes.use("/kanbanboard", kanbanboard);
 routes.use("/project-create", projectCreate);
 routes.use("/project-detail", projectDetail);
 routes.use("/project-edit", projectEdit);
+routes.use("/project-delete", projectDelete);
 routes.use("/signin", signin);
 routes.use("/signup", signup);
 routes.use("/logout", logout);

@@ -49,9 +49,24 @@ var Project_1 = require("../projectentity/Project");
 var Team_1 = require("../projectentity/Team");
 var TeaModule_1 = require("../projectentity/TeaModule");
 var TeaScript_1 = require("../projectentity/TeaScript");
+var fs_1 = __importDefault(require("fs"));
+var path_1 = __importDefault(require("path"));
 var ProjectController = /** @class */ (function () {
     function ProjectController() {
     }
+    ProjectController.delete = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            // Get the projects from the folder.
+            if (fs_1.default.existsSync(path_1.default.join(__dirname, "/../../../../../projects/", req.params.projectname + ".db"))) {
+                fs_1.default.unlinkSync(path_1.default.join(__dirname, "/../../../../../projects/", req.params.projectname + ".db"));
+                res.redirect('/dashboard');
+            }
+            else {
+                res.redirect('/dashboard');
+            }
+            return [2 /*return*/];
+        });
+    }); };
     ProjectController.create = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
         var projectFile;
         return __generator(this, function (_a) {
@@ -64,7 +79,7 @@ var ProjectController = /** @class */ (function () {
             req.session.projectName = req.params.projectname;
             req.session.save(function (err) {
                 // @ts-ignore
-                typeorm_1.createConnection({
+                var conn = typeorm_1.createConnection({
                     "name": projectFile,
                     "type": "sqlite",
                     "database": "projects/" + projectFile + ".db",
@@ -80,6 +95,8 @@ var ProjectController = /** @class */ (function () {
                 }).then(function (connection) {
                     // here you can start to work with your entities
                     console.log('[DBSYSTEM] - Created project database: projects/' + projectFile + ".db - for project " + req.params.projectname);
+                    // Close connection
+                    connection.close();
                     res.redirect("/dashboard");
                 }).catch(function (error) {
                     console.log(error);

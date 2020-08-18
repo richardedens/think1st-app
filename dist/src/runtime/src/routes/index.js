@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var homepage_1 = __importDefault(require("./homepage"));
+var projectDelete_1 = __importDefault(require("./projectDelete"));
 var projectCreate_1 = __importDefault(require("./projectCreate"));
 var projectDetail_1 = __importDefault(require("./projectDetail"));
 var projectEdit_1 = __importDefault(require("./projectEdit"));
@@ -34,6 +35,7 @@ routes.use("/kanbanboard", kanbanboard_1.default);
 routes.use("/project-create", projectCreate_1.default);
 routes.use("/project-detail", projectDetail_1.default);
 routes.use("/project-edit", projectEdit_1.default);
+routes.use("/project-delete", projectDelete_1.default);
 routes.use("/signin", signin_1.default);
 routes.use("/signup", signup_1.default);
 routes.use("/logout", logout_1.default);
