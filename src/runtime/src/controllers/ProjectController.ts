@@ -3,12 +3,64 @@ import TwingEngine from "../twig/TwingEngine";
 import Lang from "./components/Lang";
 import config from "../../../../config.json";
 
+import "reflect-metadata";
+import { createConnection } from "typeorm";
+import { User } from "../projectentity/User";
+import { Project } from "../projectentity/Project";
+import { Team } from "../projectentity/Team";
+import { TeaModule } from "../projectentity/TeaModule";
+import { TeaScript } from "../projectentity/TeaScript";
+
 class ProjectController {
+
+    static create = async (req: Request, res: Response) => {
+
+        // Sanatizing project name to project file name.
+        console.log(req.body);
+
+        let projectFile = req.body.projectname;
+        projectFile = projectFile.toLowerCase().replace(/\W+/g, " ").split(" ").join("_");
+
+        // Save both the project file and project name.
+        req.session.projectFile = projectFile;
+        req.session.projectName = req.params.projectname;
+        req.session.save((err) => {
+
+            // @ts-ignore
+            createConnection({
+                "name": projectFile,
+                "type": "sqlite",
+                "database": "projects/" + projectFile + ".db",
+                "synchronize": true,
+                "logging": false,
+                "entities": [
+                    User,
+                    Project,
+                    Team,
+                    TeaModule,
+                    TeaScript,
+                ],
+            }).then(connection => {
+                // here you can start to work with your entities
+                console.log('[DBSYSTEM] - Created project database: projects/' + projectFile + ".db - for project " + req.params.projectname);
+                res.redirect("/dashboard");
+            }).catch((error) => {
+                console.log(error);
+                res.redirect("/dashboard");
+            });
+            
+        });
+
+    }
 
     static show = async (req: Request, res: Response) => {
         res.set('Cache-Control', 'no-store');
+
+        // Get if we are logged in or not
         const twingEngine = new TwingEngine();
         const loggedin = req.session.loggedin || false;
+
+        // Render the projects
         twingEngine.render("project-create.twig", {
             title: "Think1st - Platform",
             pageid: "projects",
@@ -18,12 +70,14 @@ class ProjectController {
             currentLanguage: Lang.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
             lang: (req.session.lang) ? req.session.lang : "en",
             page: 'projects',
+            /*csrfToken: req.csrfToken(),*/
             environment: config.environment
         }).then((output) => {
             res.send(output);
         }).catch((err) => {
             res.send(err.toString());
         });
+
     };
 
     static detail = async (req: Request, res: Response) => {

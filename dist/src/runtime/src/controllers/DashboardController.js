@@ -42,6 +42,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var TwingEngine_1 = __importDefault(require("../twig/TwingEngine"));
 var Lang_1 = __importDefault(require("./components/Lang"));
 var config_json_1 = __importDefault(require("../../../../config.json"));
+// Readout the projects from the project folder.
+var fs_1 = __importDefault(require("fs"));
+var path_1 = __importDefault(require("path"));
 var DashboardController = /** @class */ (function () {
     function DashboardController() {
     }
@@ -50,19 +53,30 @@ var DashboardController = /** @class */ (function () {
         return __generator(this, function (_a) {
             twingEngine = new TwingEngine_1.default();
             loggedin = req.session.loggedin || false;
-            twingEngine.render("dashboard.twig", {
-                title: "Think1st - Dashboard",
-                pageid: "dashboard",
-                cachebust: ("v=" + +new Date),
-                nonce: res.locals.nonce,
-                loggedin: loggedin,
-                currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
-                lang: (req.session.lang) ? req.session.lang : "en",
-                environment: config_json_1.default.environment
-            }).then(function (output) {
-                res.send(output);
-            }).catch(function (err) {
-                res.send(err.toString());
+            // Get the projects from the folder.
+            fs_1.default.readdir(path_1.default.join(__dirname, "/../../../../../projects/"), function (err, projects) {
+                // Sanitize project database files.
+                var projectNames = [];
+                projects.forEach(function (project) {
+                    if (project !== "README.md") {
+                        projectNames.push(project.replace(".db", ""));
+                    }
+                });
+                twingEngine.render("dashboard.twig", {
+                    title: "Think1st - Dashboard",
+                    pageid: "dashboard",
+                    cachebust: ("v=" + +new Date),
+                    nonce: res.locals.nonce,
+                    loggedin: loggedin,
+                    currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
+                    lang: (req.session.lang) ? req.session.lang : "en",
+                    environment: config_json_1.default.environment,
+                    projects: projectNames
+                }).then(function (output) {
+                    res.send(output);
+                }).catch(function (err) {
+                    res.send(err.toString());
+                });
             });
             return [2 /*return*/];
         });

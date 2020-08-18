@@ -18,11 +18,20 @@ var TeaModule_1 = require("../../../projectentity/TeaModule");
 var TeaScript_1 = require("../../../projectentity/TeaScript");
 var router = express.Router();
 router.get("/create/project/:projectname", loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), function (req, res, next) {
+    // Sanatizing project name to project file name.
+    var projectFile = req.params.projectname;
+    projectFile = projectFile.toLowerCase().replace(/\W+/g, " ").split(" ").join("_");
+    // Save both the project file and project name.
+    req.session.projectFile = projectFile;
+    req.session.projectName = req.params.projectname;
+    req.session.save(function (err) {
+        res.redirect("/dashboard");
+    });
     // @ts-ignore
     typeorm_1.createConnection({
-        "name": req.params.projectname,
+        "name": projectFile,
         "type": "sqlite",
-        "database": "projects/" + req.params.projectname + ".db",
+        "database": "projects/" + projectFile + ".db",
         "synchronize": true,
         "logging": false,
         "entities": [
@@ -34,7 +43,7 @@ router.get("/create/project/:projectname", loginCheck.ensureLoggedIn({ redirectT
         ],
     }).then(function (connection) {
         // here you can start to work with your entities
-        console.log('[DBSYSTEM] - Created project database: projects/' + req.params.projectname + ".db");
+        console.log('[DBSYSTEM] - Created project database: projects/' + projectFile + ".db - for project " + req.params.projectname);
     }).catch(function (error) { return console.log(error); });
     res.json({ success: true });
 });

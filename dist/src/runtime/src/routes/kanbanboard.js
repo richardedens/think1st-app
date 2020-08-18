@@ -16,6 +16,6 @@ var KanbanboardController_1 = __importDefault(require("../controllers/Kanbanboar
 var loginCheck = __importStar(require("connect-ensure-login"));
 var router = express_1.default.Router();
 /* GET home page. */
-router.get("/", loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), KanbanboardController_1.default.show);
+router.get("/:projectName", loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), KanbanboardController_1.default.show);
 exports.default = router;
 //# sourceMappingURL=kanbanboard.js.map

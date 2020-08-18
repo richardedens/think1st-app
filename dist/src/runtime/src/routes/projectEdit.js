@@ -16,6 +16,6 @@ var ProjectController_1 = __importDefault(require("../controllers/ProjectControl
 var loginCheck = __importStar(require("connect-ensure-login"));
 var router = express_1.default.Router();
 /* GET home page. */
-router.get("/", loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), ProjectController_1.default.edit);
+router.get("/:projectName", loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), ProjectController_1.default.edit);
 exports.default = router;
 //# sourceMappingURL=projectEdit.js.map

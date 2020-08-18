@@ -85,9 +85,10 @@ createConnection().then(async connection => {
     // Call midlewares
     app.use(cors());
     app.use(helmet());
-    app.use(bodyParser.json({
-        type: ['json', 'application/csp-report']
+    app.use(bodyParser.urlencoded({
+        extended: true
     }));
+    app.use(bodyParser.json());
 
     // Report violation!
     app.post('/report-violation', (req, res) => {
@@ -96,7 +97,7 @@ createConnection().then(async connection => {
         } else {
             console.log('[INFO] - CSP Violation: No data received!')
         }
-        
+
         res.status(204).end()
     })
 
@@ -114,7 +115,6 @@ createConnection().then(async connection => {
     app.use(express.urlencoded({ extended: false }));
 
     // CSRF Protection
-    const csrfProtection = csrf({ cookie: true });
     //app.use(cookieParser("think1stapp", {}));
 
     // Sass middleware
@@ -129,14 +129,14 @@ createConnection().then(async connection => {
         session(
             {
                 secret: "think1stapp",
-                cookie: { domain:'localhost', path: '/', secure: false },
+                cookie: { path: '/', secure: false },
                 resave: false,
                 saveUninitialized: true
             }
         )
     );
-    
-    
+
+
     app.use(passport.initialize());
     app.use(passport.session());
 

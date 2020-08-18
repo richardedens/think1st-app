@@ -6,6 +6,6 @@ import * as loginCheck from "connect-ensure-login";
 const router = express.Router();
 
 /* GET home page. */
-router.get("/", loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), KanbanboardController.show);
+router.get("/:projectName", loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), KanbanboardController.show);
 
 export default router;

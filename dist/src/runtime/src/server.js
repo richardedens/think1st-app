@@ -52,7 +52,6 @@ var morgan_1 = __importDefault(require("morgan"));
 var node_sass_middleware_1 = __importDefault(require("node-sass-middleware"));
 var helmet_1 = __importDefault(require("helmet"));
 var cors_1 = __importDefault(require("cors"));
-var csurf_1 = __importDefault(require("csurf"));
 var routes_1 = __importDefault(require("./routes"));
 var open_1 = __importDefault(require("open"));
 // Setup passport.
@@ -69,7 +68,7 @@ var config_json_1 = __importDefault(require("../../../config.json"));
 var TwingEngine_1 = __importDefault(require("./twig/TwingEngine"));
 // Start connection to the database and then start the server.
 typeorm_1.createConnection().then(function (connection) { return __awaiter(_this, void 0, void 0, function () {
-    var app, uuidv4, csrfProtection, port;
+    var app, uuidv4, port;
     var _this = this;
     return __generator(this, function (_a) {
         switch (_a.label) {
@@ -144,9 +143,10 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                 // Call midlewares
                 app.use(cors_1.default());
                 app.use(helmet_1.default());
-                app.use(body_parser_1.default.json({
-                    type: ['json', 'application/csp-report']
+                app.use(body_parser_1.default.urlencoded({
+                    extended: true
                 }));
+                app.use(body_parser_1.default.json());
                 // Report violation!
                 app.post('/report-violation', function (req, res) {
                     if (req.body) {
@@ -167,7 +167,7 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                 app.use(morgan_1.default("dev"));
                 app.use(express_1.default.json());
                 app.use(express_1.default.urlencoded({ extended: false }));
-                csrfProtection = csurf_1.default({ cookie: true });
+                // CSRF Protection
                 //app.use(cookieParser("think1stapp", {}));
                 // Sass middleware
                 app.use(node_sass_middleware_1.default({
@@ -178,7 +178,7 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                 // Create a session and then add passport to it.
                 app.use(express_session_1.default({
                     secret: "think1stapp",
-                    cookie: { domain: 'localhost', path: '/', secure: false },
+                    cookie: { path: '/', secure: false },
                     resave: false,
                     saveUninitialized: true
                 }));

@@ -6,6 +6,6 @@ import * as loginCheck from "connect-ensure-login";
 const router = express.Router();
 
 /* GET home page. */
-router.get("/", loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), ProjectController.edit);
+router.get("/:projectName", loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), ProjectController.edit);
 
 export default router;

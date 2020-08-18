@@ -15,6 +15,6 @@ var MindmapController_1 = __importDefault(require("../controllers/MindmapControl
 var loginCheck = __importStar(require("connect-ensure-login"));
 var router = express_1.default.Router();
 /* GET home page. */
-router.get("/", loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), MindmapController_1.default.show);
+router.get("/:projectName", loginCheck.ensureLoggedIn({ redirectTo: "/signin" }), MindmapController_1.default.show);
 exports.default = router;
 //# sourceMappingURL=mindmap.js.map
