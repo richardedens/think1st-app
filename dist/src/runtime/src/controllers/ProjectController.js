@@ -132,6 +132,81 @@ var ProjectController = /** @class */ (function () {
             return [2 /*return*/];
         });
     }); };
+    ProjectController.design = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+        var twingEngine, loggedin;
+        return __generator(this, function (_a) {
+            res.set('Cache-Control', 'no-store');
+            twingEngine = new TwingEngine_1.default();
+            loggedin = req.session.loggedin || false;
+            // Render the projects
+            twingEngine.render("project-design.twig", {
+                title: "Think1st - Platform",
+                pageid: "projects",
+                cachebust: ("v=" + +new Date),
+                nonce: res.locals.nonce,
+                loggedin: loggedin,
+                currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
+                lang: (req.session.lang) ? req.session.lang : "en",
+                page: 'projects',
+                environment: config_json_1.default.environment
+            }).then(function (output) {
+                res.send(output);
+            }).catch(function (err) {
+                res.send(err.toString());
+            });
+            return [2 /*return*/];
+        });
+    }); };
+    ProjectController.settings = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+        var twingEngine, loggedin;
+        return __generator(this, function (_a) {
+            res.set('Cache-Control', 'no-store');
+            twingEngine = new TwingEngine_1.default();
+            loggedin = req.session.loggedin || false;
+            // Render the projects
+            twingEngine.render("project-settings.twig", {
+                title: "Think1st - Platform",
+                pageid: "projects",
+                cachebust: ("v=" + +new Date),
+                nonce: res.locals.nonce,
+                loggedin: loggedin,
+                currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
+                lang: (req.session.lang) ? req.session.lang : "en",
+                page: 'projects',
+                environment: config_json_1.default.environment
+            }).then(function (output) {
+                res.send(output);
+            }).catch(function (err) {
+                res.send(err.toString());
+            });
+            return [2 /*return*/];
+        });
+    }); };
+    ProjectController.cloud = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+        var twingEngine, loggedin;
+        return __generator(this, function (_a) {
+            res.set('Cache-Control', 'no-store');
+            twingEngine = new TwingEngine_1.default();
+            loggedin = req.session.loggedin || false;
+            // Render the projects
+            twingEngine.render("project-cloud-architecture.twig", {
+                title: "Think1st - Platform",
+                pageid: "projects",
+                cachebust: ("v=" + +new Date),
+                nonce: res.locals.nonce,
+                loggedin: loggedin,
+                currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
+                lang: (req.session.lang) ? req.session.lang : "en",
+                page: 'projects',
+                environment: config_json_1.default.environment
+            }).then(function (output) {
+                res.send(output);
+            }).catch(function (err) {
+                res.send(err.toString());
+            });
+            return [2 /*return*/];
+        });
+    }); };
     ProjectController.detail = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
         var twingEngine, loggedin;
         return __generator(this, function (_a) {

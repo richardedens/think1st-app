@@ -92,14 +92,12 @@
 										<div class="dropdown-menu dropdown-menu-right">
 											<a class="dropdown-item" href="/mindmap/{{ project }}">Mindmap</a>
 											<a class="dropdown-item" href="/architect/{{ project }}">Architect</a>
+											<a class="dropdown-item" href="/project-cloud-architecture/{{ project }}">Cloud Architect</a>
 											<a class="dropdown-item" href="/kanbanboard/{{ project }}">Board</a>
 											<a class="dropdown-item" href="/project-edit/{{ project }}">Edit</a>
 											<a class="dropdown-item" href="/project-design/{{ project }}">Design</a>
-											<a class="dropdown-item" href="#{{ project }}"><hr /></a>
-											<a class="dropdown-item" href="#{{ project }}">Add Members</a>
-											<a class="dropdown-item" href="#{{ project }}">Settings</a>
-											<a class="dropdown-item" href="#{{ project }}"><hr /></a>
-											<a class="dropdown-item" href="/project-delete/{{ project }}">Delete</a>
+											<a class="dropdown-item" href="/project-settings/{{ project }}">Settings</a>
+											<a class="dropdown-item" style="color: red;" href="/project-delete/{{ project }}">Delete</a>
 										</div>
 									</div>
 									<!-- end dropdown -->
@@ -178,7 +176,7 @@
 			<!-- End Content -->
 
 			<!-- ========== Right Sidebar Start ========== -->
-			{% include "components/right-menu.twig" %}<!-- End Right Sidebar -->
+			{% include "components/menus/right-menu.twig" %}<!-- End Right Sidebar -->
 
 			<!-- ========== Right Overlay ========== --><div class="rightbar-overlay"> </div>
 			<!-- End Right Overlay -->
