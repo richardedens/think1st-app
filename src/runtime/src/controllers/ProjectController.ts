@@ -125,6 +125,32 @@ class ProjectController {
 
     };
 
+    static database = async (req: Request, res: Response) => {
+        res.set('Cache-Control', 'no-store');
+
+        // Get if we are logged in or not
+        const twingEngine = new TwingEngine();
+        const loggedin = req.session.loggedin || false;
+
+        // Render the projects
+        twingEngine.render("project-database.twig", {
+            title: "Think1st - Platform",
+            pageid: "projects",
+            cachebust: ("v=" + +new Date),
+            nonce: res.locals.nonce,
+            loggedin: loggedin,
+            currentLanguage: Lang.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
+            lang: (req.session.lang) ? req.session.lang : "en",
+            page: 'projects',
+            environment: config.environment
+        }).then((output) => {
+            res.send(output);
+        }).catch((err) => {
+            res.send(err.toString());
+        });
+
+    };
+
     static settings = async (req: Request, res: Response) => {
         res.set('Cache-Control', 'no-store');
 
