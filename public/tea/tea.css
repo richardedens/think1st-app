@@ -12,6 +12,10 @@
     overflow: scroll;
 }
 
+.tea-editor.tea-database {
+    top: 90px;
+}
+
 .tea-editor-arrows-inner,
 .tea-editor-inner {
     width: 4000px;
@@ -33,6 +37,10 @@
     padding: 15px;
     position: fixed;
     overflow: hidden;
+}
+
+.tea-output.tea-database {
+    top: 90px;
 }
 
 .tea-component {
