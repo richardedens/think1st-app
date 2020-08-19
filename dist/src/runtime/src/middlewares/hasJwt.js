@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.hasJwt = void 0;
 exports.hasJwt = function (req, res, next) {
     //Get the jwt token from the head
     var token = req.headers["token"];

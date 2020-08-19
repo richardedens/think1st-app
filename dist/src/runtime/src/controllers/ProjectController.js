@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -37,7 +38,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var TwingEngine_1 = __importDefault(require("../twig/TwingEngine"));
 var Lang_1 = __importDefault(require("./components/Lang"));
@@ -54,11 +54,11 @@ var path_1 = __importDefault(require("path"));
 var ProjectController = /** @class */ (function () {
     function ProjectController() {
     }
-    ProjectController.delete = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    ProjectController.delete = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             // Get the projects from the folder.
-            if (fs_1.default.existsSync(path_1.default.join(__dirname, "/../../../../../projects/", req.params.projectname + ".db"))) {
-                fs_1.default.unlinkSync(path_1.default.join(__dirname, "/../../../../../projects/", req.params.projectname + ".db"));
+            if (fs_1.default.existsSync(path_1.default.join(__dirname, "/../../../../../projects/", req.params.projectName + ".db"))) {
+                fs_1.default.unlinkSync(path_1.default.join(__dirname, "/../../../../../projects/", req.params.projectName + ".db"));
                 res.redirect('/dashboard');
             }
             else {
@@ -67,7 +67,7 @@ var ProjectController = /** @class */ (function () {
             return [2 /*return*/];
         });
     }); };
-    ProjectController.create = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    ProjectController.create = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var projectFile;
         return __generator(this, function (_a) {
             // Sanatizing project name to project file name.
@@ -76,7 +76,7 @@ var ProjectController = /** @class */ (function () {
             projectFile = projectFile.toLowerCase().replace(/\W+/g, " ").split(" ").join("_");
             // Save both the project file and project name.
             req.session.projectFile = projectFile;
-            req.session.projectName = req.params.projectname;
+            req.session.projectName = req.params.projectName;
             req.session.save(function (err) {
                 // @ts-ignore
                 var conn = typeorm_1.createConnection({
@@ -94,7 +94,7 @@ var ProjectController = /** @class */ (function () {
                     ],
                 }).then(function (connection) {
                     // here you can start to work with your entities
-                    console.log('[DBSYSTEM] - Created project database: projects/' + projectFile + ".db - for project " + req.params.projectname);
+                    console.log('[DBSYSTEM] - Created project database: projects/' + projectFile + ".db - for project " + req.params.projectName);
                     // Close connection
                     connection.close();
                     res.redirect("/dashboard");
@@ -106,12 +106,13 @@ var ProjectController = /** @class */ (function () {
             return [2 /*return*/];
         });
     }); };
-    ProjectController.show = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    ProjectController.show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var twingEngine, loggedin;
         return __generator(this, function (_a) {
             res.set('Cache-Control', 'no-store');
             twingEngine = new TwingEngine_1.default();
             loggedin = req.session.loggedin || false;
+            console.log("[PROJECT] - " + req.params.projectName);
             // Render the projects
             twingEngine.render("project-create.twig", {
                 title: "Think1st - Platform",
@@ -122,8 +123,8 @@ var ProjectController = /** @class */ (function () {
                 currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
                 lang: (req.session.lang) ? req.session.lang : "en",
                 page: 'projects',
-                /*csrfToken: req.csrfToken(),*/
-                environment: config_json_1.default.environment
+                environment: config_json_1.default.environment,
+                project: req.params.projectName
             }).then(function (output) {
                 res.send(output);
             }).catch(function (err) {
@@ -132,7 +133,7 @@ var ProjectController = /** @class */ (function () {
             return [2 /*return*/];
         });
     }); };
-    ProjectController.design = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    ProjectController.design = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var twingEngine, loggedin;
         return __generator(this, function (_a) {
             res.set('Cache-Control', 'no-store');
@@ -148,7 +149,8 @@ var ProjectController = /** @class */ (function () {
                 currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
                 lang: (req.session.lang) ? req.session.lang : "en",
                 page: 'projects',
-                environment: config_json_1.default.environment
+                environment: config_json_1.default.environment,
+                project: req.params.projectName
             }).then(function (output) {
                 res.send(output);
             }).catch(function (err) {
@@ -157,7 +159,7 @@ var ProjectController = /** @class */ (function () {
             return [2 /*return*/];
         });
     }); };
-    ProjectController.database = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    ProjectController.database = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var twingEngine, loggedin;
         return __generator(this, function (_a) {
             res.set('Cache-Control', 'no-store');
@@ -173,7 +175,8 @@ var ProjectController = /** @class */ (function () {
                 currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
                 lang: (req.session.lang) ? req.session.lang : "en",
                 page: 'projects',
-                environment: config_json_1.default.environment
+                environment: config_json_1.default.environment,
+                project: req.params.projectName
             }).then(function (output) {
                 res.send(output);
             }).catch(function (err) {
@@ -182,7 +185,7 @@ var ProjectController = /** @class */ (function () {
             return [2 /*return*/];
         });
     }); };
-    ProjectController.settings = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    ProjectController.settings = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var twingEngine, loggedin;
         return __generator(this, function (_a) {
             res.set('Cache-Control', 'no-store');
@@ -198,7 +201,8 @@ var ProjectController = /** @class */ (function () {
                 currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
                 lang: (req.session.lang) ? req.session.lang : "en",
                 page: 'projects',
-                environment: config_json_1.default.environment
+                environment: config_json_1.default.environment,
+                project: req.params.projectName
             }).then(function (output) {
                 res.send(output);
             }).catch(function (err) {
@@ -207,7 +211,7 @@ var ProjectController = /** @class */ (function () {
             return [2 /*return*/];
         });
     }); };
-    ProjectController.cloud = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    ProjectController.cloud = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var twingEngine, loggedin;
         return __generator(this, function (_a) {
             res.set('Cache-Control', 'no-store');
@@ -223,7 +227,8 @@ var ProjectController = /** @class */ (function () {
                 currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
                 lang: (req.session.lang) ? req.session.lang : "en",
                 page: 'projects',
-                environment: config_json_1.default.environment
+                environment: config_json_1.default.environment,
+                project: req.params.projectName
             }).then(function (output) {
                 res.send(output);
             }).catch(function (err) {
@@ -232,7 +237,7 @@ var ProjectController = /** @class */ (function () {
             return [2 /*return*/];
         });
     }); };
-    ProjectController.detail = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    ProjectController.detail = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var twingEngine, loggedin;
         return __generator(this, function (_a) {
             twingEngine = new TwingEngine_1.default();
@@ -245,7 +250,8 @@ var ProjectController = /** @class */ (function () {
                 loggedin: loggedin,
                 currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
                 lang: (req.session.lang) ? req.session.lang : "en",
-                environment: config_json_1.default.environment
+                environment: config_json_1.default.environment,
+                project: req.params.projectName
             }).then(function (output) {
                 res.send(output);
             }).catch(function (err) {
@@ -254,11 +260,12 @@ var ProjectController = /** @class */ (function () {
             return [2 /*return*/];
         });
     }); };
-    ProjectController.edit = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    ProjectController.edit = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var twingEngine, loggedin;
         return __generator(this, function (_a) {
             twingEngine = new TwingEngine_1.default();
             loggedin = req.session.loggedin || false;
+            console.log("[PROJECT] - " + req.params.projectName);
             twingEngine.render("project-edit.twig", {
                 title: "Think1st - Platform",
                 pageid: "projectedit",
@@ -267,7 +274,32 @@ var ProjectController = /** @class */ (function () {
                 loggedin: loggedin,
                 currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
                 lang: (req.session.lang) ? req.session.lang : "en",
-                environment: config_json_1.default.environment
+                environment: config_json_1.default.environment,
+                project: req.params.projectName
+            }).then(function (output) {
+                res.send(output);
+            }).catch(function (err) {
+                res.send(err.toString());
+            });
+            return [2 /*return*/];
+        });
+    }); };
+    ProjectController.security = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var twingEngine, loggedin;
+        return __generator(this, function (_a) {
+            twingEngine = new TwingEngine_1.default();
+            loggedin = req.session.loggedin || false;
+            console.log("[PROJECT] - " + req.params.projectName);
+            twingEngine.render("project-security.twig", {
+                title: "Think1st - Platform",
+                pageid: "projectedit",
+                cachebust: ("v=" + +new Date),
+                nonce: res.locals.nonce,
+                loggedin: loggedin,
+                currentLanguage: Lang_1.default.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
+                lang: (req.session.lang) ? req.session.lang : "en",
+                environment: config_json_1.default.environment,
+                project: req.params.projectName
             }).then(function (output) {
                 res.send(output);
             }).catch(function (err) {

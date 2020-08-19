@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% include "components/head.twig" %}
+	</head>
+
+	<body data-layout-mode="two-column" data-layout='{"mode": "light", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": false}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": false}'>
+
+		<!-- Begin page -->
+		<div id="wrapper">
+
+			<!-- ========== Topbar Start ========== -->
+			{% include "components/navigation-custom.twig" %}
+			<!-- End Topbar -->
+
+			<!-- ========== Left Sidebar Start ========== -->
+			{% include "components/left-menu-security.twig" %}
+			<!-- End Sidebar -->
+
+			<!-- ========== Content ========== -->
+			<div class="content-page">
+                <div class="content">
+					<!-- end Footer -->
+					<!-- Footer Start -->
+					{% include "components/footer.twig" %}
+					<!-- end Footer -->
+				</div>
+			</div>
+			<!-- End Content -->
+
+			<!-- ========== Right Sidebar Start ========== -->
+			{% include "components/menus/right-menu.twig" %}
+			<!-- End Right Sidebar -->
+
+			<!-- ========== Right Overlay ========== --><div class="rightbar-overlay"> </div>
+			<!-- End Right Overlay -->
+
+			{% include "components/scripts.twig" %}
+		</div>
+
+	</body>
+</html>

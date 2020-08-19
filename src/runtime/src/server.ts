@@ -24,7 +24,6 @@ import { getRepository } from "typeorm";
 
 // Setup introduction.
 import { Intro } from "../../shared/util/intro";
-import { ɵLOCALE_DATA, LOCALE_ID } from "@angular/core";
 import db from "./db/db";
 const intro = new Intro();
 

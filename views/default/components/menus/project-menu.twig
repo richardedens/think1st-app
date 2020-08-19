@@ -2,104 +2,391 @@
                                 <span>Project</span>
                             </h5>
                             <ul id="myUL">
-                                <li>
-                                    <img src="/icons/feather_black/box.svg" width="16" height="16">&nbsp;<span>Project</span>
+                                <li class="cursor-select">
+                                    <div class="inline-block">
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newModuleModal" href="#">Create Module</a>
+                                            </div>
+                                        </div>
+                                        <img src="/icons/feather_black/box.svg" width="16" height="16">&nbsp;<span>Project</span>
+                                    </div>
                                 </li>
-                                <li>
-                                    <img src="/icons/feather_black/settings.svg" width="16" height="16">&nbsp;<span>System</span>
+                                <li class="cursor-select">
+                                    <div class="inline-block">
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/project-settings/{{project}}">Show Settings</a>
+                                            </div>
+                                        </div>
+                                        <img src="/icons/feather_black/settings.svg" width="16" height="16">&nbsp;<span>System</span>
+                                    </div>
                                 </li>
-                                <li>
-                                    <img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span>
+                                <li class="cursor-select">
+                                    <div class="inline-block">
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="/project-security/{{project}}">Show Security Setings</a>
+                                                </div>
+                                        </div>
+                                        <img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span>
+                                    </div>
                                 </li>
-                                <li>
-                                    <span class="caret">ArchitectureModule</span>
-                                    <ul class="nested">
-                                        <li><img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span></li>
-                                        <li><img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span></li>
-                                        <li>
-                                            <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
-                                            <ul class="nested">
-                                                <li>Default_Layout</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <li class="cursor-select">
+                                    <div class="inline-block">
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                            </div>
+                                        </div>
+                                        <span class="caret">ConfigurationModule</span>
+                                        <ul class="nested">
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-database/{{ project }}">Show Database Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-security/{{project}}">Show Security Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
-                                <li>
-                                    <span class="caret">ConfigurationModule</span>
-                                    <ul class="nested">
-                                        <li><img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span></li>
-                                        <li><img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span></li>
-                                        <li>
-                                            <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
-                                            <ul class="nested">
-                                                <li>Default_Layout</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <li class="cursor-select">
+                                    <div class="inline-block">
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                            </div>
+                                        </div>
+                                        <span class="caret">LoginModule</span>
+                                        <ul class="nested">
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-database/{{ project }}">Show Database Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-security/{{project}}">Show Security Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
-                                <li>
-                                    <span class="caret">LoginModule</span>
-                                    <ul class="nested">
-                                        <li><img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span></li>
-                                        <li><img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span></li>
-                                        <li>
-                                            <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
-                                            <ul class="nested">
-                                                <li>Default_Layout</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <li class="cursor-select">
+                                    <div class="inline-block">
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                            </div>
+                                        </div>
+                                        <span class="caret">StartModule</span>
+                                        <ul class="nested">
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-database/{{ project }}">Show Database Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-security/{{project}}">Show Security Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
-                                <li>
-                                    <span class="caret">StartModule</span>
-                                    <ul class="nested">
-                                        <li><img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span></li>
-                                        <li><img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span></li>
-                                        <li>
-                                            <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
-                                            <ul class="nested">
-                                                <li>Default_Layout</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <li class="cursor-select">
+                                    <div class="inline-block">
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                            </div>
+                                        </div>
+                                        <span class="caret">WorkflowModule</span>
+                                        <ul class="nested">
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-database/{{ project }}">Show Database Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-security/{{project}}">Show Security Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
-                                <li>
-                                    <span class="caret">WorkflowModule</span>
-                                    <ul class="nested">
-                                        <li><img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span></li>
-                                        <li><img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span></li>
-                                        <li>
-                                            <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
-                                            <ul class="nested">
-                                                <li>Default_Layout</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <li class="cursor-select">
+                                    <div class="inline-block">
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                            </div>
+                                        </div>
+                                        <span class="caret">BusinessRuleModule</span>
+                                        <ul class="nested">
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-database/{{ project }}">Show Database Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-security/{{project}}">Show Security Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
-                                <li>
-                                    <span class="caret">BusinessRuleModule</span>
-                                    <ul class="nested">
-                                        <li><img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span></li>
-                                        <li><img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span></li>
-                                        <li>
-                                            <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
-                                            <ul class="nested">
-                                                <li>Default_Layout</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <span class="caret">MyFirstModule</span>
-                                    <ul class="nested">
-                                        <li><img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span></li>
-                                        <li><img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span></li>
-                                        <li>
-                                            <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
-                                            <ul class="nested">
-                                                <li>Default_Layout</li>
-                                            </ul>
-                                        </li>
-                                    </ul>
+                                <li class="cursor-select">
+                                    <div class="inline-block">
+                                        <div class="dropdown float-right">
+                                            <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                            </div>
+                                        </div>
+                                        <span class="caret">MyFirstModule</span>
+                                        <ul class="nested">
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-database/{{ project }}">Show Database Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/database.svg" width="16" height="16">&nbsp;<span>Database</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="/project-security/{{project}}">Show Security Settings</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/lock.svg" width="16" height="16">&nbsp;<span>Security</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="inline-block">
+                                                    <div class="dropdown float-right">
+                                                        <a href="#" class="dropdown-toggle arrow-none" data-toggle="dropdown" aria-expanded="false">
+                                                            <i class="mdi mdi-dots-horizontal m-0 text-muted h4"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFolderModal" href="#">Add Folder</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newFileModal" href="#">Add Script</a>
+                                                            <a class="dropdown-item" data-toggle="modal" data-target="#newImagesModal" href="#">Add Images</a>
+                                                        </div>
+                                                    </div>
+                                                    <img src="/icons/feather_black/folder.svg" width="16" height="16">&nbsp;<span>Layout</span>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </li>
                             </ul>

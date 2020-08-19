@@ -37,3 +37,12 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+.inline-block {
+    display: inline-block;
+    width: 100%;
+}
+
+.cursor-select {
+    cursor: default;
+}

@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -37,7 +38,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 // Setup server.
 require("reflect-metadata");
@@ -67,9 +67,8 @@ var intro = new intro_1.Intro();
 var config_json_1 = __importDefault(require("../../../config.json"));
 var TwingEngine_1 = __importDefault(require("./twig/TwingEngine"));
 // Start connection to the database and then start the server.
-typeorm_1.createConnection().then(function (connection) { return __awaiter(_this, void 0, void 0, function () {
+typeorm_1.createConnection().then(function (connection) { return __awaiter(void 0, void 0, void 0, function () {
     var app, uuidv4, port;
-    var _this = this;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -82,7 +81,7 @@ typeorm_1.createConnection().then(function (connection) { return __awaiter(_this
                 _a.sent();
                 app = express_1.default();
                 // Setup use
-                passport_1.default.use(new passport_local_1.default.Strategy(function (username, password, done) { return __awaiter(_this, void 0, void 0, function () {
+                passport_1.default.use(new passport_local_1.default.Strategy(function (username, password, done) { return __awaiter(void 0, void 0, void 0, function () {
                     var userRepository, user, error_1;
                     return __generator(this, function (_a) {
                         switch (_a.label) {

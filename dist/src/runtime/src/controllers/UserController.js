@@ -1,9 +1,10 @@
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -34,7 +35,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var typeorm_1 = require("typeorm");
 var class_validator_1 = require("class-validator");
@@ -42,7 +42,7 @@ var User_1 = require("../entity/User");
 var UserController = /** @class */ (function () {
     function UserController() {
     }
-    UserController.listAll = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    UserController.listAll = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var userRepository, users;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -59,7 +59,7 @@ var UserController = /** @class */ (function () {
             }
         });
     }); };
-    UserController.getOneById = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    UserController.getOneById = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var id, userRepository, user, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -83,7 +83,7 @@ var UserController = /** @class */ (function () {
             }
         });
     }); };
-    UserController.newUser = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    UserController.newUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var _a, username, password, role, user, errors, userRepository, e_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
@@ -121,7 +121,7 @@ var UserController = /** @class */ (function () {
             }
         });
     }); };
-    UserController.editUser = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    UserController.editUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var id, _a, username, role, userRepository, user, error_2, errors, e_2;
         return __generator(this, function (_b) {
             switch (_b.label) {
@@ -170,7 +170,7 @@ var UserController = /** @class */ (function () {
             }
         });
     }); };
-    UserController.deleteUser = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    UserController.deleteUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var id, userRepository, user, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {

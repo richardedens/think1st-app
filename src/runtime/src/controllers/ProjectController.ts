@@ -18,8 +18,8 @@ class ProjectController {
     static delete = async (req: Request, res: Response) => {
         
         // Get the projects from the folder.
-        if (fs.existsSync(path.join(__dirname,"/../../../../../projects/", req.params.projectname + ".db"))) {
-            fs.unlinkSync(path.join(__dirname,"/../../../../../projects/", req.params.projectname + ".db"));
+        if (fs.existsSync(path.join(__dirname,"/../../../../../projects/", req.params.projectName + ".db"))) {
+            fs.unlinkSync(path.join(__dirname,"/../../../../../projects/", req.params.projectName + ".db"));
             res.redirect('/dashboard');
         } else {
             res.redirect('/dashboard');
@@ -37,7 +37,7 @@ class ProjectController {
 
         // Save both the project file and project name.
         req.session.projectFile = projectFile;
-        req.session.projectName = req.params.projectname;
+        req.session.projectName = req.params.projectName;
         req.session.save((err) => {
 
             // @ts-ignore
@@ -56,7 +56,7 @@ class ProjectController {
                 ],
             }).then(connection => {
                 // here you can start to work with your entities
-                console.log('[DBSYSTEM] - Created project database: projects/' + projectFile + ".db - for project " + req.params.projectname);
+                console.log('[DBSYSTEM] - Created project database: projects/' + projectFile + ".db - for project " + req.params.projectName);
                 
                 // Close connection
                 connection.close();
@@ -78,6 +78,8 @@ class ProjectController {
         const twingEngine = new TwingEngine();
         const loggedin = req.session.loggedin || false;
 
+        console.log("[PROJECT] - " + req.params.projectName);
+
         // Render the projects
         twingEngine.render("project-create.twig", {
             title: "Think1st - Platform",
@@ -88,8 +90,8 @@ class ProjectController {
             currentLanguage: Lang.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
             lang: (req.session.lang) ? req.session.lang : "en",
             page: 'projects',
-            /*csrfToken: req.csrfToken(),*/
-            environment: config.environment
+            environment: config.environment,
+            project: req.params.projectName
         }).then((output) => {
             res.send(output);
         }).catch((err) => {
@@ -116,7 +118,8 @@ class ProjectController {
             currentLanguage: Lang.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
             lang: (req.session.lang) ? req.session.lang : "en",
             page: 'projects',
-            environment: config.environment
+            environment: config.environment,
+            project: req.params.projectName
         }).then((output) => {
             res.send(output);
         }).catch((err) => {
@@ -142,7 +145,8 @@ class ProjectController {
             currentLanguage: Lang.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
             lang: (req.session.lang) ? req.session.lang : "en",
             page: 'projects',
-            environment: config.environment
+            environment: config.environment,
+            project: req.params.projectName
         }).then((output) => {
             res.send(output);
         }).catch((err) => {
@@ -168,7 +172,8 @@ class ProjectController {
             currentLanguage: Lang.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
             lang: (req.session.lang) ? req.session.lang : "en",
             page: 'projects',
-            environment: config.environment
+            environment: config.environment,
+            project: req.params.projectName
         }).then((output) => {
             res.send(output);
         }).catch((err) => {
@@ -194,7 +199,8 @@ class ProjectController {
             currentLanguage: Lang.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
             lang: (req.session.lang) ? req.session.lang : "en",
             page: 'projects',
-            environment: config.environment
+            environment: config.environment,
+            project: req.params.projectName
         }).then((output) => {
             res.send(output);
         }).catch((err) => {
@@ -214,7 +220,8 @@ class ProjectController {
             loggedin: loggedin,
             currentLanguage: Lang.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
             lang: (req.session.lang) ? req.session.lang : "en",
-            environment: config.environment
+            environment: config.environment,
+            project: req.params.projectName
         }).then((output) => {
             res.send(output);
         }).catch((err) => {
@@ -225,6 +232,9 @@ class ProjectController {
     static edit = async (req: Request, res: Response) => {
         const twingEngine = new TwingEngine();
         const loggedin = req.session.loggedin || false;
+
+        console.log("[PROJECT] - " + req.params.projectName);
+
         twingEngine.render("project-edit.twig", {
             title: "Think1st - Platform",
             pageid: "projectedit",
@@ -233,7 +243,31 @@ class ProjectController {
             loggedin: loggedin,
             currentLanguage: Lang.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
             lang: (req.session.lang) ? req.session.lang : "en",
-            environment: config.environment
+            environment: config.environment,
+            project: req.params.projectName
+        }).then((output) => {
+            res.send(output);
+        }).catch((err) => {
+            res.send(err.toString());
+        });
+    };
+
+    static security = async (req: Request, res: Response) => {
+        const twingEngine = new TwingEngine();
+        const loggedin = req.session.loggedin || false;
+
+        console.log("[PROJECT] - " + req.params.projectName);
+        
+        twingEngine.render("project-security.twig", {
+            title: "Think1st - Platform",
+            pageid: "projectedit",
+            cachebust: ("v=" + +new Date),
+            nonce: res.locals.nonce,
+            loggedin: loggedin,
+            currentLanguage: Lang.getLanguageDescription((req.session.lang) ? req.session.lang : "en"),
+            lang: (req.session.lang) ? req.session.lang : "en",
+            environment: config.environment,
+            project: req.params.projectName
         }).then((output) => {
             res.send(output);
         }).catch((err) => {
