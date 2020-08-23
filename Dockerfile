@@ -1,3 +1,4 @@
+# Hooked to Docker Build
 FROM node:12
 # Install typescript
 RUN npm install -g typescript
