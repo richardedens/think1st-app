@@ -94,7 +94,7 @@
         "debug": "~4.1.1",
         "dotenv": "^8.2.0",
         "ejs": "^3.1.5",
-        "express": "~4.17.1",
+        "express": "~4.17.3",
         "express-jwt": "^6.0.0",
         "express-session": "^1.17.1",
         "figlet": "^1.5.0",
