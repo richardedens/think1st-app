@@ -82,7 +82,7 @@
         "bootstrap": "^4.5.2",
         "chalk": "^2.4.2",
         "chart.js": "^2.9.3",
-        "class-validator": "^0.10.2",
+        "class-validator": "^0.14.0",
         "clear": "^0.1.0",
         "compression": "^1.7.4",
         "connect-ensure-login": "^0.1.1",
